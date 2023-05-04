@@ -11,7 +11,7 @@ class Sidebar extends JPanel {
     Sidebar(){};
 }
 
-class Footer extends JPanel {
+class Footer extends JPanel { // This class contains recording buttons
     JButton speakNewQuestion;
     JButton stopRecording;
     Footer(){
@@ -49,7 +49,7 @@ class AppFrame extends JFrame {
         // Creating the sidebar to the left of the screen
         historyList = new Sidebar();
 
-        // Creating the sidebar to the right of the screen
+        // Creating the main screen to the right of the screen
         mainScreen = new QAScreen();
 
         JSplitPane splitScreen = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, historyList, mainScreen);
