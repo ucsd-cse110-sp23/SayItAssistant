@@ -4,11 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 
 class QAScreen extends JPanel {
-    QAScreen(){};
+    Color QABackColor = new Color(40,40,40);
+    QAScreen(){
+        this.setBackground(QABackColor);
+        JLabel testText = new JLabel();
+        testText.setForeground(Color.WHITE);
+        testText.setText("This is a test");
+        add(testText);
+    };
 }
 
 class Sidebar extends JPanel {
-    Sidebar(){};
+    Color SideBackColor = new Color(18,18,18);
+    Sidebar(){
+        this.setBackground(SideBackColor);
+    };
 }
 
 class Footer extends JPanel { // This class contains recording buttons
@@ -17,7 +27,7 @@ class Footer extends JPanel { // This class contains recording buttons
     Footer(){
         // Set Question recording buttons to the left of the footer
         JPanel leftHalf = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        this.setPreferredSize(new Dimension(270, 30));
+        this.setPreferredSize(new Dimension(270, 35));
         // Create new question button
         speakNewQuestion = new JButton("New Question");
         // Set Font
@@ -30,6 +40,8 @@ class Footer extends JPanel { // This class contains recording buttons
         stopRecording.setFont(new Font("Sans-serif", Font.ITALIC, 10));
         leftHalf.add(stopRecording);
 
+        // Adjust the position of the buttons in the panel
+        leftHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
         setLayout(new BorderLayout());
         this.add(leftHalf, BorderLayout.WEST);
 
@@ -56,7 +68,8 @@ class AppFrame extends JFrame {
         // Set width of sidebar
         splitScreen.setDividerLocation(230);
         // Set divider to non-adjustable
-        splitScreen.setResizeWeight(0);
+        splitScreen.setDividerSize(0);
+        splitScreen.setContinuousLayout(true);
         // TODO: Make divider MANUALLY non-adjustable by user
 
         this.add(splitScreen, BorderLayout.CENTER);
@@ -67,6 +80,8 @@ class AppFrame extends JFrame {
     }
 
     public static void main(String[] args) {
+
+        // Set UI theme to match system:
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
