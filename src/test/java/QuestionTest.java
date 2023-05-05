@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import main.java.Answer;
 import main.java.Question;
-import main.java.*;
 
 class QuestionTest {
 

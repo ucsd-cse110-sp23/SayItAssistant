@@ -3,14 +3,11 @@
  */
 package test.java;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.Test;
 
 import main.java.Answer;
-import main.java.*;
 
 class AnswerTest {
 
