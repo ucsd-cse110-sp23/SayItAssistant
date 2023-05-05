@@ -1,9 +1,10 @@
-package sayltassistant;
+package main.java;
 
 import javax.swing.*;
-import java.awt.*;
 
-import sayltassistant.components.*;
+import main.java.components.*;
+
+import java.awt.*;
 
 class AppFrame extends JFrame {
     private QAScreen mainScreen;

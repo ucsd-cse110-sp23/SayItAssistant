@@ -1,4 +1,4 @@
-package sayltassistant.components;
+package main.java.components;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
