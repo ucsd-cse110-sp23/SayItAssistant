@@ -1,19 +1,21 @@
 /**
  * 
  */
-package test;
+package test.java;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.Test;
-import sayltassistant.*;
+
+import main.java.Answer;
+import main.java.*;
 
 class AnswerTest {
 
 	/**
-	 * Test method for {@link sayltassistant.Answer#Answer()}.
+	 * Test method for {@link main.java.Answer#Answer()}.
 	 */
 	@Test
 	void testConstructor() {
@@ -24,7 +26,7 @@ class AnswerTest {
 	}
 
 	/**
-	 * Test method for {@link sayltassistant.Answer#setAnswerString(java.lang.String)}.
+	 * Test method for {@link main.java.Answer#setAnswerString(java.lang.String)}.
 	 */
 	@Test
 	void testSetAnswerString() {

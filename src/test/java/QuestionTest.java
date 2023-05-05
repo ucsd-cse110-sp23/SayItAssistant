@@ -1,17 +1,20 @@
 /**
  * 
  */
-package test;
+package test.java;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import sayltassistant.*;
+
+import main.java.Answer;
+import main.java.Question;
+import main.java.*;
 
 class QuestionTest {
 
 	/**
-	 * Test method for {@link sayltassistant.Question#Question()}.
+	 * Test method for {@link main.java.Question#Question()}.
 	 */
 	@Test
 	void testQuestion() {
@@ -24,7 +27,7 @@ class QuestionTest {
 	}
 
 	/**
-	 * Test method for {@link sayltassistant.Question#setQuestionString(java.lang.String)}.
+	 * Test method for {@link main.java.Question#setQuestionString(java.lang.String)}.
 	 */
 	@Test
 	void testSetQuestionString() {
@@ -41,7 +44,7 @@ class QuestionTest {
 	}
 
 	/**
-	 * Test method for {@link sayltassistant.Question#setAnswerObject(sayltassistant.Answer)}.
+	 * Test method for {@link main.java.Question#setAnswerObject(main.java.Answer)}.
 	 */
 	@Test
 	void testSetAnswerObject() {

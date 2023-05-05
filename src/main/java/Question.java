@@ -1,9 +1,9 @@
-package sayltassistant;
+package main.java;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Answer
 ||
-||         Author:  Chanho Jeon, Cassandra Ponce Maldonado
+||         Author:  Chanho Jeon
 ||
 ||        Purpose:  This class contains question and its answer
 ||
