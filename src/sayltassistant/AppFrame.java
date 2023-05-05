@@ -7,6 +7,7 @@ class QAScreen extends JPanel {
     Color QABackColor = new Color(40,40,40);
     QAScreen(){
         this.setBackground(QABackColor);
+        // Testing text in main screen
         JLabel testText = new JLabel();
         testText.setForeground(Color.WHITE);
         testText.setText("This is a test");
@@ -70,7 +71,6 @@ class AppFrame extends JFrame {
         // Set divider to non-adjustable
         splitScreen.setDividerSize(0);
         splitScreen.setContinuousLayout(true);
-        // TODO: Make divider MANUALLY non-adjustable by user
 
         this.add(splitScreen, BorderLayout.CENTER);
         // Footer
@@ -81,7 +81,6 @@ class AppFrame extends JFrame {
 
     public static void main(String[] args) {
 
-        // Set UI theme to match system:
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
