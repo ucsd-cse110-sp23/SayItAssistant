@@ -1,7 +1,9 @@
-package main.java.components;
+package sayItAssistant.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class QAScreen extends JPanel {
     Color QABackColor = new Color(40,40,40);
@@ -12,5 +14,5 @@ public class QAScreen extends JPanel {
         testText.setForeground(Color.WHITE);
         testText.setText("This is a test");
         add(testText);
-    };
+    }
 }

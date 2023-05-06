@@ -1,4 +1,5 @@
-package main.java;
+package sayItAssistant;
+
 /*+----------------------------------------------------------------------
 ||
 ||  Class Answer
@@ -9,15 +10,15 @@ package main.java;
 ||
 |+-----------------------------------------------------------------------
 ||
-||          Field:  
+||          Field:
 ||					questionString - the question, Strign type
 ||					answerObject - its answer, Answer object type
 ||
 |+-----------------------------------------------------------------------
 ||
-||   Constructors:  
+||   Constructors:
 ||					public Question() - constructor without arguments
-||					public Question(String questionString) 
+||					public Question(String questionString)
 ||									- constructor with String argument
 ||
 ||  Class Methods:
@@ -25,12 +26,12 @@ package main.java;
 ||
 ++-----------------------------------------------------------------------*/
 public class Question {
-	
+
 	// the question in String type
 	private String questionString;
 	// Answer object. The answer will be saved in the object as String
 	private Answer answerObject;
-	
+
     /*---------------------------------------------------------------------
     |  Method Question()
     |
@@ -50,7 +51,7 @@ public class Question {
 		questionString = "";
 		answerObject = new Answer();
 	}
-	
+
     /*---------------------------------------------------------------------
     |  Method Question(String questionString, Answer answerObject)
     |
@@ -61,7 +62,7 @@ public class Question {
     |  Post-condition: Initialize Question Object, questionString and
     |					Answer object saved
     |
-    |      Parameters:  String questionString 
+    |      Parameters:  String questionString
     |					Answer answerObject
     |
     |         Returns: Question object which passed arguments are saved
@@ -139,5 +140,5 @@ public class Question {
 	public void setAnswerObject(Answer answerObject) {
 		this.answerObject = answerObject;
 	}
-	
+
 }

@@ -1,13 +1,13 @@
 /**
- * 
+ *
  */
-package test.java;
+package sayItAssitantTests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.Answer;
+import sayItAssistant.Answer;
 
 class AnswerTest {
 
