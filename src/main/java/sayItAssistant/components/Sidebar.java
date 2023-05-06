@@ -1,4 +1,4 @@
-package main.java.components;
+package sayItAssistant.components;
 
 import javax.swing.*;
 import java.awt.*;
