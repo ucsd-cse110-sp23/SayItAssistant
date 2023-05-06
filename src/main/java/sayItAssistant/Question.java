@@ -11,7 +11,7 @@ package sayItAssistant;
 |+-----------------------------------------------------------------------
 ||
 ||          Field:
-||					questionString - the question, Strign type
+||					questionString - the question, String type
 ||					answerObject - its answer, Answer object type
 ||
 |+-----------------------------------------------------------------------
@@ -33,7 +33,7 @@ public class Question {
 	private Answer answerObject;
 
     /*---------------------------------------------------------------------
-    |  Method Question()
+    |  Constructor Question()
     |
     |         Purpose: Constructor for Question object using no arguments
     |
@@ -53,7 +53,7 @@ public class Question {
 	}
 
     /*---------------------------------------------------------------------
-    |  Method Question(String questionString, Answer answerObject)
+    |  Constructor Question(String questionString, Answer answerObject)
     |
     |         Purpose: Constructor for Question object using arguments
     |
