@@ -10,7 +10,7 @@ package sayItAssistant;
 |+-----------------------------------------------------------------------
 ||
 ||          Field:
-||					answerString - the answer, Strign type
+||					answerString - the answer, String type
 ||
 |+-----------------------------------------------------------------------
 ||
@@ -29,7 +29,7 @@ public class Answer {
 	private String answerString;
 
     /*---------------------------------------------------------------------
-    |  Method Answer()
+    |  Constructor Answer()
     |
     |         Purpose: Constructor for Answer object using no arguments
     |
@@ -46,7 +46,7 @@ public class Answer {
 	}
 
     /*---------------------------------------------------------------------
-    |  Method Answer(String answerString)
+    |  Constructor Answer(String answerString)
     |
     |         Purpose: Constructor for Answer object using
     |					String as an argument
