@@ -9,14 +9,14 @@ package sayItAssistant;
 ||
 |+-----------------------------------------------------------------------
 ||
-||          Field:  
+||          Field:
 ||					answerString - the answer, Strign type
 ||
 |+-----------------------------------------------------------------------
 ||
-||   Constructors:  
+||   Constructors:
 ||					public Answer() - constructor without arguments
-||					public Answer(String answerString) 
+||					public Answer(String answerString)
 ||									- constructor with String argument
 ||
 ||  Class Methods:
@@ -24,7 +24,7 @@ package sayItAssistant;
 ||
 ++-----------------------------------------------------------------------*/
 public class Answer {
-	
+
 	// The answer in String type
 	private String answerString;
 
@@ -48,7 +48,7 @@ public class Answer {
     /*---------------------------------------------------------------------
     |  Method Answer(String answerString)
     |
-    |         Purpose: Constructor for Answer object using 
+    |         Purpose: Constructor for Answer object using
     |					String as an argument
     |
     |   Pre-condition: None
@@ -96,5 +96,5 @@ public class Answer {
 	public void setAnswerString(String answerString) {
 		this.answerString = answerString;
 	}
-	
+
 }

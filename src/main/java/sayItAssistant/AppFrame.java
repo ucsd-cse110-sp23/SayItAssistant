@@ -1,10 +1,14 @@
 package sayItAssistant;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
 
-import sayItAssistant.components.*;
+import javax.swing.JFrame;
+import javax.swing.JSplitPane;
+import javax.swing.WindowConstants;
 
-import java.awt.*;
+import sayItAssistant.components.Footer;
+import sayItAssistant.components.QAScreen;
+import sayItAssistant.components.Sidebar;
 
 class AppFrame extends JFrame {
     private QAScreen mainScreen;
@@ -39,7 +43,7 @@ class AppFrame extends JFrame {
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
-        baseApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseApp.setVisible(true);
 
     }

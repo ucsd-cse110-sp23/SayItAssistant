@@ -1,10 +1,22 @@
 package sayItAssistant.components;
 
-import javax.sound.sampled.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.TargetDataLine;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class Footer extends JPanel { // This class contains recording buttons
     JButton speakNewQuestion;
@@ -28,11 +40,11 @@ public class Footer extends JPanel { // This class contains recording buttons
                     targetDataLine.start();
 
                     AudioInputStream audioInputStream = new AudioInputStream(targetDataLine);
-                    
+
                     // WRITE TO FILE
                     File audioFile = new File("recording.wav");
                     AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, audioFile);
-                    
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -61,14 +73,14 @@ public class Footer extends JPanel { // This class contains recording buttons
             bigEndian
         );
     }
-    
+
     // Add listeners to buttons
     public void addListeners() {
         speakNewQuestion.addActionListener(
             (ActionEvent e) -> {
                 speakNewQuestion.setBackground(Color.RED);
                 startRecording();
-            } 
+            }
         );
 
         stopRecording.addActionListener(
@@ -107,5 +119,5 @@ public class Footer extends JPanel { // This class contains recording buttons
         audioFormat = getAudioFormat();
         addListeners();
         revalidate();
-    };
+    }
 }

@@ -1,15 +1,14 @@
 /**
- * 
+ *
  */
 package sayItAssitantTests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import sayItAssistant.Answer;
 import sayItAssistant.Question;
-import sayItAssistant.*;
 
 class QuestionTest {
 
