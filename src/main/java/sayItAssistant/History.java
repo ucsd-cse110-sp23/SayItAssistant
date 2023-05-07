@@ -163,7 +163,7 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
-	public void removeQeustion(int index) {removeQuestion(index, false);}
+	public void removeQuestion(int index) {removeQuestion(index, false);}
 
     /*---------------------------------------------------------------------
     |  Method removeQuestion(int index, boolean test)
