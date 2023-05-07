@@ -92,7 +92,7 @@ public class Footer extends JPanel { // This class contains recording buttons
     public void addListeners() {
         speakNewQuestion.addActionListener(
             (ActionEvent e) -> {
-                speakNewQuestion.setBackground(Color.RED);
+                speakNewQuestion.setBackground(Color.GREEN);
                 startRecording();
             }
         );
