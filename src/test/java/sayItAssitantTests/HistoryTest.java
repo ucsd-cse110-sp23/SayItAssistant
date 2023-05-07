@@ -123,6 +123,7 @@ class HistoryTest {
 		assertEquals("Answer for Test1", br.readLine());
 		assertEquals("Question for Test2", br.readLine());
 		assertEquals("Answer for Test2", br.readLine());
+		br.close();
 	}
 
 	/**
@@ -164,6 +165,7 @@ class HistoryTest {
 		assertEquals("Answer for Test1", br.readLine());
 		assertEquals("Question for Test3", br.readLine());
 		assertEquals("Answer for Test3", br.readLine());
+		br.close();
 	}
 
 	@Test
