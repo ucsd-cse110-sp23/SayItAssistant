@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
+
+import sayItAssistant.Whisper;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -24,6 +27,7 @@ public class Footer extends JPanel { // This class contains recording buttons
     boolean recordingStatus = false;
     private TargetDataLine targetDataLine;
     private AudioFormat audioFormat;
+    File audioFile;
 
     // Create method to receive microphone input; Adapted from Lab 5 code
     private void startRecording() {
@@ -42,9 +46,10 @@ public class Footer extends JPanel { // This class contains recording buttons
                     AudioInputStream audioInputStream = new AudioInputStream(targetDataLine);
 
                     // WRITE TO FILE
-                    File audioFile = new File("recording.wav");
+                    audioFile = new File("recording.wav");
                     AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, audioFile);
-
+                    
+                    
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -55,13 +60,22 @@ public class Footer extends JPanel { // This class contains recording buttons
 
     private void stopRecording() {
         targetDataLine.stop();
+        //File file = new File("src/UCSanDiego.m4a");
+        //Whisper whis = new Whisper(file);
+        Whisper whis = new Whisper(audioFile);
+        try {
+            whis.toTranscribe();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         targetDataLine.close();
     }
 
     private AudioFormat getAudioFormat() {
         float sampleRate = 44100;
         int sampleSizeInBits = 16;
-        int channels = 2;
+        int channels = 1;
         boolean signed = true;
         boolean bigEndian = false;
 
@@ -91,7 +105,7 @@ public class Footer extends JPanel { // This class contains recording buttons
         );
     }
 
-    public Footer(){
+    public Footer() {
         // Set Question recording buttons to the left of the footer
         JPanel leftHalf = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         this.setPreferredSize(new Dimension(270, 35));
@@ -117,6 +131,7 @@ public class Footer extends JPanel { // This class contains recording buttons
         //TODO: Add a right half for delete buttons. Follows a similar format as above
 
         audioFormat = getAudioFormat();
+        
         addListeners();
         revalidate();
     }
