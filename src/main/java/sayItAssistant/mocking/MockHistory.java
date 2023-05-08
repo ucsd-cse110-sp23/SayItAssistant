@@ -1,32 +1,5 @@
-package sayItAssistant;
-/*+----------------------------------------------------------------------
-||
-||  Class History
-||
-||         Author:  Chanho Jeon
-||
-||        Purpose:  This class contains list of Question objects
-||
-|+-----------------------------------------------------------------------
-||
-||          Field:
-||					dbPath: path to the text file
-||					testDbPath: path to the testing text file
-||					history: arraylist containing Question object
-||
-|+-----------------------------------------------------------------------
-||
-||   Constructors:
-||					History()- default constructor
-||					 
-||
-||  Class Methods:				
-||					getHistory() - return history arrayList
-||					addQuestion() - add question object into arrayList
-||					removeQuestion() - remove object from arrayList using index
-||					saveHistory() - save arraylist in text file	
-||
-++-----------------------------------------------------------------------*/
+package sayItAssistant.mocking;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -34,10 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class History {
+import sayItAssistant.Answer;
+import sayItAssistant.History;
+import sayItAssistant.Question;
 
-	private final String dbPath = "./DB/Questions.txt";
-	private final String testDbPath = "./DB/QuestionsForTest.txt";
+public class MockHistory extends History{
+	
+	private final String dbPath = "./DB/QuestionsForTest.txt";
 	private static ArrayList<Question> history;
 
     /*---------------------------------------------------------------------
@@ -54,7 +30,7 @@ public class History {
     |
     |         Returns: History Object
     *-------------------------------------------------------------------*/
-	public History() {
+	public MockHistory() {
 		File dbFile = new File(dbPath);
 		history = new ArrayList<>();
 		try(BufferedReader br = new BufferedReader(new FileReader(dbFile))) {
@@ -86,6 +62,7 @@ public class History {
     |
     |         Returns: arrayList containing Question objects
     *-------------------------------------------------------------------*/
+	@Override
 	public ArrayList<Question> getHistory() {
 		return history;
 	}
@@ -104,6 +81,7 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
+	@Override
 	public void addQuestion(Question question) {
 		ArrayList<Question> addedHistory = new ArrayList<>();
 		addedHistory.add(question);
@@ -129,6 +107,7 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
+	@Override
 	public void removeQuestion(int index) {
 		ArrayList<Question> removedHistory = new ArrayList<>();
 		for(int i=0; i<history.size();i++) {
@@ -152,6 +131,7 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
+	@Override
 	public void saveHistory() {
 		File dbFile=  new File(dbPath);
 
@@ -167,5 +147,4 @@ public class History {
 			e.printStackTrace();
 		}
 	}
-
 }

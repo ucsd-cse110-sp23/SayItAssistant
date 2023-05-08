@@ -107,7 +107,7 @@ public class ChatGpt {
 			e.printStackTrace();
 		}
 		history.getHistory().get(0).getAnswerObject().setAnswerString(answerString);
-		history.saveHistory(false);
+		history.saveHistory();
 	}
 	
     /*---------------------------------------------------------------------

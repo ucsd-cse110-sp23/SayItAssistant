@@ -21,7 +21,7 @@ public class MockWhisper extends Whisper{
 
 	@Override
 	public void toTranscribe() {
-		History history = new History(true);
-		history.addQuestion(new Question(questionString, new Answer("unanswered question")),true);
+		History history = new MockHistory();
+		history.addQuestion(new Question(questionString, new Answer("unanswered question")));
 	}
 }

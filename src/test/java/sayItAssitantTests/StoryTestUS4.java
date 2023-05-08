@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import sayItAssistant.ChatGpt;
 import sayItAssistant.History;
 import sayItAssistant.mocking.MockChatGpt;
+import sayItAssistant.mocking.MockHistory;
 
 class StoryTestUS4 {
 
@@ -78,7 +79,7 @@ class StoryTestUS4 {
 	++-----------------------------------------------------------------------*/
 	@Test
 	void scenarioOneTest() {
-		History usTestHistory = new History(true);
+		History usTestHistory = new MockHistory();
 		ChatGpt mockChatGpt = new MockChatGpt();
 		assertEquals(3, usTestHistory.getHistory().size());
 		assertEquals("How did Louis Braille come up with the idea for braille?",
