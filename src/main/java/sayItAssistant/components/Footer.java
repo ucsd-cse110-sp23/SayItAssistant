@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-import sayItAssistant.History;
 import sayItAssistant.Whisper;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -60,18 +59,24 @@ public class Footer extends JPanel { // This class contains recording buttons
     }
 
     private void stopRecording() {
-        targetDataLine.stop();
-        //File file = new File("src/UCSanDiego.m4a");
-        //Whisper whis = new Whisper(file);
-        Whisper whis = new Whisper(audioFile);
-        try {
-            whis.toTranscribe();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        removeAudio();
-        Sidebar.updateHistory();
-        targetDataLine.close();
+        Thread thr = new Thread(
+            () -> {
+                targetDataLine.stop();
+                //File file = new File("src/UCSanDiego.m4a");
+                //Whisper whis = new Whisper(file);
+                Whisper whis = new Whisper(audioFile);
+                try {
+                    whis.toTranscribe();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                removeAudio();
+                Sidebar.updateHistory();
+                QAScreen.updateQAScreen();
+                targetDataLine.close();
+            }
+        );
+        thr.start();
     }
 
     private AudioFormat getAudioFormat() {
