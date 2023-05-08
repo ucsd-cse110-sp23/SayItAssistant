@@ -38,7 +38,7 @@ public class History {
 
 	private final String dbPath = "./DB/Questions.txt";
 	private final String testDbPath = "./DB/QuestionsForTest.txt";
-	private ArrayList<Question> history;
+	private static ArrayList<Question> history;
 
     /*---------------------------------------------------------------------
     |  Constructor History()
@@ -192,8 +192,7 @@ public class History {
     /*---------------------------------------------------------------------
     |  Method saveHistory(boolean test)
     |
-    |         Purpose: private method used in History methods to save
-    |					current arrayList in text file
+    |         Purpose: method used to save current arrayList in text file
     |
     |   Pre-condition: none
     |
@@ -203,7 +202,7 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
-	private void saveHistory(boolean test) {
+	public void saveHistory(boolean test) {
 		File dbFile;
 		if(!test) {
 			dbFile = new File(dbPath);
