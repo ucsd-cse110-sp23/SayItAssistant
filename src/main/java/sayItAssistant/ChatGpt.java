@@ -62,6 +62,6 @@ public class ChatGpt {
 		String responseBody = response.body();
 		responseJson = new JSONObject(responseBody);
 		JSONArray choices = responseJson.getJSONArray("choices");
-		answerString = choices.getJSONObject(0).getString("text");	
+		answerString = choices.getJSONObject(0).getString("text").replace("\n", "").replace("\r", "");
 	}
 }
