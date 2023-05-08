@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
+import sayItAssistant.History;
 import sayItAssistant.Whisper;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -69,6 +70,7 @@ public class Footer extends JPanel { // This class contains recording buttons
             e.printStackTrace();
         }
         removeAudio();
+        Sidebar.updateHistory();
         targetDataLine.close();
     }
 

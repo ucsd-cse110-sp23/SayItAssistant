@@ -22,9 +22,10 @@ import sayItAssistant.Question;
 public class Sidebar extends JPanel {
 
     private Color SideBackColor = new Color(18,18,18);
-    private History historyObj = new History();
+    public static History historyObj = new History();
     private ArrayList<Question> historyList = historyObj.getHistory();
-
+    public static DefaultListModel<String> historyListModel = new DefaultListModel<>();
+    public static JList<String> historyJList;
     public Sidebar(){
         setLayout(new BorderLayout());
 
@@ -43,8 +44,9 @@ public class Sidebar extends JPanel {
         historyLabel.setFont(new Font("Sans-serif", Font.BOLD, 18));
         historyTitleBox.add(historyLabel);
 
-        ArrayList<String> historyStringList = toStringList(historyList);
-        JList<String> historyJList = new JList<>(historyStringList.toArray(new String[0]));
+        historyListModel = toStringList(historyList);
+        
+        historyJList = new JList<>(historyListModel);
         JScrollPane scrollList = new JScrollPane(historyJList);
 
         scrollList.setBorder(new CompoundBorder(
@@ -59,11 +61,19 @@ public class Sidebar extends JPanel {
         this.setBackground(SideBackColor);
     }
 
-    private ArrayList<String> toStringList(ArrayList<Question> historyList) {
-        ArrayList<String> returnList = new ArrayList<>();
+    private DefaultListModel<String> toStringList(ArrayList<Question> historyList) {
+        DefaultListModel<String> returnList = new DefaultListModel<>();
         for(Question QA : historyList) {
-            returnList.add(QA.getQuestionString());
+            returnList.addElement(QA.getQuestionString());
         }
         return returnList;
+    }
+
+    // Update history and update list in sidebar
+    public static void updateHistory() {
+        historyObj = new History();
+        historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());
+        historyJList.validate();
+        historyJList.repaint();
     }
 }
