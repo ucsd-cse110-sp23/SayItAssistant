@@ -43,7 +43,7 @@ public class History {
     /*---------------------------------------------------------------------
     |  Constructor History()
     |
-    |         Purpose: constructor used for testing
+    |         Purpose: constructor used for testing.
     |
     |   Pre-condition: None
     |
