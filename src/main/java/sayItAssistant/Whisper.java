@@ -69,6 +69,9 @@ public class Whisper {
     public Whisper(File file_path) {
       file = file_path;
     }
+    
+    public Whisper() {}
+    
  /*---------------------------------------------------------------------
     |  Method writeParameterToOutputStream()
     |
@@ -136,7 +139,7 @@ public class Whisper {
   }
   fileInputStream.close();
 }
-/*---------------------------------------------------------------------
+  	/*---------------------------------------------------------------------
     |  Method handleSuccessResponse()
     |
     |         Purpose: get response from API
@@ -268,7 +271,7 @@ private static void handleErrorResponse (HttpURLConnection connection)
     |
     |   Pre-condition: initialized Whisper object 
     |
-    |  Post-condition: trasncription will be printed 
+    |  Post-condition: transcription will be printed 
     |
     |      Parameters: None
     |
