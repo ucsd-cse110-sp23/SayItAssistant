@@ -22,7 +22,7 @@ import sayItAssistant.Question;
 public class Sidebar extends JPanel {
 
     private Color SideBackColor = new Color(18,18,18);
-    private History historyObj = new History(false);
+    private History historyObj = new History();
     private ArrayList<Question> historyList = historyObj.getHistory();
 
     public Sidebar(){

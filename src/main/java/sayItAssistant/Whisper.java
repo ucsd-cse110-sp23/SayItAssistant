@@ -166,7 +166,9 @@ private static Question handleSuccessResponse (HttpURLConnection connection)
   //Print the transcription result
   System.out.println("Transcription Result: " + generatedText);
   //Create New Question Object
-  Question q = new Question(generatedText, null);
+  Question q = new Question(generatedText, new Answer("Unanswered Question"));
+  History h = new History();
+  h.addQuestion(q);
   return q;
   
 
@@ -282,6 +284,8 @@ private static void handleErrorResponse (HttpURLConnection connection)
     closeResponse();
     getAndCheckResponse();
     DisconnectConnection();
+    ChatGpt chatGpt = new ChatGpt();
+    chatGpt.search();
   }
    
 }
