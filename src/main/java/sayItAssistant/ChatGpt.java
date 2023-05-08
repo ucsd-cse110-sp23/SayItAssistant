@@ -1,5 +1,42 @@
 package sayItAssistant;
-
+/*+----------------------------------------------------------------------
+||
+||  Class ChatGpt
+||
+||         Author:  Chanho Jeon
+||
+||        Purpose:  Get answers from openai api using String type question
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||					API_ENDPOINT - URL of API
+||					API_KEY - API key
+||					MODEL - Version/ currently GPT3.5
+||					MAX_TOKENS - Maximum tokens in generating answer
+||					TEMPERATRUE - clarity(0: focused, 2:random)
+||					questionString - question goes into API
+||					answerString - Answer get from API
+||					requestJson - Json object to send request
+||					responseJson - Json object of response
+||					history - History object contains list of questions
+||					request - Http request
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					ChatGpt()- default constructor
+||					Initialize history, questionString, requestJson
+||					put variables into request Json object
+||
+||  Class Methods:				
+||					setRequest() - private method to set request field
+||					setResponse() - private method to send request and get
+||									response
+||					search() - method calls setRequest, setResponse
+||								put Question object in the history and save it
+||
+++-----------------------------------------------------------------------*/
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,7 +50,7 @@ public class ChatGpt {
 	private static final String API_KEY = "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";
 	private static final String MODEL = "text-davinci-003";
 	private static final int MAX_TOKENS = 100;
-	private static final double TEMPERATURE = 0.8;
+	private static final double TEMPERATURE = 1.0;
 	
 	String questionString;
 	String answerString;
@@ -22,7 +59,20 @@ public class ChatGpt {
 	History history;
 	HttpRequest request;
 	
-	
+    /*---------------------------------------------------------------------
+    |  Constructor ChatGpt()
+    |
+    |         Purpose: default constructor
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize ChatGpt object. Answer in Question object
+    |					of static arrayList in History class updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: ChatGpt Object
+    *-------------------------------------------------------------------*/
 	public ChatGpt() {
 		history = new History();
 		questionString = history.getHistory().get(0).getQuestionString();
@@ -33,6 +83,20 @@ public class ChatGpt {
 		requestJson.put("temperature", TEMPERATURE);
 	}
 	
+    /*---------------------------------------------------------------------
+    |  Method search()
+    |
+    |         Purpose: call setRequest and setResponse, put answer in
+    |					History object and save it to DB
+    |
+    |   Pre-condition: Initialized ChatGpt object needed
+    |
+    |  Post-condition: History object has answer to the question
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 	public void search() {
 		setRequest();
 		try {
@@ -46,6 +110,19 @@ public class ChatGpt {
 		history.saveHistory(false);
 	}
 	
+    /*---------------------------------------------------------------------
+    |  Method setRequest()
+    |
+    |         Purpose: private method to set HttpRequest
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: HttpRequest is set to use chatGPT API
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 	private void setRequest() {
 		request = HttpRequest
 				.newBuilder()
@@ -56,6 +133,19 @@ public class ChatGpt {
 				.build();
 	}
 	
+    /*---------------------------------------------------------------------
+    |  Method setResponse()
+    |
+    |         Purpose: private method to get response and set answerString
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: answerString now contains the answer from API
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 	private void setResponse() throws IOException, InterruptedException {
 		HttpClient client = HttpClient.newHttpClient();
 		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
