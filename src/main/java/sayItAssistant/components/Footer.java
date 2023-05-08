@@ -68,7 +68,7 @@ public class Footer extends JPanel { // This class contains recording buttons
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+        removeAudio();
         targetDataLine.close();
     }
 
@@ -103,6 +103,11 @@ public class Footer extends JPanel { // This class contains recording buttons
                 stopRecording();
             }
         );
+    }
+    
+    // Removing audio file
+    private void removeAudio() {
+    	audioFile.delete();
     }
 
     public Footer() {
