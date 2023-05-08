@@ -2,45 +2,6 @@ package sayItAssistant;
 import java.io.*;
 import java.net.*;
 import org.json.*;
-/*+----------------------------------------------------------------------
-||
-||  Class Whisper
-||
-||         Author:  Bella Jeong
-||
-||        Purpose:  This class transcribe audio using API
-||
-|+-----------------------------------------------------------------------
-||
-||          Field:
-||					connection - protocol for communication between web servers and clients 
-||                       (HTTP connection object)
-||          outputStream - object to write request
-||          boundary - responses having multipart (String type)
-||          file - audio file to transcribe
-||          url - API's URL object 
-||          API_ENDPOINT - specifies the location (endpoint URL)
-||          TOKEN - authorization token for API
-||          MODEL - transcription for API 
-||
-|+-----------------------------------------------------------------------
-||
-||   Constructors:
-||					public Whisper(File file_path) - constructor including file parameter
-||
-||  Class Methods:
-||					writeParameterToOutputStream() 
-||            - takes four parameters and writes to the output stream
-||          writeFileToOutputStream() 
-||            - takes three parameters and writes the audio file to the output stream
-||          handleSuccessResponse () 
-||            - takes input stream and analyze JSON response to get the result
-||          handleErrorResponse () 
-||            - reads error stream and gives error response
-||          toTranscribe() 
-||            - transcribe to audio file
-||
-++-----------------------------------------------------------------------*/
 
 public class Whisper {
     //private String file_path;
@@ -53,39 +14,11 @@ public class Whisper {
     private static final String API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
     private static final String TOKEN = "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";
     private static final String MODEL = "whisper-1";
- /*---------------------------------------------------------------------
-    |  Constructor Whisper()
-    |
-    |         Purpose: transcribe audio using API
-    |
-    |   Pre-condition: None
-    |
-    |  Post-condition: Initialize Whisper object containing the file
-    |
-    |      Parameters: file_path - file object to be trascribed
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
+
     public Whisper(File file_path) {
       file = file_path;
     }
- /*---------------------------------------------------------------------
-    |  Method writeParameterToOutputStream()
-    |
-    |         Purpose: using the boundary string, it writes parameter 
-    |                   to the OutputStream
-    |
-    |   Pre-condition: Initialized OutputStream, parameterName, parameterValue
-    |                    and boundary string needed
-    |
-    |  Post-condition: using the boundary string the parameter will be written
-    |                   to the OutputStream
-    |
-    |      Parameters: OutputStream outputStream, String parameterName,
-    |                   String parameterValue, String boundary 
-    |
-    |         Returns: void
-    *-------------------------------------------------------------------*/
+
     public static void writeParameterToOutputStream(
       OutputStream outputStream,
       String parameterName,
@@ -100,19 +33,8 @@ public class Whisper {
       );
       outputStream.write((parameterValue + "\r\n").getBytes());
     }
-/*---------------------------------------------------------------------
-    |  Method writeFileToOutputStream()
-    |
-    |         Purpose: writes file to the OutputStream to be sent as HTTP request 
-    |
-    |   Pre-condition: valid OutputStream, file. 
-    |
-    |  Post-condition: file be written in the right format
-    |
-    |      Parameters: OutputStream outputStream, File file, String boundary
-    |
-    |         Returns: void
-    *-------------------------------------------------------------------*/
+
+
   private static void writeFileToOutputStream(
     OutputStream outputStream,
     File file,
@@ -136,19 +58,6 @@ public class Whisper {
   }
   fileInputStream.close();
 }
-/*---------------------------------------------------------------------
-    |  Method handleSuccessResponse()
-    |
-    |         Purpose: get response from API
-    |
-    |   Pre-condition: Initialized HttpURLConnection connection needed
-    |
-    |  Post-condition: new Question object made and returned from the response
-    |
-    |      Parameters: HttpURLConnection connection
-    |
-    |         Returns: Question object
-    *-------------------------------------------------------------------*/
 
 private static Question handleSuccessResponse (HttpURLConnection connection)
   throws IOException, JSONException {
@@ -171,20 +80,6 @@ private static Question handleSuccessResponse (HttpURLConnection connection)
   
 
 }
-/*---------------------------------------------------------------------
-    |  Method handleErrorResponse()
-    |
-    |         Purpose: handles error response from API endpoint and prints 
-    |
-    |   Pre-condition: valid HTTP connection object needed, 
-    |                   receive error message from the endpoint
-    |
-    |  Post-condition: error response will be read and printed 
-    |
-    |      Parameters: HttpURLConnection connection
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
 
 // Helper method to handle an error response
 private static void handleErrorResponse (HttpURLConnection connection)
@@ -259,19 +154,6 @@ private static void handleErrorResponse (HttpURLConnection connection)
   void DisconnectConnection(){
     connection.disconnect();
   }
-/*---------------------------------------------------------------------
-    |  Method toTranscribe()
-    |
-    |         Purpose: transcribes the audio file 
-    |
-    |   Pre-condition: initialized Whisper object 
-    |
-    |  Post-condition: trasncription will be printed 
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
 
   public void toTranscribe() throws IOException{
     //createFileObj();
