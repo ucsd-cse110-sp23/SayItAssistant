@@ -43,6 +43,22 @@ public class History {
     /*---------------------------------------------------------------------
     |  Constructor History()
     |
+    |         Purpose: default constructor
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize History object containing arrayList
+    |					Question and answer is loaded from text file
+    |
+    |      Parameters: None
+    |
+    |         Returns: History Object
+    *-------------------------------------------------------------------*/
+	public History() {this(false);}
+
+    /*---------------------------------------------------------------------
+    |  Constructor History(boolean test)
+    |
     |         Purpose: constructor used for testing
     |
     |   Pre-condition: None
@@ -50,12 +66,17 @@ public class History {
     |  Post-condition: Initialize History object containing arrayList
     |					Question and answer is loaded from text file
     |
-    |      Parameters: none
+    |      Parameters: test - set it to true for testing
     |
     |         Returns: History Object
     *-------------------------------------------------------------------*/
-	public History() {
-		File dbFile = new File(dbPath);
+	public History(boolean test) {
+		File dbFile;
+		if(!test) {
+			dbFile = new File(dbPath);
+		} else {
+			dbFile = new File(testDbPath);
+		}
 		history = new ArrayList<>();
 		try(BufferedReader br = new BufferedReader(new FileReader(dbFile))) {
 			String questionString;
@@ -90,9 +111,8 @@ public class History {
 		return history;
 	}
 
-
     /*---------------------------------------------------------------------
-    |  Method addQuestion(Question question, boolean test)
+    |  Method addQuestion(Question question)
     |
     |         Purpose: add Question object at index 0(front)
     |
@@ -104,19 +124,49 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
-	public void addQuestion(Question question) {
+	public void addQuestion(Question question) {addQuestion(question,false);}
+
+    /*---------------------------------------------------------------------
+    |  Method addQuestion(Question question, boolean test)
+    |
+    |         Purpose: add Question object at index 0(front)
+    |
+    |   Pre-condition: Initialized history object needed
+    |
+    |  Post-condition: new Question object inserted at the front
+    |
+    |      Parameters: question, test(set true for testing)
+    |
+    |         Returns: none
+    *-------------------------------------------------------------------*/
+	public void addQuestion(Question question, boolean test) {
 		ArrayList<Question> addedHistory = new ArrayList<>();
 		addedHistory.add(question);
 		for (Question q : history) {
 			addedHistory.add(q);
 		}
 		history = addedHistory;
-		saveHistory();
+		saveHistory(test);
 	}
-
 
     /*---------------------------------------------------------------------
     |  Method removeQuestion(int index)
+    |
+    |         Purpose: remove one Question object from list
+    |
+    |   Pre-condition: Initialized history object needed
+    |					Index should be in range of array size
+    |
+    |  Post-condition: Question object removed
+    |
+    |      Parameters: index
+    |
+    |         Returns: none
+    *-------------------------------------------------------------------*/
+	public void removeQuestion(int index) {removeQuestion(index, false);}
+
+    /*---------------------------------------------------------------------
+    |  Method removeQuestion(int index, boolean test)
     |
     |         Purpose: remove one Question object from list
     |
@@ -129,18 +179,18 @@ public class History {
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
-	public void removeQuestion(int index) {
+	public void removeQuestion(int index, boolean test) {
 		ArrayList<Question> removedHistory = new ArrayList<>();
 		for(int i=0; i<history.size();i++) {
 			if(i==index) {continue;}
 			removedHistory.add(history.get(i));
 		}
 		history = removedHistory;
-		saveHistory();
+		saveHistory(test);
 	}
 
     /*---------------------------------------------------------------------
-    |  Method saveHistory()
+    |  Method saveHistory(boolean test)
     |
     |         Purpose: method used to save current arrayList in text file
     |
@@ -148,13 +198,17 @@ public class History {
     |
     |  Post-condition: current arrayList saved in text file
     |
-    |      Parameters: none
+    |      Parameters: test(set true for testing)
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
-	public void saveHistory() {
-		File dbFile=  new File(dbPath);
-
+	public void saveHistory(boolean test) {
+		File dbFile;
+		if(!test) {
+			dbFile = new File(dbPath);
+		} else {
+			dbFile = new File(testDbPath);
+		}
 		try (FileWriter fw = new FileWriter(dbFile)) {
 			for(Question q : history) {
 				fw.write(q.getQuestionString()+"\n");
