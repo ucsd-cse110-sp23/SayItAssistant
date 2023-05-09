@@ -1,0 +1,21 @@
+Manual Test Instruction for ChatGPT.java:
+
+Preview = ChatGPT.java takes questions (in the form of strings) 
+          to get answers through the OpenAI API and then generates 
+          responses using the GPT-3.5 architecture.
+
+1. Launch the application
+2. Click New question button
+3. Ask "What is the largest city in the United States?"
+4. After the question is asked, it shows answer: 
+   "The largest city in the United States is New York City, 
+   which is home to over 8 million people." is shown on the main board
+5. Ask "Where is Spain?"
+6. After the question is asked, it shows answer: 
+   "Spain is located in southwestern Europe on the Iberian Peninsula. 
+    It is bordered by Portugal to the west, France to the north, 
+    and Andorra and the Bay of Biscay to the northeast." is 
+    shown on the main board. 
+7. Ask "what is the time."
+8. After the question is asked, it shows answer:
+   "It is 4:39 PM." is shown on the main board. 
