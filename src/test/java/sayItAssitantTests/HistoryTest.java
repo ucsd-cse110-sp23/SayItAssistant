@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sayItAssistant.*;
+import sayItAssistant.mocking.MockHistory;
 
 /**
  * @author Chanho Jeon
@@ -62,7 +63,7 @@ class HistoryTest {
 	 */
 	@Test
 	void testHistoryConstructor() {
-		History csTest = new History(true);
+		History csTest = new MockHistory();
 		assertEquals("Question for Test1", csTest.getHistory().get(0).getQuestionString());
 		assertEquals("Answer for Test1", csTest.getHistory().get(0).getAnswerObject().getAnswerString());
 		assertEquals("Question for Test2", csTest.getHistory().get(1).getQuestionString());
@@ -75,9 +76,9 @@ class HistoryTest {
 	 */
 	@Test
 	void testAddSizeIncrease() {
-		History csTest = new History(true);
+		History csTest = new MockHistory();
 		assertEquals(3, csTest.getHistory().size());
-		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")),true);
+		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")));
 		assertEquals(4, csTest.getHistory().size());
 	}
 
@@ -88,8 +89,8 @@ class HistoryTest {
 	 */
 	@Test
 	void testAddedQuestionOnTop() {
-		History csTest = new History(true);
-		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")),true);
+		History csTest = new MockHistory();
+		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")));
 		assertEquals("New Question Added", csTest.getHistory().get(0).getQuestionString());
 		assertEquals("New Answer Added", csTest.getHistory().get(0).getAnswerObject().getAnswerString());
 	}
@@ -100,8 +101,8 @@ class HistoryTest {
 	 */
 	@Test
 	void testAddExistingQuestion() {
-		History csTest = new History(true);
-		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")),true);
+		History csTest = new MockHistory();
+		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")));
 		assertEquals("Question for Test1", csTest.getHistory().get(1).getQuestionString());
 		assertEquals("Answer for Test1", csTest.getHistory().get(1).getAnswerObject().getAnswerString());
 		assertEquals("Question for Test2", csTest.getHistory().get(2).getQuestionString());
@@ -114,8 +115,8 @@ class HistoryTest {
 	 */
 	@Test
 	void testAddAutoSave() throws Exception{
-		History csTest = new History(true);
-		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")),true);
+		History csTest = new MockHistory();
+		csTest.addQuestion(new Question("New Question Added", new Answer("New Answer Added")));
 		BufferedReader br = new BufferedReader(new FileReader("./DB/QuestionsForTest.txt"));
 		assertEquals("New Question Added", br.readLine());
 		assertEquals("New Answer Added", br.readLine());
@@ -132,9 +133,9 @@ class HistoryTest {
 	 */
 	@Test
 	void testRemoveSizeDecrease() {
-		History csTest = new History(true);
+		History csTest = new MockHistory();
 		assertEquals(3, csTest.getHistory().size());
-		csTest.removeQuestion(0, true);
+		csTest.removeQuestion(0);
 		assertEquals(2, csTest.getHistory().size());
 	}
 
@@ -144,8 +145,8 @@ class HistoryTest {
 	 */
 	@Test
 	void testRemoveExistingQuestion() {
-		History csTest = new History(true);
-		csTest.removeQuestion(1, true);
+		History csTest = new MockHistory();
+		csTest.removeQuestion(1);
 		assertEquals("Question for Test1", csTest.getHistory().get(0).getQuestionString());
 		assertEquals("Answer for Test1", csTest.getHistory().get(0).getAnswerObject().getAnswerString());
 		assertEquals("Question for Test3", csTest.getHistory().get(1).getQuestionString());
@@ -158,8 +159,8 @@ class HistoryTest {
 	 */
 	@Test
 	void testRemoveAutoSave() throws Exception{
-		History csTest = new History(true);
-		csTest.removeQuestion(1, true);
+		History csTest = new MockHistory();
+		csTest.removeQuestion(1);
 		BufferedReader br = new BufferedReader(new FileReader("./DB/QuestionsForTest.txt"));
 		assertEquals("Question for Test1", br.readLine());
 		assertEquals("Answer for Test1", br.readLine());
@@ -170,12 +171,12 @@ class HistoryTest {
 
 	@Test
 	void testMultiAddRemove() {
-		History csTest = new History(true);
-		csTest.addQuestion(new Question("First Multiple Question", new Answer("First Multiple Answer")),true);
-		csTest.addQuestion(new Question("Second Multiple Question", new Answer("Second Multiple Answer")),true);
-		csTest.removeQuestion(2, true);
-		csTest.addQuestion(new Question("Third Multiple Question", new Answer("Third Multiple Answer")),true);
-		csTest.removeQuestion(1, true);
+		History csTest = new MockHistory();
+		csTest.addQuestion(new Question("First Multiple Question", new Answer("First Multiple Answer")));
+		csTest.addQuestion(new Question("Second Multiple Question", new Answer("Second Multiple Answer")));
+		csTest.removeQuestion(2);
+		csTest.addQuestion(new Question("Third Multiple Question", new Answer("Third Multiple Answer")));
+		csTest.removeQuestion(1);
 		assertEquals("Third Multiple Question", csTest.getHistory().get(0).getQuestionString());
 		assertEquals("Third Multiple Answer", csTest.getHistory().get(0).getAnswerObject().getAnswerString());
 		assertEquals("First Multiple Question", csTest.getHistory().get(1).getQuestionString());
@@ -185,7 +186,7 @@ class HistoryTest {
 		assertEquals("Question for Test3", csTest.getHistory().get(3).getQuestionString());
 		assertEquals("Answer for Test3", csTest.getHistory().get(3).getAnswerObject().getAnswerString());
 
-		csTest = new History(true);
+		csTest = new MockHistory();
 		assertEquals(4, csTest.getHistory().size());
 		assertEquals("Third Multiple Question", csTest.getHistory().get(0).getQuestionString());
 		assertEquals("Third Multiple Answer", csTest.getHistory().get(0).getAnswerObject().getAnswerString());
