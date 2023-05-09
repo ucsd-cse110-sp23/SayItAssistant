@@ -18,7 +18,32 @@ import java.util.ArrayList;
 
 import sayItAssistant.History;
 import sayItAssistant.Question;
-
+/*+----------------------------------------------------------------------
+||
+||  Class Sidebar
+||||
+||        Purpose: Serves as the component for the Sidebar on the UI
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||          SideBackColor - background color for the sidebar
+||          historyObj - object containing the history of questions and answers
+||          historyList - List of the history of questions and answers
+||          historyListModel - DefaultListModel representation of history
+||          historyJList - List containing history data for displayal
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					Sidebar()- default constructor
+||					Creates the Sidebar which displays history of questions and answers
+||
+||  Class Methods:
+||					toStringList() - method to convert ArrayList to DefaultListModel
+||                  updateHistory() - method to update history
+||
+++-----------------------------------------------------------------------*/
 public class Sidebar extends JPanel {
 
     private Color SideBackColor = new Color(18,18,18);
@@ -26,6 +51,20 @@ public class Sidebar extends JPanel {
     private ArrayList<Question> historyList = historyObj.getHistory();
     public static DefaultListModel<String> historyListModel = new DefaultListModel<>();
     public static JList<String> historyJList;
+
+    /*---------------------------------------------------------------------
+    |  Constructor Sidebar()
+    |
+    |         Purpose: Creates the Sidebar
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize Sidebar component
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public Sidebar(){
         setLayout(new BorderLayout());
 
@@ -61,6 +100,19 @@ public class Sidebar extends JPanel {
         this.setBackground(SideBackColor);
     }
 
+    /*---------------------------------------------------------------------
+    |  Method toStringList()
+    |
+    |         Purpose: Returns a DefaultListModel representation of ArrayList
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: None
+    |
+    |      Parameters: ArrayList<Question> historyList
+    |
+    |         Returns: A DefaultListModel representation of historyList
+    *-------------------------------------------------------------------*/
     private DefaultListModel<String> toStringList(ArrayList<Question> historyList) {
         DefaultListModel<String> returnList = new DefaultListModel<>();
         for(Question QA : historyList) {
@@ -69,7 +121,19 @@ public class Sidebar extends JPanel {
         return returnList;
     }
 
-    // Update history and update list in sidebar
+    /*---------------------------------------------------------------------
+    |  Method updateHistory()
+    |
+    |         Purpose: Updates history and refreshes the historyJList to display updated history
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: History is updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public static void updateHistory() {
         historyObj = new History();
         historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());

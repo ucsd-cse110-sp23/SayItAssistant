@@ -20,7 +20,37 @@ import javax.sound.sampled.TargetDataLine;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/*+----------------------------------------------------------------------
+||
+||  Class Footer
+||||
+||        Purpose: Serves as the component for the Footer on the UI
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||					speakNewQuestion - new question button
+||					stopRecording - stop recording button
+||					recordingStatus - true if recording is in progress. False otherwise
+||					targetDataLine - type of dataline from which audio can be read
+||					audioFormat - format for the audio
+||					audioFile - file where audio is saved
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					Footer()- default constructor
+||					Creates Footer which consists of start recording (new question) 
+||                  and stop recording buttons
+||
+||  Class Methods:
+||					startRecording() - method to begin recording
+||					stopRecording() - method to stop recording
+||					getAudioFormat() - method for getting the format of audio
+||                  addListeners() - method for handles clicking of buttons
+||                  removeAudio() - method for deleting audio file
+||
+++-----------------------------------------------------------------------*/
 public class Footer extends JPanel { // This class contains recording buttons
     JButton speakNewQuestion;
     JButton stopRecording;
@@ -29,7 +59,19 @@ public class Footer extends JPanel { // This class contains recording buttons
     private AudioFormat audioFormat;
     File audioFile;
 
-    // Create method to receive microphone input; Adapted from Lab 5 code
+    /*---------------------------------------------------------------------
+    |  Method startRecording()
+    |
+    |         Purpose: handles start recording
+    |
+    |   Pre-condition: Start recording button is clicked
+    |
+    |  Post-condition: Audio file is created with voice recording
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     private void startRecording() {
         Thread t = new Thread(
             () -> {
@@ -58,6 +100,20 @@ public class Footer extends JPanel { // This class contains recording buttons
         t.start();
     }
 
+    /*---------------------------------------------------------------------
+    |  Method stopRecording()
+    |
+    |         Purpose: handles stop recording
+    |
+    |   Pre-condition: Stop recording button is clicked
+    |
+    |  Post-condition: Audio file is transcribed, audio file is deleted, and sidebar + QAScreen
+    |                  are updated with new question.
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     private void stopRecording() {
         Thread thr = new Thread(
             () -> {
@@ -79,6 +135,19 @@ public class Footer extends JPanel { // This class contains recording buttons
         thr.start();
     }
 
+    /*---------------------------------------------------------------------
+    |  Method getAudioFormat()
+    |
+    |         Purpose: Creates and Returns the format of the audio
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: New audio format is created
+    |
+    |      Parameters: None
+    |
+    |         Returns: Audio Format
+    *-------------------------------------------------------------------*/
     private AudioFormat getAudioFormat() {
         float sampleRate = 44100;
         int sampleSizeInBits = 16;
@@ -95,7 +164,19 @@ public class Footer extends JPanel { // This class contains recording buttons
         );
     }
 
-    // Add listeners to buttons
+    /*---------------------------------------------------------------------
+    |  Method addListeners()
+    |
+    |         Purpose: Adds action listeners to buttons
+    |
+    |   Pre-condition: Buttons are initialized
+    |
+    |  Post-condition: New question button and stop recording has action listeners
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public void addListeners() {
         speakNewQuestion.addActionListener(
             (ActionEvent e) -> {
@@ -112,11 +193,36 @@ public class Footer extends JPanel { // This class contains recording buttons
         );
     }
     
-    // Removing audio file
+    /*---------------------------------------------------------------------
+    |  Method removeAudio()
+    |
+    |         Purpose: Deletes Audio File
+    |
+    |   Pre-condition: Audio File Exists
+    |
+    |  Post-condition: Audio File is deleted
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     private void removeAudio() {
     	audioFile.delete();
     }
 
+    /*---------------------------------------------------------------------
+    |  Constructor Footer()
+    |
+    |         Purpose: Creates Footer with the new question and stop recording buttons
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize Footer component
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public Footer() {
         // Set Question recording buttons to the left of the footer
         JPanel leftHalf = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));

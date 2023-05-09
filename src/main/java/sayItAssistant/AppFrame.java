@@ -9,12 +9,47 @@ import javax.swing.WindowConstants;
 import sayItAssistant.components.Footer;
 import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
-
+/*+----------------------------------------------------------------------
+||
+||  Class AppFrame
+||||
+||        Purpose: Main window that contains the entire GUI of the app
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||          mainScreen - QAScreen
+||          historyList - Sidebar
+||          buttons - Footer
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					AppFrame()- default constructor
+||					Creates the AppFrame by combining all UI Components
+||
+||  Class Methods:
+||					main() - entry point for executing the app
+||
+++-----------------------------------------------------------------------*/
 class AppFrame extends JFrame {
     private QAScreen mainScreen;
     private Sidebar historyList;
     private Footer buttons;
 
+    /*---------------------------------------------------------------------
+    |  Constructor AppFrame()
+    |
+    |         Purpose: Creates the AppFrame
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize AppFrame
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public AppFrame() {
         setLayout(new BorderLayout()); // Layout for AppFrame
 
@@ -39,12 +74,24 @@ class AppFrame extends JFrame {
 
     }
 
+    /*---------------------------------------------------------------------
+    |  Method main()
+    |
+    |         Purpose: Entry point for execution of app
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: GUI is created and executed
+    |
+    |      Parameters: String[] args - command line arguments
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public static void main(String[] args){
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
         baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseApp.setVisible(true);
-
     }
 }
