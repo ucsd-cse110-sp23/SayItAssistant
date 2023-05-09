@@ -1,0 +1,18 @@
+Manual Test Instruction for Whisper.java:
+
+Preview = Whisper.java allows users to transcribe audio message they send. 
+          The sayItAssistant application uses API in order to transcribe    
+          audio message into text files. 
+          This manual test is to confirm that the application works in the way 
+          it is expected. 
+
+1. Launch the application
+2. Click New question button
+3. Ask "What is the largest city in the United States?"
+4. The question asked appears on the main board
+5. Click New question button
+6. Ask "What is 1 plus 1?"
+7. The question asked appears on the main board
+8. Click New question button
+9. Ask "Where is Sweden?"
+10. The question asked appears on the main board
