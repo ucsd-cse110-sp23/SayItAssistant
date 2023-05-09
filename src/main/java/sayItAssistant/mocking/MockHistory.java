@@ -19,7 +19,7 @@ public class MockHistory extends History{
     /*---------------------------------------------------------------------
     |  Constructor History()
     |
-    |         Purpose: constructor used for testing
+    |         Purpose: constructor used for testing(mocking)
     |
     |   Pre-condition: None
     |

@@ -60,6 +60,7 @@ class HistoryTest {
 	 * Test if the constructor of History class correctly load Strings from Question.txt
 	 * The Question.txt file has two sets of Strings: question, answer
 	 * Check if the String is saved into the right object
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testHistoryConstructor() {
@@ -73,6 +74,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#addQuestion(main.java.Question)}.
 	 * Test if addQuestion() method increases the size of history array
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testAddSizeIncrease() {
@@ -86,6 +88,7 @@ class HistoryTest {
 	 * Test method for {@link main.java.History#addQuestion(main.java.Question)}.
 	 * Test if addQuestion() method add question and answer
 	 * Test if addQeustion() method put new element at front
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testAddedQuestionOnTop() {
@@ -98,6 +101,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#addQuestion(main.java.Question)}.
 	 * Test if addQuestion() still contains existing questions
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testAddExistingQuestion() {
@@ -112,6 +116,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#addQuestion(main.java.Question)}.
 	 * Test if addQuestion() save questions into text file
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testAddAutoSave() throws Exception{
@@ -130,6 +135,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#removeQuestion(int)}.
 	 * Test if removeQuestion() decreases size of history
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testRemoveSizeDecrease() {
@@ -142,6 +148,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#removeQuestion(int)}.
 	 * Test if removeQuestion() does not affect non-removing questions
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testRemoveExistingQuestion() {
@@ -156,6 +163,7 @@ class HistoryTest {
 	/**
 	 * Test method for {@link main.java.History#removeQuestion(int)}.
 	 * Test if removeQuestion() save questions into text file
+	 * Use MockHistory class, so the data base won't be changed by running the test
 	 */
 	@Test
 	void testRemoveAutoSave() throws Exception{

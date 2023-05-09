@@ -77,6 +77,7 @@ class StoryTestUS3 {
 	||	Test if the question has corresponding answer "unanswered question"
 	||	The story is part where user ask question so it should not have any
 	||	answers
+	||	Use MockHistory class, so the data base won't be changed by running the test
 	||
 	++-----------------------------------------------------------------------*/
 	@Test
@@ -113,6 +114,7 @@ class StoryTestUS3 {
 	||	askQuestion returns boolean value which is corresponding to 
 	||	error in real whisper class
 	||	check if the boolean value is false.
+	||	Use MockHistory class, so the data base won't be changed by running the test
 	||
 	++-----------------------------------------------------------------------*/
 	@Test

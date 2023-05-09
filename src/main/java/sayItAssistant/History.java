@@ -43,7 +43,7 @@ public class History {
     /*---------------------------------------------------------------------
     |  Constructor History()
     |
-    |         Purpose: constructor used for testing
+    |         Purpose: constructor used
     |
     |   Pre-condition: None
     |
@@ -125,7 +125,7 @@ public class History {
     |
     |  Post-condition: Question object removed
     |
-    |      Parameters: index, test(set true for testing)
+    |      Parameters: index
     |
     |         Returns: none
     *-------------------------------------------------------------------*/
