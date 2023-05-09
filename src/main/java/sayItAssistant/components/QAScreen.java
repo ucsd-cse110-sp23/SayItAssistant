@@ -9,46 +9,11 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-/*+----------------------------------------------------------------------
-||
-||  Class QAScreen
-||||
-||        Purpose: Serves as the component for the QAScreen on the UI
-||
-|+-----------------------------------------------------------------------
-||
-||          Field:
-||					QABackColor - background color for the QAScreen
-||					QAText - Text area for displaying question and answer
-||
-|+-----------------------------------------------------------------------
-||
-||   Constructors:
-||					QAScreen()- default constructor
-||					Creates QAScreen which displays question and answer
-||
-||  Class Methods:
-||					updateQAScreen() - methods to update the QAScreen with most recent
-||                                     question and answer
-||
-++-----------------------------------------------------------------------*/
+
 public class QAScreen extends JPanel {
     private Color QABackColor = new Color(40,40,40);
     public static JTextArea QAText;
 
-    /*---------------------------------------------------------------------
-    |  Constructor QAScreen()
-    |
-    |         Purpose: Creates the QAScreen
-    |
-    |   Pre-condition: None
-    |
-    |  Post-condition: Initialize QAScreen component
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
     public QAScreen(){
         this.setBackground(QABackColor);
 
@@ -76,19 +41,7 @@ public class QAScreen extends JPanel {
         
     }
 
-    /*---------------------------------------------------------------------
-    |  Method updateQAScreen()
-    |
-    |         Purpose: Updates QAScreen
-    |
-    |   Pre-condition: history is updated with most recent question and answer
-    |
-    |  Post-condition: QAText shows the most recent question and answer
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
+    //Has to be run after sidebar is updated. Relies on updated history class.
     public static void updateQAScreen() {
         String outputString = Sidebar.historyObj.getHistory().get(0).getQuestionString() + "\n\n\n" + 
                               Sidebar.historyObj.getHistory().get(0).getAnswerObject().getAnswerString();
