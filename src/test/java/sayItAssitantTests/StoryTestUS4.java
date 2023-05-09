@@ -75,6 +75,7 @@ class StoryTestUS4 {
 	||	Initialize MockChatGpt because we are not the real API
 	||	Run mock method in MockChatGpt
 	||	Test if the answer is changed to the right answer string
+	||	Use MockHistory class, so the data base won't be changed by running the test
 	||
 	++-----------------------------------------------------------------------*/
 	@Test
