@@ -92,7 +92,7 @@ public class History {
 
 
     /*---------------------------------------------------------------------
-    |  Method addQuestion(Question question, boolean test)
+    |  Method addQuestion(Question question)
     |
     |         Purpose: add Question object at index 0(front)
     |
@@ -125,7 +125,7 @@ public class History {
     |
     |  Post-condition: Question object removed
     |
-    |      Parameters: index, test(set true for testing)
+    |      Parameters: index
     |
     |         Returns: none
     *-------------------------------------------------------------------*/

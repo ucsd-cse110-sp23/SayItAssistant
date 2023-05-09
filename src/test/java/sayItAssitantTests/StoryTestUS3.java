@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import sayItAssistant.History;
 import sayItAssistant.Whisper;
-import sayItAssistant.mocking.MockHistory;
 import sayItAssistant.mocking.MockWhisper;
 
 class StoryTestUS3 {
@@ -81,7 +80,7 @@ class StoryTestUS3 {
 	++-----------------------------------------------------------------------*/
 	@Test
 	void scenarioOneTest() {
-		History usTestHistory = new MockHistory();
+		History usTestHistory = new History(true);
 		MockWhisper mockWhisper = new MockWhisper();
 		assertEquals(3, usTestHistory.getHistory().size());
 		
@@ -117,7 +116,7 @@ class StoryTestUS3 {
 	++-----------------------------------------------------------------------*/
 	@Test
 	void scenarioTwoTest() {
-		History usTestHistory = new MockHistory();
+		History usTestHistory = new History(true);
 		MockWhisper mockWhisper = new MockWhisper();
 		assertEquals(3, usTestHistory.getHistory().size());
 		

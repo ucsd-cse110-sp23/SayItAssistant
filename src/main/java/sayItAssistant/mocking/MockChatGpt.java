@@ -9,7 +9,7 @@ public class MockChatGpt extends ChatGpt{
 	String answerString = "Louis Braille came up with the idea for braille after an accident blinded him at the age of three.";
 	
 	public MockChatGpt() {
-		history = new MockHistory();
+		history = new History(true);
 	}
 	
 	private void setRequest() {
@@ -24,6 +24,6 @@ public class MockChatGpt extends ChatGpt{
 	public void search() {
 		setRequest();
 		setResponse();
-		history.saveHistory();
+		history.saveHistory(true);
 	}
 }
