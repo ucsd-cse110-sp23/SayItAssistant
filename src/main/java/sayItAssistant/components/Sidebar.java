@@ -14,8 +14,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.*;
 
-import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import java.util.ArrayList;
+import javax.swing.JTextArea;
 import sayItAssistant.History;
 import sayItAssistant.Question;
 /*+----------------------------------------------------------------------
@@ -52,6 +55,20 @@ public class Sidebar extends JPanel {
     public static DefaultListModel<String> historyListModel = new DefaultListModel<>();
     public static JList<String> historyJList;
 
+    public void valueChangedAnswer(){
+        Thread thr = new Thread(
+            () -> {
+                String s = (String) historyJList.getSelectedValue();
+                for(Question QA : historyList) {
+                    if(QA.getQuestionString() == s){
+                        QAScreen.QAText.setText(QA.getAnswerObject().getAnswerString());
+                    }
+                }
+            }
+        );
+        thr.start();
+    }
+
     /*---------------------------------------------------------------------
     |  Constructor Sidebar()
     |
@@ -80,14 +97,22 @@ public class Sidebar extends JPanel {
         
         JLabel historyLabel = new JLabel("History");
         historyLabel.setForeground(Color.WHITE);
-        historyLabel.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        historyLabel.setFont(new Font("Segoe Script", Font.BOLD, 18));
         historyTitleBox.add(historyLabel);
 
         historyListModel = toStringList(historyList);
         
         historyJList = new JList<>(historyListModel);
-        JScrollPane scrollList = new JScrollPane(historyJList);
 
+        historyJList.addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent evt) {
+                valueChangedAnswer();
+            }
+        });
+        
+        JScrollPane scrollList = new JScrollPane(historyJList);
+        scrollList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollList.setBorder(new CompoundBorder(
             new LineBorder(SideBackColor, 1),
             new EmptyBorder(0, 0, 0, 0)
@@ -95,6 +120,7 @@ public class Sidebar extends JPanel {
 
         this.add(historyTitleBox, BorderLayout.NORTH);
         this.add(scrollList, BorderLayout.CENTER);
+        historyJList.setFont(new Font("Trebuchet MS",Font.BOLD,14));
         historyJList.setBackground(SideBackColor);
         historyJList.setForeground(Color.WHITE);
         this.setBackground(SideBackColor);

@@ -92,7 +92,6 @@ class AppFrame extends JFrame {
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
         baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseApp.setVisible(true);
-
+        baseApp.setVisible(true);   
     }
 }
