@@ -61,7 +61,7 @@ public class Sidebar extends JPanel {
                 String s = (String) historyJList.getSelectedValue();
                 for(Question QA : historyList) {
                     if(QA.getQuestionString() == s){
-                        QAScreen.QAText.setText(QA.getAnswerObject().getAnswerString());
+                        QAScreen.QAText.setText(QA.getQuestionString() + "\n\n" + QA.getAnswerObject().getAnswerString());
                     }
                 }
             }
