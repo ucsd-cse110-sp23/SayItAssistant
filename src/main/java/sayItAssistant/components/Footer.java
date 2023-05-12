@@ -230,14 +230,14 @@ public class Footer extends JPanel { // This class contains recording buttons
         // Create new question button
         speakNewQuestion = new JButton("New Question");
         // Set Font
-        speakNewQuestion.setFont(new Font("Sans-serif", Font.ITALIC, 10));
+        speakNewQuestion.setFont(new Font("Segoe Script", Font.BOLD, 10));
         speakNewQuestion.setBackground(Color.WHITE);
         leftHalf.add(speakNewQuestion);
 
         // Create stop recording button
         stopRecording = new JButton("Stop Recording");
         // Set Font
-        stopRecording.setFont(new Font("Sans-serif", Font.ITALIC, 10));
+        stopRecording.setFont(new Font("Segoe Script", Font.BOLD, 10));
         stopRecording.setBackground(Color.WHITE);
         leftHalf.add(stopRecording);
 

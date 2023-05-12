@@ -57,7 +57,7 @@ public class QAScreen extends JPanel {
         QAText.setEditable(false);
 
         QAText.setBorder(BorderFactory.createEmptyBorder(40,0,40,0));
-        QAText.setFont(new Font("Sans-serif", Font.BOLD, 18));
+        QAText.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
 
         JPanel QAPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         QAPanel.setPreferredSize(new Dimension(570, 600));
