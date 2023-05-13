@@ -90,8 +90,20 @@ public class QAScreen extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public static void updateQAScreen() {
-        String outputString = Sidebar.historyObj.getHistory().get(0).getQuestionString() + "\n\n\n" + 
+        String outputString = Sidebar.historyObj.getHistory().get(0).getQuestionString() + "\n\n" + 
                               Sidebar.historyObj.getHistory().get(0).getAnswerObject().getAnswerString();
+        QAText.setText(outputString);
+    }
+
+    public static void updateRemoveQAScreen() {
+        String outputString;
+        if(Sidebar.currentQuestionIndex == 0) {
+            outputString = "";
+        } else {
+            outputString = Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getQuestionString() + "\n\n" + 
+                           Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getAnswerObject().getAnswerString();
+        }
+        //System.out.println("" + Sidebar.currentQuestionIndex);
         QAText.setText(outputString);
     }
 }
