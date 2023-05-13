@@ -51,23 +51,10 @@ public class Sidebar extends JPanel {
 
     private Color SideBackColor = new Color(18,18,18);
     public static History historyObj = new History();
-    private ArrayList<Question> historyList = historyObj.getHistory();
+    private static ArrayList<Question> historyList = historyObj.getHistory();
     public static DefaultListModel<String> historyListModel = new DefaultListModel<>();
     public static JList<String> historyJList;
 
-    public void valueChangedAnswer(){
-        Thread thr = new Thread(
-            () -> {
-                String s = (String) historyJList.getSelectedValue();
-                for(Question QA : historyList) {
-                    if(QA.getQuestionString() == s){
-                        QAScreen.QAText.setText(QA.getQuestionString() + "\n\n" + QA.getAnswerObject().getAnswerString());
-                    }
-                }
-            }
-        );
-        thr.start();
-    }
 
     /*---------------------------------------------------------------------
     |  Constructor Sidebar()
@@ -163,7 +150,22 @@ public class Sidebar extends JPanel {
     public static void updateHistory() {
         historyObj = new History();
         historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());
+        historyList.add(historyObj.getHistory().get(0));
         historyJList.validate();
         historyJList.repaint();
+    }
+
+    public void valueChangedAnswer(){
+        Thread thr = new Thread(
+            () -> {
+                String s = (String) historyJList.getSelectedValue();
+                for(Question QA : historyList) {
+                    if(QA.getQuestionString() == s){
+                        QAScreen.QAText.setText(QA.getQuestionString() + "\n\n" + QA.getAnswerObject().getAnswerString());
+                    }
+                }
+            }
+        );
+        thr.start();
     }
 }
