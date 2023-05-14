@@ -168,9 +168,4 @@ public class History {
 		}
 	}
 
-    public void clearHistory() {
-        history.clear();
-        saveHistory();
-    }
-
 }
