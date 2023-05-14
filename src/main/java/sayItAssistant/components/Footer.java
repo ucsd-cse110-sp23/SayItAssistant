@@ -144,6 +144,11 @@ public class Footer extends JPanel { // This class contains recording buttons
         QAScreen.updateRemoveQAScreen();
     }
 
+    private void deleteAllQuestions() {
+        Sidebar.resetHistory();
+        QAScreen.resetQAScreen();
+    }
+
     /*---------------------------------------------------------------------
     |  Method getAudioFormat()
     |
@@ -204,6 +209,12 @@ public class Footer extends JPanel { // This class contains recording buttons
         deleteCurrent.addActionListener(
             (ActionEvent e)-> {
                 deleteCurrentQuestion();
+            }
+        );
+
+        deleteAll.addActionListener(
+            (ActionEvent e) -> {
+                deleteAllQuestions();
             }
         );
     }

@@ -106,4 +106,8 @@ public class QAScreen extends JPanel {
         //System.out.println("" + Sidebar.currentQuestionIndex);
         QAText.setText(outputString);
     }
+
+    public static void resetQAScreen() {
+        QAText.setText("");
+    }
 }
