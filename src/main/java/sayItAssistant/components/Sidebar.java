@@ -127,7 +127,7 @@ public class Sidebar extends JPanel {
     |
     |         Returns: A DefaultListModel representation of historyList
     *-------------------------------------------------------------------*/
-    private static DefaultListModel<String> toStringList(ArrayList<Question> historyList) {
+    private DefaultListModel<String> toStringList(ArrayList<Question> historyList) {
         DefaultListModel<String> returnList = new DefaultListModel<>();
         for(Question QA : historyList) {
             returnList.addElement(QA.getQuestionString());
@@ -167,14 +167,7 @@ public class Sidebar extends JPanel {
         historyJList.repaint();
     }
 
-    public static void resetHistory() {
-        historyListModel.clear();
-        historyObj.clearHistory();
-        historyList.clear();
-        historyJList.validate();
-        historyJList.repaint();
-        historyObj = new History();
-    }
+    
 
     public void valueChangedAnswer(){
         Thread thr = new Thread(

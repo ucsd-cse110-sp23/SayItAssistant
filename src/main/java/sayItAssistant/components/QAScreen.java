@@ -107,7 +107,4 @@ public class QAScreen extends JPanel {
         QAText.setText(outputString);
     }
 
-    public static void resetQAScreen() {
-        QAText.setText("");
-    }
 }
