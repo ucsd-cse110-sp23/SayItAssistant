@@ -131,12 +131,17 @@ public class Footer extends JPanel { // This class contains recording buttons
                     e.printStackTrace();
                 }
                 removeAudio();
-                Sidebar.updateHistory();
+                Sidebar.updateAddHistory();
                 QAScreen.updateQAScreen();
                 targetDataLine.close();
             }
         );
         thr.start();
+    }
+
+    private void deleteCurrentQuestion() {
+        Sidebar.updateRemoveHistory();
+        QAScreen.updateRemoveQAScreen();
     }
 
     /*---------------------------------------------------------------------
@@ -195,6 +200,14 @@ public class Footer extends JPanel { // This class contains recording buttons
                 stopRecording();
             }
         );
+
+        deleteCurrent.addActionListener(
+            (ActionEvent e)-> {
+                deleteCurrentQuestion();
+            }
+        );
+
+      
     }
     
     /*---------------------------------------------------------------------

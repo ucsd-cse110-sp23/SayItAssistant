@@ -51,23 +51,11 @@ public class Sidebar extends JPanel {
 
     private Color SideBackColor = new Color(18,18,18);
     public static History historyObj = new History();
-    private ArrayList<Question> historyList = historyObj.getHistory();
+    public static ArrayList<Question> historyList = historyObj.getHistory();
     public static DefaultListModel<String> historyListModel = new DefaultListModel<>();
     public static JList<String> historyJList;
+    public static int currentQuestionIndex;
 
-    public void valueChangedAnswer(){
-        Thread thr = new Thread(
-            () -> {
-                String s = (String) historyJList.getSelectedValue();
-                for(Question QA : historyList) {
-                    if(QA.getQuestionString() == s){
-                        QAScreen.QAText.setText(QA.getQuestionString() + "\n\n" + QA.getAnswerObject().getAnswerString());
-                    }
-                }
-            }
-        );
-        thr.start();
-    }
 
     /*---------------------------------------------------------------------
     |  Constructor Sidebar()
@@ -97,7 +85,7 @@ public class Sidebar extends JPanel {
         
         JLabel historyLabel = new JLabel("History");
         historyLabel.setForeground(Color.WHITE);
-        historyLabel.setFont(new Font("Segoe Script", Font.BOLD, 18));
+        historyLabel.setFont(new Font("Sans-serif", Font.BOLD, 18));
         historyTitleBox.add(historyLabel);
 
         historyListModel = toStringList(historyList);
@@ -150,20 +138,49 @@ public class Sidebar extends JPanel {
     /*---------------------------------------------------------------------
     |  Method updateHistory()
     |
-    |         Purpose: Updates history and refreshes the historyJList to display updated history
+    |         Purpose: Updates history and refreshes the historyJList to display elementes add to history
     |
     |   Pre-condition: None
     |
-    |  Post-condition: History is updated
+    |  Post-condition: History is updated with added element
     |
     |      Parameters: None
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
-    public static void updateHistory() {
-        historyObj = new History();
+    public static void updateAddHistory() {
         historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());
+        historyList.add(0,historyObj.getHistory().get(0));
+        historyObj = new History();
         historyJList.validate();
         historyJList.repaint();
+        historyJList.setSelectedIndex(0);
+    }
+
+    public static void updateRemoveHistory() {
+        //historyObj = new History();
+        historyListModel.remove(currentQuestionIndex);
+        historyObj.removeQuestion(currentQuestionIndex);
+        historyList.remove(currentQuestionIndex);
+        historyObj = new History();
+        historyJList.validate();
+        historyJList.repaint();
+    }
+
+    
+
+    public void valueChangedAnswer(){
+        Thread thr = new Thread(
+            () -> {
+                String s = (String) historyJList.getSelectedValue();
+                for(int i = 0; i < historyList.size(); i++) {
+                    if(historyList.get(i).getQuestionString() == s){
+                        QAScreen.QAText.setText(historyList.get(i).getQuestionString() + "\n\n" + historyList.get(i).getAnswerObject().getAnswerString());
+                        currentQuestionIndex = i;
+                    }
+                }
+            }
+        );
+        thr.start();
     }
 }
