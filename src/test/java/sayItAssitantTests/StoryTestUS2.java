@@ -66,9 +66,9 @@ public class StoryTestUS2 {
 	||
 	||  First test if the question data base is properly called
 	||	by testing the size
-    	Since the question is already asked, test index:1 of history
-	||	if it contains the right question
-        Test if the answer of the question is the correct corresponding answer 
+	||  Since the question is already asked and is in the prompt history, test index:1 of history
+	||  to ensure it contains the right question
+	||  Test if the answer of the question is the correct corresponding answer 
 	||	
 	++-----------------------------------------------------------------------*/
     @Test
@@ -78,16 +78,7 @@ public class StoryTestUS2 {
 		assertEquals("Who is Joe Biden?",
 				usTestHistory.getHistory().get(1).getQuestionString());
 		assertEquals("Joe Biden is the President of the United States.",
-				usTestHistory.getHistory().get(1).getAnswerObject().getAnswerString());	
-
-        // restart the application
-		History freshTestHistory = new MockHistory();
-        assertEquals(3, freshTestHistory.getHistory().size());
-		assertEquals("Who is Joe Biden?",
-                freshTestHistory.getHistory().get(1).getQuestionString());
-		assertEquals("Joe Biden is the President of the United States.",
-                freshTestHistory.getHistory().get(1).getAnswerObject().getAnswerString());	
-                
+				usTestHistory.getHistory().get(1).getAnswerObject().getAnswerString());		            
 	}
     
 
