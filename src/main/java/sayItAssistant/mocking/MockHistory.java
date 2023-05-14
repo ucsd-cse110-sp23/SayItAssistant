@@ -103,7 +103,7 @@ public class MockHistory extends History{
     |
     |  Post-condition: Question object removed
     |
-    |      Parameters: index, test(set true for testing)
+    |      Parameters: index
     |
     |         Returns: none
     *-------------------------------------------------------------------*/

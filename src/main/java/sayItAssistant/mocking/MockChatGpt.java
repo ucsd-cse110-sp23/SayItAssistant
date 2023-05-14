@@ -12,6 +12,11 @@ public class MockChatGpt extends ChatGpt{
 		history = new MockHistory();
 	}
 	
+	public MockChatGpt(String answerString) {
+		history = new MockHistory();
+		this.answerString = answerString;
+	}
+	
 	private void setRequest() {
 		questionString = history.getHistory().get(0).getQuestionString();
 	}
