@@ -25,7 +25,7 @@ public class RequestHandler implements HttpHandler{
 	public void handle(HttpExchange httpExchange) throws IOException {
 		String response = "Request Received";
 		String method = httpExchange.getRequestMethod();
-		
+		System.out.println("handle()");
 		try {
 			if(method.equals("GET")) {
 				//response = handleGet(httpExchange);
@@ -43,12 +43,10 @@ public class RequestHandler implements HttpHandler{
 			response = e.toString();
 			e.printStackTrace();
 		}
-		
 		httpExchange.sendResponseHeaders(200, response.length());
 		OutputStream outStream = httpExchange.getResponseBody();
 		outStream.write(response.getBytes());
 		outStream.close();
-		
 	}
 	
 	private void handlePost(HttpExchange httpExchange) throws IOException {
@@ -61,6 +59,8 @@ public class RequestHandler implements HttpHandler{
 		), answerString = postData.substring(postData.indexOf(",") + 1);
 
 		Question question = new Question(questionString, new Answer(answerString));
+		System.out.println(data.getHistory().get(0).getQuestionString());
+		System.out.println(data.getHistory().get(0).getAnswerObject().getAnswerString());
 		data.addQuestion(question);
 		scanner.close();
 	}

@@ -6,15 +6,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import sayItAssistant.data.Answer;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
 /*+----------------------------------------------------------------------
@@ -107,10 +109,8 @@ public class Footer extends JPanel { // This class contains recording buttons
 	                out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
 	                out.flush();
 	                out.close();
-	                Sidebar.updateAddHistory();
-	                QAScreen.updateQAScreen();
+	                conn.getInputStream();
 				} catch (Exception ex) {
-					// TODO Auto-generated catch block
 					ex.printStackTrace();
 				}
                 
