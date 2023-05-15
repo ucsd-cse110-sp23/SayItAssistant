@@ -22,5 +22,5 @@ The application will open 5 seconds after the server is started.<br>
 **Note**:
 The application will open 5 seconds after the server is started.<br>
 4. Close out of the application normally after you are finished. <br>
-5. To correctly shut down the server, run the command prompt as adminsitrator and run the command `netstat -ano | :8100`. The last string of numbers is the PID. Take note of this number.
+5. To correctly shut down the server, run the command prompt as adminsitrator and run the command `netstat -ano | findstr :8100`. The last string of numbers is the PID. Take note of this number.
 6. Run `taskkill /F /PID {PID}`, where the PID number from the last step is inserted between the brackets. This kills the server. 
