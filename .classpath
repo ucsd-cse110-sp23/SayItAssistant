@@ -19,7 +19,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="/Users/jeonchanho/Documents/csProjects/CSE110/cse-110-project-team-16/lib/json-20230227.jar"/>
-	<classpathentry kind="lib" path="/Users/jeonchanho/Documents/csProjects/CSE110/cse-110-project-team-16/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="/Users/bella/Desktop/CSE110/projectT16/lib/json-20230227.jar"/>
+	<classpathentry kind="lib" path="/Users/bella/Desktop/CSE110/projectT16/gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

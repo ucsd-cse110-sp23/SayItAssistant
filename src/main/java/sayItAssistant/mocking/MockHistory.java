@@ -147,4 +147,23 @@ public class MockHistory extends History{
 			e.printStackTrace();
 		}
 	}
+	
+    /*---------------------------------------------------------------------
+    |  Method clearHistory()
+    |
+    |         Purpose: method used to clear arrayList
+    |
+    |   Pre-condition: none
+    |
+    |  Post-condition: arrayList cleared
+    |
+    |      Parameters: none
+    |
+    |         Returns: none
+    *-------------------------------------------------------------------*/
+    @Override
+    public void clearHistory() {
+        history.clear();
+        saveHistory();
+    }
 }
