@@ -150,12 +150,13 @@ public class Sidebar extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public static void updateAddHistory() {
+    	historyObj = new History();
         historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());
         historyList.add(0,historyObj.getHistory().get(0));
-        historyObj = new History();
         historyJList.validate();
         historyJList.repaint();
         historyJList.setSelectedIndex(0);
+        QAScreen.updateQAScreen();
     }
 
     public static void updateRemoveHistory() {

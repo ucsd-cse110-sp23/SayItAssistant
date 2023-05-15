@@ -14,6 +14,7 @@ import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import sayItAssistant.data.Answer;
@@ -113,16 +114,29 @@ public class Footer extends JPanel { // This class contains recording buttons
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-                
-                
+				Sidebar.updateAddHistory();
             }
         );
 
-        deleteCurrent.addActionListener(
-            (ActionEvent e)-> {
-                deleteCurrentQuestion();
-            }
-        );
+//        deleteCurrent.addActionListener(
+//            (ActionEvent e)-> {
+//            	try {
+//                    String query = fieldPanel.getQuery();
+//                    URL url = new URL(URL + "?=" + query);
+//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//                    conn.setRequestMethod("DELETE");
+//                    BufferedReader in = new BufferedReader(
+//                      new InputStreamReader(conn.getInputStream())
+//                    );
+//                    String response = in.readLine();
+//                    in.close();
+//                    JOptionPane.showMessageDialog(null, response);
+//                  } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+//                  }
+//            }
+//        );
         
         deleteAll.addActionListener(
             (ActionEvent e) -> {
