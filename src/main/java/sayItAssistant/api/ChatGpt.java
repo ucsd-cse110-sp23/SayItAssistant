@@ -1,4 +1,4 @@
-package sayItAssistant;
+package sayItAssistant.api;
 /*+----------------------------------------------------------------------
 ||
 ||  Class ChatGpt
@@ -44,6 +44,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import sayItAssistant.data.History;
 
 public class ChatGpt {
 	private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";

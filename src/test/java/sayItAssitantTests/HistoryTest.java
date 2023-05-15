@@ -15,6 +15,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sayItAssistant.*;
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockHistory;
 
 /**

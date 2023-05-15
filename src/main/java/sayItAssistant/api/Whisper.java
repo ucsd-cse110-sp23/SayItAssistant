@@ -1,4 +1,4 @@
-package sayItAssistant;
+package sayItAssistant.api;
 import java.io.*;
 import java.net.*;
 import org.json.*;
@@ -41,6 +41,10 @@ import org.json.*;
 ||            - transcribe to audio file
 ||
 ++-----------------------------------------------------------------------*/
+
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
 
 public class Whisper {
     //private String file_path;

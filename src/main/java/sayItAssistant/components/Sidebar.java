@@ -17,10 +17,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
+
 import java.util.ArrayList;
 import javax.swing.JTextArea;
-import sayItAssistant.History;
-import sayItAssistant.Question;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Sidebar

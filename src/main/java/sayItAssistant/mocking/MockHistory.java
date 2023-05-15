@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import sayItAssistant.Answer;
-import sayItAssistant.History;
-import sayItAssistant.Question;
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
 
 public class MockHistory extends History{
 	

@@ -1,9 +1,9 @@
 package sayItAssistant.mocking;
 
-import sayItAssistant.Answer;
-import sayItAssistant.History;
-import sayItAssistant.Question;
-import sayItAssistant.Whisper;
+import sayItAssistant.api.Whisper;
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
 
 public class MockWhisper extends Whisper{
 

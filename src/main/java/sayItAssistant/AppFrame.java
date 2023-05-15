@@ -1,14 +1,24 @@
 package sayItAssistant;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import javax.swing.WindowConstants;
 
+import com.sun.net.httpserver.HttpServer;
+
 import sayItAssistant.components.Footer;
 import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
+import sayItAssistant.data.History;
+import sayItAssistant.handler.RequestHandler;
 /*+----------------------------------------------------------------------
 ||
 ||  Class AppFrame
@@ -33,6 +43,9 @@ import sayItAssistant.components.Sidebar;
 ||
 ++-----------------------------------------------------------------------*/
 class AppFrame extends JFrame {
+	 private static final int SERVER_PORT = 8100;
+	 private static final String SERVER_HOSTNAME = "localhost";
+	
     private QAScreen mainScreen;
     private Sidebar historyList;
     private Footer buttons;
@@ -87,7 +100,17 @@ class AppFrame extends JFrame {
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
+    	
+	   	ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor)Executors.newFixedThreadPool(10);
+	   	History data = new History(); 
+	   	HttpServer server = HttpServer.create(
+	   			new InetSocketAddress(SERVER_HOSTNAME, SERVER_PORT), 0);
+	   	server.createContext("/", new RequestHandler(data));
+	   	server.setExecutor(threadPoolExecutor);
+	    server.start();
+    	
+    	
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);

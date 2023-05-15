@@ -12,11 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sayItAssistant.ChatGpt;
-import sayItAssistant.History;
+import sayItAssistant.api.ChatGpt;
+import sayItAssistant.data.History;
 import sayItAssistant.mocking.MockChatGpt;
 import sayItAssistant.mocking.MockHistory;
 import sayItAssistant.mocking.MockWhisper;

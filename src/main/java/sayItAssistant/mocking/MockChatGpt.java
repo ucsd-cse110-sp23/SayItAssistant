@@ -1,7 +1,7 @@
 package sayItAssistant.mocking;
 
-import sayItAssistant.ChatGpt;
-import sayItAssistant.History;
+import sayItAssistant.api.ChatGpt;
+import sayItAssistant.data.History;
 
 public class MockChatGpt extends ChatGpt{
 	History history;

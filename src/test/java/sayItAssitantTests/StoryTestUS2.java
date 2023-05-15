@@ -17,9 +17,7 @@ import java.io.FileWriter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import sayItAssistant.ChatGpt;
-import sayItAssistant.History;
-import sayItAssistant.mocking.MockChatGpt;
+import sayItAssistant.data.History;
 import sayItAssistant.mocking.MockHistory;
 
 public class StoryTestUS2 {
