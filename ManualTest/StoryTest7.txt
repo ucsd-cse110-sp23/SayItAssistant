@@ -1,0 +1,39 @@
+Manual Test Instruction for Copy to Clipboard and Paste:
+
+US7: Copy to Clipboard and Paste
+
+Scenario: Copy the text to the clipboard and paste
+    Given = Helen’s question and answer is shown on the main screen 
+    When = Helen drags her cursor over the questions and right click copies (or Ctrl+C)
+    Then = all the text should be copied to the clipboard
+    When = Helen right click pastes (or Ctrl+V)
+    Then = all the text she copied should be pasted to the new location
+
+Preview: It should be able to copy the whole question and/or answer to the clipboard and paste it to a different location
+
+1.	Open the application
+2.	Click on the question and answer you want to copy
+3.  Drag your cursor over the question and answer
+4.	Right click and select copy
+5.	Open a new word document
+6.	Right click and select paste
+7.	Verify that the question and answer is pasted to the new word document
+
+EX. In the mainscrean of the application, click on the question and answer you want to copy.
+      Asked question : "Where is England?" 
+      Answer to the question : "England is a country located in Western Europe, and it is part of the United Kingdom 
+      of Great Britain and Northern Ireland. It is bordered by Scotland to the north, Wales to the west, 
+      and the Irish Sea to the west and north west, and is separated from continental Europe by the North Sea in the east."
+
+    Right click to copy the question and answer.
+      Paste the question and answer : Where is Ireland?
+
+                                      Ireland is an island located off the northwest coast of mainland Europe, in the British 
+                                      Isles and is part of the United Kingdom. It is divided into the Republic of Ireland, which 
+                                      covers about five-sixths of the island, and Northern Ireland, a part of the United Kingdom, 
+                                      which covers the remaining part.
+
+    Verified that the question and answer is pasted to a new space.
+
+                      
+    
