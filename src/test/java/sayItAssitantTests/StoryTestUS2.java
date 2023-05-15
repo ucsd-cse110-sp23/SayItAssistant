@@ -7,7 +7,7 @@ package sayItAssitantTests;
  * Scenario 1: View previous answers
  * Given: Helen scrolled through the prompt history
  * When Helen clicks on a previously asked question “Who is Joe Biden?” in the prompt history
- * Then “Who is Joe Biden?” “Joe Biden is the President of the United States.” is displayed on the main screen. 
+ * Then “Who is Joe Biden?”, “Joe Biden is the President of the United States.” is displayed on the main screen. 
  * We are testing one BDD scenario.
  */
 
