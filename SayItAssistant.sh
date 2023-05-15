@@ -1,0 +1,1 @@
+java -jar out/artifacts/Server_jar2/cse-110-project-team-16.main.jar & sleep 5 && java -jar out/artifacts/SayItAssistant_jar/cse-110-project-team-16.main.jar
