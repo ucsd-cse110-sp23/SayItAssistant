@@ -3,6 +3,7 @@ package sayItAssistant.handler;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.Scanner;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -31,9 +32,9 @@ public class RequestHandler implements HttpHandler{
 			} else if (method.equals("POST")) {
 				handlePost(httpExchange);
 			} else if (method.equals("DELETE")) {
-				//response = handleDelete(httpExchange);
-			} else if (method.equals("DELETEALL")) {
-				//response = handleDeleteAll(httpExchange);
+				handleDelete(httpExchange);
+			} else if (method.equals("PUT")) {
+				handleDeleteAll(httpExchange);
 			} else {
 				throw new Exception("Not Valid Request Method");
 			}
@@ -60,6 +61,18 @@ public class RequestHandler implements HttpHandler{
 		Question question = new Question(questionString, new Answer(answerString));
 		data.addQuestion(question);
 		scanner.close();
+	}
+	
+	private void handleDelete(HttpExchange httpExchange) throws IOException {
+		URI uri = httpExchange.getRequestURI();
+		String query = uri.getRawQuery();
+		String stringIndex = query.substring(query.indexOf("=") + 1);
+		int intIndex = Integer.parseInt(stringIndex);
+		data.removeQuestion(intIndex);
+	}
+	
+	private void handleDeleteAll(HttpExchange httpExchange) throws IOException {
+		data.clearHistory();
 	}
 
 }

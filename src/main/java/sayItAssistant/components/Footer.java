@@ -62,17 +62,6 @@ public class Footer extends JPanel { // This class contains recording buttons
     Audio audio = new Audio();
     public final String URL = "http://localhost:8100/";
 
-    private void deleteCurrentQuestion() {
-        Sidebar.updateRemoveHistory();
-        QAScreen.updateRemoveQAScreen();
-    }
-
-    private void deleteAllQuestions() {
-        Sidebar.resetHistory();
-        QAScreen.resetQAScreen();
-    }
-
-
     /*---------------------------------------------------------------------
     |  Method addListeners()
     |
@@ -118,30 +107,33 @@ public class Footer extends JPanel { // This class contains recording buttons
             }
         );
 
-//        deleteCurrent.addActionListener(
-//            (ActionEvent e)-> {
-//            	try {
-//                    String query = fieldPanel.getQuery();
-//                    URL url = new URL(URL + "?=" + query);
-//                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                    conn.setRequestMethod("DELETE");
-//                    BufferedReader in = new BufferedReader(
-//                      new InputStreamReader(conn.getInputStream())
-//                    );
-//                    String response = in.readLine();
-//                    in.close();
-//                    JOptionPane.showMessageDialog(null, response);
-//                  } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-//                  }
-//            }
-//        );
+        deleteCurrent.addActionListener(
+            (ActionEvent e)-> {
+            	try {
+                    String query = String.valueOf(Sidebar.getIndex());
+                    URL url = new URL(URL + "?=" + query);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("DELETE");
+                    conn.getInputStream();
+                  } catch (Exception ex) {
+                    ex.printStackTrace();
+                  }
+            Sidebar.updateRemoveHistory();
+            }
+        );
         
         deleteAll.addActionListener(
             (ActionEvent e) -> {
-                deleteAllQuestions();
-            }
+            	try {
+					URL url = new URL(URL);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	                conn.setRequestMethod("PUT");
+	                conn.getInputStream();
+            	} catch (Exception ex) {
+            		ex.printStackTrace();
+            	}
+            Sidebar.resetHistory();
+            }   
         );
       
     }

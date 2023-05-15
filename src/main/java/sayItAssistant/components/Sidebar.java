@@ -158,15 +158,18 @@ public class Sidebar extends JPanel {
         historyJList.setSelectedIndex(0);
         QAScreen.updateQAScreen();
     }
+    
+    public static int getIndex() {
+    	return currentQuestionIndex;
+    }
 
     public static void updateRemoveHistory() {
-        //historyObj = new History();
         historyListModel.remove(currentQuestionIndex);
-        historyObj.removeQuestion(currentQuestionIndex);
         historyList.remove(currentQuestionIndex);
         historyObj = new History();
         historyJList.validate();
         historyJList.repaint();
+        QAScreen.updateRemoveQAScreen();
     }
 
     public static void resetHistory() {
@@ -176,6 +179,7 @@ public class Sidebar extends JPanel {
         historyJList.validate();
         historyJList.repaint();
         historyObj = new History();
+        QAScreen.resetQAScreen();
     }
 
     public void valueChangedAnswer(){

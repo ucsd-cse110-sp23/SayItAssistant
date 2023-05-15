@@ -103,7 +103,6 @@ public class QAScreen extends JPanel {
             outputString = Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getQuestionString() + "\n\n" + 
                            Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getAnswerObject().getAnswerString();
         }
-        //System.out.println("" + Sidebar.currentQuestionIndex);
         QAText.setText(outputString);
     }
 
