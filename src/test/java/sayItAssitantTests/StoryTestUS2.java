@@ -81,6 +81,4 @@ public class StoryTestUS2 {
 				usTestHistory.getHistory().get(1).getAnswerObject().getAnswerString());		            
 	}
     
-
-    
 }
