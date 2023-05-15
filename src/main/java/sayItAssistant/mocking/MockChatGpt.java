@@ -1,7 +1,8 @@
 package sayItAssistant.mocking;
 
-import sayItAssistant.api.ChatGpt;
 import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
+import sayItAssistant.functions.ChatGpt;
 
 public class MockChatGpt extends ChatGpt{
 	History history;
@@ -21,7 +22,6 @@ public class MockChatGpt extends ChatGpt{
 	|
 	|         Returns: ChatGpt Object
 	*-------------------------------------------------------------------*/
-
 	public MockChatGpt() {
 		history = new MockHistory();
 	}
@@ -92,9 +92,10 @@ public class MockChatGpt extends ChatGpt{
 	|         Returns: none
 	*-------------------------------------------------------------------*/
 	@Override
-	public void search() {
+	public Question search() {
 		setRequest();
 		setResponse();
 		history.saveHistory();
+		return null;
 	}
 }

@@ -14,8 +14,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sayItAssistant.api.ChatGpt;
 import sayItAssistant.data.History;
+import sayItAssistant.functions.ChatGpt;
 import sayItAssistant.mocking.MockChatGpt;
 import sayItAssistant.mocking.MockHistory;
 

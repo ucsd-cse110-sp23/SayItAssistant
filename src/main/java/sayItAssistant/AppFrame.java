@@ -43,8 +43,6 @@ import sayItAssistant.handler.RequestHandler;
 ||
 ++-----------------------------------------------------------------------*/
 class AppFrame extends JFrame {
-	 private static final int SERVER_PORT = 8100;
-	 private static final String SERVER_HOSTNAME = "localhost";
 	
     private QAScreen mainScreen;
     private Sidebar historyList;
@@ -101,15 +99,6 @@ class AppFrame extends JFrame {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public static void main(String[] args) throws IOException{
-    	
-	   	ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor)Executors.newFixedThreadPool(10);
-	   	History data = new History(); 
-	   	HttpServer server = HttpServer.create(
-	   			new InetSocketAddress(SERVER_HOSTNAME, SERVER_PORT), 0);
-	   	server.createContext("/", new RequestHandler(data));
-	   	server.setExecutor(threadPoolExecutor);
-	    server.start();
-    	
     	
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
