@@ -164,12 +164,14 @@ public class Sidebar extends JPanel {
     }
 
     public static void updateRemoveHistory() {
-        historyListModel.remove(currentQuestionIndex);
-        historyList.remove(currentQuestionIndex);
-        historyObj = new History();
-        historyJList.validate();
-        historyJList.repaint();
-        QAScreen.updateRemoveQAScreen();
+        if(!historyJList.isSelectionEmpty()) {
+            historyListModel.remove(currentQuestionIndex);
+            historyList.remove(currentQuestionIndex);
+            historyObj = new History();
+            historyJList.validate();
+            historyJList.repaint();
+            QAScreen.resetQAScreen();
+        }
     }
 
     public static void resetHistory() {
