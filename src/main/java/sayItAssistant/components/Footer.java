@@ -109,15 +109,17 @@ public class Footer extends JPanel { // This class contains recording buttons
 
         deleteCurrent.addActionListener(
             (ActionEvent e)-> {
-            	try {
+                try {
+                    if(!Sidebar.historyJList.isSelectionEmpty())  {
                     String query = String.valueOf(Sidebar.getIndex());
                     URL url = new URL(URL + "?=" + query);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("DELETE");
                     conn.getInputStream();
-                  } catch (Exception ex) {
+                    }
+                } catch (Exception ex) {
                     ex.printStackTrace();
-                  }
+                }
             Sidebar.updateRemoveHistory();
             }
         );
