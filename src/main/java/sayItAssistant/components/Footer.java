@@ -85,25 +85,27 @@ public class Footer extends JPanel { // This class contains recording buttons
 
         stopRecording.addActionListener(
             (ActionEvent e) -> {
-                speakNewQuestion.setBackground(Color.WHITE);
-                Question question = audio.stopRecording();
-                URL url;
-				try {
-					url = new URL(URL);
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	                conn.setRequestMethod("POST");
-	                conn.setDoOutput(true);
-	                OutputStreamWriter out = new OutputStreamWriter(
-	                  conn.getOutputStream()
-	                );
-	                out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
-	                out.flush();
-	                out.close();
-	                conn.getInputStream();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				Sidebar.updateAddHistory();
+            	if(audio.getIsMicOn()) {
+	                speakNewQuestion.setBackground(Color.WHITE);
+	                Question question = audio.stopRecording();
+	                URL url;
+					try {
+						url = new URL(URL);
+						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		                conn.setRequestMethod("POST");
+		                conn.setDoOutput(true);
+		                OutputStreamWriter out = new OutputStreamWriter(
+		                  conn.getOutputStream()
+		                );
+		                out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
+		                out.flush();
+		                out.close();
+		                conn.getInputStream();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+					Sidebar.updateAddHistory();
+            	}
             }
         );
 

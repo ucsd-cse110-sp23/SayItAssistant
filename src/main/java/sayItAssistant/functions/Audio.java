@@ -19,6 +19,7 @@ public class Audio {
 	private TargetDataLine targetDataLine;
 	private AudioFormat audioFormat;
 	File audioFile;
+	boolean isMicOn = false;
 	
 	public Audio() {
 		audioFormat = getAudioFormat();
@@ -38,6 +39,7 @@ public class Audio {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public void startRecording() {
+    	isMicOn = true;
         Thread t = new Thread(
             () -> {
                 try {
@@ -80,6 +82,7 @@ public class Audio {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public Question stopRecording() {
+    	if(!isMicOn) return null;
     	Question q = new Question();
         Thread thr = new Thread(
             () -> {
@@ -99,6 +102,7 @@ public class Audio {
             e.printStackTrace();
         }
         removeAudio();
+        isMicOn = false;
         return q;
     }
     
@@ -146,6 +150,10 @@ public class Audio {
     *-------------------------------------------------------------------*/
     private void removeAudio() {
     	audioFile.delete();
+    }
+    
+    public boolean getIsMicOn() {
+    	return isMicOn;
     }
     
 }
