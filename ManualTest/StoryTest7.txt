@@ -20,10 +20,11 @@ Preview: It should be able to copy the whole question and/or answer to the clipb
 7.	Verify that the question and answer is pasted to the new word document
 
 EX. In the mainscrean of the application, click on the question and answer you want to copy.
-      Asked question : "Where is England?" 
-      Answer to the question : "England is a country located in Western Europe, and it is part of the United Kingdom 
-      of Great Britain and Northern Ireland. It is bordered by Scotland to the north, Wales to the west, 
-      and the Irish Sea to the west and north west, and is separated from continental Europe by the North Sea in the east."
+      Asked question : "Where is Ireland" 
+      Answer to the question : "Ireland is an island located off the northwest coast of mainland Europe, in the British 
+                                Isles and is part of the United Kingdom. It is divided into the Republic of Ireland, which 
+                                covers about five-sixths of the island, and Northern Ireland, a part of the United Kingdom, 
+                                which covers the remaining part."
 
     Right click to copy the question and answer.
       Paste the question and answer : Where is Ireland?
