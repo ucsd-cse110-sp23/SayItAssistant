@@ -1,4 +1,4 @@
-package sayItAssistant;
+package sayItAssistant.data;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Answer

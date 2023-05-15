@@ -1,4 +1,4 @@
-package sayItAssistant;
+package sayItAssistant.functions;
 import java.io.*;
 import java.net.*;
 import org.json.*;
@@ -41,6 +41,10 @@ import org.json.*;
 ||            - transcribe to audio file
 ||
 ++-----------------------------------------------------------------------*/
+
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
 
 public class Whisper {
     //private String file_path;
@@ -170,8 +174,6 @@ private static Question handleSuccessResponse (HttpURLConnection connection)
   System.out.println("Transcription Result: " + generatedText);
   //Create New Question Object
   Question q = new Question(generatedText, new Answer("Unanswered Question"));
-  History h = new History();
-  h.addQuestion(q);
   return q;
   
 
@@ -250,15 +252,17 @@ private static void handleErrorResponse (HttpURLConnection connection)
     outputStream.close();
   }
 
-  void getAndCheckResponse()throws IOException{
+  Question getAndCheckResponse()throws IOException{
     // Get response code
     int responseCode = connection.getResponseCode();
+    Question q = new Question();
     // Check response code and handle response accordingly
     if (responseCode == HttpURLConnection.HTTP_OK) {
-      handleSuccessResponse (connection);
+      q = handleSuccessResponse (connection);
     } else{
       handleErrorResponse (connection);
     }
+    return q;
   }
 
   void DisconnectConnection(){
@@ -278,17 +282,18 @@ private static void handleErrorResponse (HttpURLConnection connection)
     |         Returns: None
     *-------------------------------------------------------------------*/
 
-  public void toTranscribe() throws IOException{
+  public Question toTranscribe() throws IOException{
     //createFileObj();
     setUpHTTPCon();
     setUpReqHeaders();
     setUpOutputStream();
     writeRequestBody();
     closeResponse();
-    getAndCheckResponse();
+    Question q = getAndCheckResponse();
     DisconnectConnection();
-    ChatGpt chatGpt = new ChatGpt();
-    chatGpt.search();
+    ChatGpt chatGpt = new ChatGpt(q);
+    q = chatGpt.search();
+    return q;
   }
    
 }

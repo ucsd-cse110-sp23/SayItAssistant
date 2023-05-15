@@ -6,20 +6,20 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-import sayItAssistant.Whisper;
-
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.TargetDataLine;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.Question;
+import sayItAssistant.functions.Audio;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Footer
@@ -59,124 +59,8 @@ public class Footer extends JPanel { // This class contains recording buttons
     JButton deleteCurrent;
     JButton deleteAll;
     boolean recordingStatus = false;
-    private TargetDataLine targetDataLine;
-    private AudioFormat audioFormat;
-    File audioFile;
-
-    /*---------------------------------------------------------------------
-    |  Method startRecording()
-    |
-    |         Purpose: handles start recording
-    |
-    |   Pre-condition: Start recording button is clicked
-    |
-    |  Post-condition: Audio file is created with voice recording
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
-    private void startRecording() {
-        Thread t = new Thread(
-            () -> {
-                try {
-                    DataLine.Info dataLineInfo = new DataLine.Info(
-                        TargetDataLine.class,
-                        audioFormat
-                    );
-
-                    targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
-                    targetDataLine.open(audioFormat);
-                    targetDataLine.start();
-
-                    AudioInputStream audioInputStream = new AudioInputStream(targetDataLine);
-
-                    // WRITE TO FILE
-                    audioFile = new File("recording.wav");
-                    AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, audioFile);
-                    
-                    
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        );
-        t.start();
-    }
-
-    /*---------------------------------------------------------------------
-    |  Method stopRecording()
-    |
-    |         Purpose: handles stop recording
-    |
-    |   Pre-condition: Stop recording button is clicked
-    |
-    |  Post-condition: Audio file is transcribed, audio file is deleted, and sidebar + QAScreen
-    |                  are updated with new question.
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
-    private void stopRecording() {
-        Thread thr = new Thread(
-            () -> {
-                targetDataLine.stop();
-                //File file = new File("src/UCSanDiego.m4a");
-                //Whisper whis = new Whisper(file);
-                Whisper whis = new Whisper(audioFile);
-                try {
-                    whis.toTranscribe();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                removeAudio();
-                Sidebar.updateAddHistory();
-                QAScreen.updateQAScreen();
-                targetDataLine.close();
-            }
-        );
-        thr.start();
-    }
-
-    private void deleteCurrentQuestion() {
-        Sidebar.updateRemoveHistory();
-        QAScreen.updateRemoveQAScreen();
-    }
-
-    private void deleteAllQuestions() {
-        Sidebar.resetHistory();
-        QAScreen.resetQAScreen();
-    }
-
-    /*---------------------------------------------------------------------
-    |  Method getAudioFormat()
-    |
-    |         Purpose: Creates and Returns the format of the audio
-    |
-    |   Pre-condition: None
-    |
-    |  Post-condition: New audio format is created
-    |
-    |      Parameters: None
-    |
-    |         Returns: Audio Format
-    *-------------------------------------------------------------------*/
-    private AudioFormat getAudioFormat() {
-        float sampleRate = 44100;
-        int sampleSizeInBits = 16;
-        int channels = 1;
-        boolean signed = true;
-        boolean bigEndian = false;
-
-        return new AudioFormat(
-            sampleRate,
-            sampleSizeInBits,
-            channels,
-            signed,
-            bigEndian
-        );
-    }
+    Audio audio = new Audio();
+    public final String URL = "http://localhost:8100/";
 
     /*---------------------------------------------------------------------
     |  Method addListeners()
@@ -195,47 +79,65 @@ public class Footer extends JPanel { // This class contains recording buttons
         speakNewQuestion.addActionListener(
             (ActionEvent e) -> {
                 speakNewQuestion.setBackground(Color.GREEN);
-                startRecording();
+                audio.startRecording();
             }
         );
 
         stopRecording.addActionListener(
             (ActionEvent e) -> {
                 speakNewQuestion.setBackground(Color.WHITE);
-                stopRecording();
+                Question question = audio.stopRecording();
+                URL url;
+				try {
+					url = new URL(URL);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	                conn.setRequestMethod("POST");
+	                conn.setDoOutput(true);
+	                OutputStreamWriter out = new OutputStreamWriter(
+	                  conn.getOutputStream()
+	                );
+	                out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
+	                out.flush();
+	                out.close();
+	                conn.getInputStream();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				Sidebar.updateAddHistory();
             }
         );
 
         deleteCurrent.addActionListener(
             (ActionEvent e)-> {
-                deleteCurrentQuestion();
+            	try {
+                    String query = String.valueOf(Sidebar.getIndex());
+                    URL url = new URL(URL + "?=" + query);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("DELETE");
+                    conn.getInputStream();
+                  } catch (Exception ex) {
+                    ex.printStackTrace();
+                  }
+            Sidebar.updateRemoveHistory();
             }
         );
         
         deleteAll.addActionListener(
             (ActionEvent e) -> {
-                deleteAllQuestions();
-            }
+            	try {
+					URL url = new URL(URL);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	                conn.setRequestMethod("PUT");
+	                conn.getInputStream();
+            	} catch (Exception ex) {
+            		ex.printStackTrace();
+            	}
+            Sidebar.resetHistory();
+            }   
         );
       
     }
     
-    /*---------------------------------------------------------------------
-    |  Method removeAudio()
-    |
-    |         Purpose: Deletes Audio File
-    |
-    |   Pre-condition: Audio File Exists
-    |
-    |  Post-condition: Audio File is deleted
-    |
-    |      Parameters: None
-    |
-    |         Returns: None
-    *-------------------------------------------------------------------*/
-    private void removeAudio() {
-    	audioFile.delete();
-    }
 
     /*---------------------------------------------------------------------
     |  Constructor Footer()
@@ -296,8 +198,6 @@ public class Footer extends JPanel { // This class contains recording buttons
         //Adjust position
         rightHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
         this.add(rightHalf, BorderLayout.EAST);
-
-        audioFormat = getAudioFormat();
         
         addListeners();
         revalidate();

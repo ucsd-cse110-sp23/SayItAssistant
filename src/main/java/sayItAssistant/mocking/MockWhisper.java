@@ -1,9 +1,9 @@
 package sayItAssistant.mocking;
 
-import sayItAssistant.Answer;
-import sayItAssistant.History;
-import sayItAssistant.Question;
-import sayItAssistant.Whisper;
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
+import sayItAssistant.functions.Whisper;
 
 public class MockWhisper extends Whisper{
 
@@ -57,9 +57,10 @@ public class MockWhisper extends Whisper{
 	|         Returns: none
 	*-------------------------------------------------------------------*/
 	@Override
-	public void toTranscribe() {
+	public Question toTranscribe() {
 		History history = new MockHistory();
-		history.addQuestion(new Question(questionString, new Answer("unanswered question"))); 
+		history.addQuestion(new Question(questionString, new Answer("unanswered question")));
+		return null; 
 	}
 
 

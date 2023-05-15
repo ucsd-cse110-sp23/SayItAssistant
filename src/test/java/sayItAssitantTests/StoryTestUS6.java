@@ -14,7 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sayItAssistant.History;
+import sayItAssistant.data.History;
 import sayItAssistant.mocking.MockHistory;
 
 

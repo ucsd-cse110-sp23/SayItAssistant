@@ -94,7 +94,7 @@ public class QAScreen extends JPanel {
                               Sidebar.historyObj.getHistory().get(0).getAnswerObject().getAnswerString();
         QAText.setText(outputString);
     }
-
+    /* 
     public static void updateRemoveQAScreen() {
         String outputString;
         if(Sidebar.currentQuestionIndex == 0) {
@@ -103,9 +103,8 @@ public class QAScreen extends JPanel {
             outputString = Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getQuestionString() + "\n\n" + 
                            Sidebar.historyObj.getHistory().get(Sidebar.currentQuestionIndex - 1).getAnswerObject().getAnswerString();
         }
-        //System.out.println("" + Sidebar.currentQuestionIndex);
         QAText.setText(outputString);
-    }
+    }*/
 
     public static void resetQAScreen() {
         QAText.setText("");

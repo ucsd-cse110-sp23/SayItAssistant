@@ -1,4 +1,4 @@
-package sayItAssistant;
+package sayItAssistant.functions;
 /*+----------------------------------------------------------------------
 ||
 ||  Class ChatGpt
@@ -45,6 +45,9 @@ import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
+
 public class ChatGpt {
 	private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
 	private static final String API_KEY = "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";
@@ -52,12 +55,12 @@ public class ChatGpt {
 	private static final int MAX_TOKENS = 100;
 	private static final double TEMPERATURE = 1.0;
 	
-	String questionString;
-	String answerString;
+	Question question;
 	JSONObject requestJson;
 	JSONObject responseJson;
-	History history;
 	HttpRequest request;
+	
+	public ChatGpt() {}
 	
     /*---------------------------------------------------------------------
     |  Constructor ChatGpt()
@@ -73,12 +76,11 @@ public class ChatGpt {
     |
     |         Returns: ChatGpt Object
     *-------------------------------------------------------------------*/
-	public ChatGpt() {
-		history = new History();
-		questionString = history.getHistory().get(0).getQuestionString();
+	public ChatGpt(Question question) {
+		this.question = question;
 		requestJson = new JSONObject();
 		requestJson.put("model", MODEL);
-		requestJson.put("prompt", questionString);
+		requestJson.put("prompt", question.getQuestionString());
 		requestJson.put("max_tokens", MAX_TOKENS);
 		requestJson.put("temperature", TEMPERATURE);
 	}
@@ -97,7 +99,7 @@ public class ChatGpt {
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
-	public void search() {
+	public Question search() {
 		setRequest();
 		try {
 			setResponse();
@@ -106,8 +108,7 @@ public class ChatGpt {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		history.getHistory().get(0).getAnswerObject().setAnswerString(answerString);
-		history.saveHistory();
+		return question;
 	}
 	
     /*---------------------------------------------------------------------
@@ -152,6 +153,6 @@ public class ChatGpt {
 		String responseBody = response.body();
 		responseJson = new JSONObject(responseBody);
 		JSONArray choices = responseJson.getJSONArray("choices");
-		answerString = choices.getJSONObject(0).getString("text").replace("\n", "").replace("\r", "");
+		question.getAnswerObject().setAnswerString(choices.getJSONObject(0).getString("text").replace("\n", "").replace("\r", ""));
 	}
 }

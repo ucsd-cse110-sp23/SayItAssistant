@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import sayItAssistant.Answer;
+import sayItAssistant.data.Answer;
 
 class AnswerTest {
 

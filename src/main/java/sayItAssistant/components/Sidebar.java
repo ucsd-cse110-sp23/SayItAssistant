@@ -17,10 +17,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import sayItAssistant.data.History;
+import sayItAssistant.data.Question;
+
 import java.util.ArrayList;
 import javax.swing.JTextArea;
-import sayItAssistant.History;
-import sayItAssistant.Question;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Sidebar
@@ -149,22 +150,28 @@ public class Sidebar extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
     public static void updateAddHistory() {
+    	historyObj = new History();
         historyListModel.add(0,historyObj.getHistory().get(0).getQuestionString());
         historyList.add(0,historyObj.getHistory().get(0));
-        historyObj = new History();
         historyJList.validate();
         historyJList.repaint();
         historyJList.setSelectedIndex(0);
+        QAScreen.updateQAScreen();
+    }
+    
+    public static int getIndex() {
+    	return currentQuestionIndex;
     }
 
     public static void updateRemoveHistory() {
-        //historyObj = new History();
-        historyListModel.remove(currentQuestionIndex);
-        historyObj.removeQuestion(currentQuestionIndex);
-        historyList.remove(currentQuestionIndex);
-        historyObj = new History();
-        historyJList.validate();
-        historyJList.repaint();
+        if(!historyJList.isSelectionEmpty()) {
+            historyListModel.remove(currentQuestionIndex);
+            historyList.remove(currentQuestionIndex);
+            historyObj = new History();
+            historyJList.validate();
+            historyJList.repaint();
+            QAScreen.resetQAScreen();
+        }
     }
 
     public static void resetHistory() {
@@ -174,6 +181,7 @@ public class Sidebar extends JPanel {
         historyJList.validate();
         historyJList.repaint();
         historyObj = new History();
+        QAScreen.resetQAScreen();
     }
 
     public void valueChangedAnswer(){
