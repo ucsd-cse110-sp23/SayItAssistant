@@ -72,6 +72,7 @@ class AppFrame extends JFrame {
         mainScreen = new QAScreen();
 
         JSplitPane splitScreen = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, historyList, mainScreen);
+    
         // Set width of sidebar
         splitScreen.setDividerLocation(230);
         // Set divider to non-adjustable
@@ -101,6 +102,7 @@ class AppFrame extends JFrame {
     public static void main(String[] args) throws IOException{
     	
         AppFrame baseApp = new AppFrame();
+
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
         baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
