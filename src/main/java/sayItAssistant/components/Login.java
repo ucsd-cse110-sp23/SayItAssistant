@@ -5,6 +5,32 @@ import java.io.*;
 import java.net.*;
 import javax.swing.*;
 
+/*+----------------------------------------------------------------------
+||
+||  Class Login
+||||
+||        Purpose: Serves as the component for the Login on the UI
+||
+|+-----------------------------------------------------------------------
+||
+||          Field: 
+||					loginButton - button to login
+||					createButton - button to create account
+||					fieldPanel - panel for the fields
+||					buttonPanel - panel for the buttons
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					Login()- default constructor
+||					Creates Login which displays fields and buttons
+||
+||  Class Methods:
+||					getLoginButton() - methods to get the login button
+||					getCreateButton() - methods to get the create button
+||
+++-----------------------------------------------------------------------*/
+
 
 class FieldPanel extends JPanel {
     
@@ -32,6 +58,19 @@ class FieldPanel extends JPanel {
     }
 }
 
+ /*---------------------------------------------------------------------
+    |  Constructor ButtonPanel()
+    |
+    |         Purpose: Creates the ButtonPanel
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize ButtonPanel component
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 
 class ButtonPanel extends JPanel {
     private JButton loginButton, createButton;
@@ -52,8 +91,19 @@ class ButtonPanel extends JPanel {
         return createButton;
     }
 }
-
-
+ /*---------------------------------------------------------------------
+    |  Constructor Login()
+    |
+    |         Purpose: Creates the Login
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize Login component
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 
 public class Login extends JPanel {
     private JButton loginButton, createButton;
