@@ -108,22 +108,49 @@ class ButtonPanel extends JPanel {
 public class Login extends JPanel {
     private JButton loginButton, createButton;
     private FieldPanel fieldPanel;
-    private ButtonPanel buttonPanel;
+    public static ButtonPanel buttonPanel;
+    public static JPanel LoginPanel;
   
-    public Login() {
-        JPanel LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        LoginPanel.setPreferredSize(new Dimension(500, 200));
-        LoginPanel.setLayout(new GridLayout(2, 2));
+    public Login() { 
+        LoginPanel = new JPanel(/*new FlowLayout(FlowLayout.CENTER)*/);
+        LoginPanel.setPreferredSize(new Dimension(500, 250));
+        LoginPanel.setLayout(new BorderLayout());
+        //LoginPanel.setLayout(new GridLayout(3, 2));
 
         fieldPanel = new FieldPanel();
-        LoginPanel.add(fieldPanel);
-  
+        LoginPanel.add(fieldPanel, BorderLayout.NORTH);
+
         buttonPanel = new ButtonPanel();
         LoginPanel.add(buttonPanel);
-  
+
         loginButton = buttonPanel.getLoginButton();
         createButton = buttonPanel.getCreateButton();
+
         this.add(LoginPanel);
     }  
+
+    public static void AccountCreationSuccess() {
+        JPanel MessagePanel = new JPanel();
+        JTextArea successText = new JTextArea();
+        successText.setPreferredSize(new Dimension(200, 20));
+        successText.setEditable(false);
+        successText.setFont(new Font("Serief", Font.BOLD, 12));
+        successText.setForeground(Color.GREEN);
+        successText.setText("Account successfully created"); 
+        MessagePanel.add(successText);
+        LoginPanel.add(MessagePanel, BorderLayout.SOUTH);  
+    }
+
+    public static void AccountCreationFail() {
+        JPanel MessagePanel = new JPanel();
+        JTextArea failText = new JTextArea();
+        failText.setEditable(false);
+        failText.setFont(new Font("Serief", Font.BOLD, 12));
+        failText.setForeground(Color.RED);
+        failText.setText("Account creation failed"); 
+        MessagePanel.add(failText);
+        LoginPanel.add(MessagePanel, BorderLayout.SOUTH);  
+        
+    }
     
 }

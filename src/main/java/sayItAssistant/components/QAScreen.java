@@ -68,6 +68,7 @@ public class QAScreen extends JPanel {
         
         Login login = new Login();
         QAPanel.add(login);
+
         //QAPanel.add(QAText);
         /*
         QAText.setBackground(QABackColor);
