@@ -56,8 +56,8 @@ import sayItAssistant.functions.Audio;
 public class Footer extends JPanel { // This class contains recording buttons
     JButton speakNewQuestion;
     JButton stopRecording;
-    JButton deleteCurrent;
-    JButton deleteAll;
+    //JButton deleteCurrent;
+    //JButton deleteAll;
     boolean recordingStatus = false;
     Audio audio = new Audio();
     public final String URL = "http://localhost:8100/";
@@ -77,39 +77,39 @@ public class Footer extends JPanel { // This class contains recording buttons
     *-------------------------------------------------------------------*/
     public void addListeners() {
         speakNewQuestion.addActionListener(
-            (ActionEvent e) -> {
-                speakNewQuestion.setBackground(Color.GREEN);
-                audio.startRecording();
-            }
+                (ActionEvent e) -> {
+                    speakNewQuestion.setBackground(Color.GREEN);
+                    audio.startRecording();
+                }
         );
 
         stopRecording.addActionListener(
-            (ActionEvent e) -> {
-            	if(audio.getIsMicOn()) {
-	                speakNewQuestion.setBackground(Color.WHITE);
-	                Question question = audio.stopRecording();
-	                URL url;
-					try {
-						url = new URL(URL);
-						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		                conn.setRequestMethod("POST");
-		                conn.setDoOutput(true);
-		                OutputStreamWriter out = new OutputStreamWriter(
-		                  conn.getOutputStream()
-		                );
-		                out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
-		                out.flush();
-		                out.close();
-		                conn.getInputStream();
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-					Sidebar.updateAddHistory();
-            	}
-            }
+                (ActionEvent e) -> {
+                    if (audio.getIsMicOn()) {
+                        speakNewQuestion.setBackground(Color.WHITE);
+                        Question question = audio.stopRecording();
+                        URL url;
+                        try {
+                            url = new URL(URL);
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setDoOutput(true);
+                            OutputStreamWriter out = new OutputStreamWriter(
+                                    conn.getOutputStream()
+                            );
+                            out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
+                            out.flush();
+                            out.close();
+                            conn.getInputStream();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                        Sidebar.updateAddHistory();
+                    }
+                }
         );
 
-        deleteCurrent.addActionListener(
+        /*deleteCurrent.addActionListener(
             (ActionEvent e)-> {
                 try {
                     if(!Sidebar.historyJList.isSelectionEmpty())  {
@@ -138,8 +138,8 @@ public class Footer extends JPanel { // This class contains recording buttons
             	}
             Sidebar.resetHistory();
             }   
-        );
-      
+        );*/
+
     }
     
 
@@ -165,7 +165,7 @@ public class Footer extends JPanel { // This class contains recording buttons
         // Set Question recording buttons to the left of the footer
         JPanel leftHalf = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         // Create new question button
-        speakNewQuestion = new JButton("New Question");
+        speakNewQuestion = new JButton("Start");
         // Set Font
         speakNewQuestion.setFont(new Font("Sans-serif", Font.BOLD, 10));
         speakNewQuestion.setBackground(Color.WHITE);
@@ -184,24 +184,24 @@ public class Footer extends JPanel { // This class contains recording buttons
         this.add(leftHalf, BorderLayout.WEST);
 
         // Set Delete buttons to the right of the footer
-        JPanel rightHalf = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        //JPanel rightHalf = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         // Create delete current question button
-        deleteCurrent = new JButton("Delete");
+        //deleteCurrent = new JButton("Delete");
         // Set features
-        deleteCurrent.setFont(new Font("Sans-serif", Font.BOLD, 10));
-        deleteCurrent.setBackground(Color.WHITE);
-        rightHalf.add(deleteCurrent);
+        //deleteCurrent.setFont(new Font("Sans-serif", Font.BOLD, 10));
+        //deleteCurrent.setBackground(Color.WHITE);
+        //rightHalf.add(deleteCurrent);
 
         // Create clear all questions button
-        deleteAll = new JButton("Clear All");
+        //deleteAll = new JButton("Clear All");
         // Set features
-        deleteAll.setFont(new Font("Sans-serif", Font.BOLD, 10));
-        deleteAll.setBackground(Color.RED);
-        rightHalf.add(deleteAll);
+        //deleteAll.setFont(new Font("Sans-serif", Font.BOLD, 10));
+        //deleteAll.setBackground(Color.RED);
+        //rightHalf.add(deleteAll);
 
         //Adjust position
-        rightHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
-        this.add(rightHalf, BorderLayout.EAST);
+        //rightHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        //this.add(rightHalf, BorderLayout.EAST);
         
         addListeners();
         revalidate();
