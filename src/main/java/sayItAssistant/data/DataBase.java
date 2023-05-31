@@ -2,7 +2,7 @@ package sayItAssistant.data;
 
 import com.mongodb.client.*;
 import org.bson.Document;
-import org.json.JSONObject;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +56,25 @@ public class DataBase {
         }
     }
 
+    public int signUp(String id, String pw) {
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+            Document document = collection.find(eq("user_id", id)).first();
+            if(document != null) {
+                //ID exist
+                System.out.println("Account exist");
+                return -1;
+            } else {
+                Document user = new Document("_id", new ObjectId());
+                user.append("user_id", id)
+                   .append("user_pw", pw)
+                   .append("question_list", "");
+            collection.insertOne(user);
+                return 0;
+            }
+        }
+    }
 
 
     public ArrayList<Question> getHistory() {
