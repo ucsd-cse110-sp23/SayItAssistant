@@ -90,6 +90,7 @@ class ButtonPanel extends JPanel {
     public JButton getCreateButton() {
         return createButton;
     }
+
 }
  /*---------------------------------------------------------------------
     |  Constructor Login()
@@ -105,25 +106,61 @@ class ButtonPanel extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
 
-public class Login extends JPanel {
+public class Login extends JFrame {
     private JButton loginButton, createButton;
     private FieldPanel fieldPanel;
     private ButtonPanel buttonPanel;
+    public static JPanel LoginPanel;
+    public static JTextArea MessageText;
+
+    public int validationStatus;
   
     public Login() {
-        JPanel LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        validationStatus = 0;
+        setLayout(new BorderLayout());
+        LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
-        LoginPanel.setLayout(new GridLayout(2, 2));
-
+        LoginPanel.setLayout(new GridLayout(3, 2));
+        this.add(LoginPanel);
         fieldPanel = new FieldPanel();
         LoginPanel.add(fieldPanel);
-  
+
         buttonPanel = new ButtonPanel();
         LoginPanel.add(buttonPanel);
-  
+
         loginButton = buttonPanel.getLoginButton();
         createButton = buttonPanel.getCreateButton();
+
+        JPanel MessagePanel = new JPanel();
+        MessageText = new JTextArea();
+        MessageText.setPreferredSize(new Dimension(200, 20));
+        MessageText.setEditable(false);
+        MessageText.setFont(new Font("Serief", Font.BOLD, 13));
+        MessagePanel.add(MessageText);
+        LoginPanel.add(MessagePanel);
+
         this.add(LoginPanel);
+        addListeners();
     }  
+
+    public void addListeners() {
+
+        loginButton.addActionListener(
+        (ActionEvent e) -> {
+            validationStatus = 1;
+            AccountCreationSuccess();
+        }  
+    );
+    }
+
+    public void AccountCreationSuccess() {
+        MessageText.setForeground(Color.GREEN);
+        MessageText.setText("New account created!");
+    }
+
+    public void AccountCreationFail() {
+        MessageText.setForeground(Color.RED);
+        MessageText.setText("Account creation failed"); 
+    }
     
 }
