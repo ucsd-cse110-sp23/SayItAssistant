@@ -15,6 +15,7 @@ import javax.swing.WindowConstants;
 import com.sun.net.httpserver.HttpServer;
 
 import sayItAssistant.components.Footer;
+import sayItAssistant.components.Login;
 import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
 import sayItAssistant.data.History;
@@ -107,6 +108,20 @@ class AppFrame extends JFrame {
         baseApp.setTitle("SayIt Assistant");
         baseApp.setSize(800, 600);
         baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseApp.setVisible(true);   
+        baseApp.setVisible(false);
+
+        Login login = new Login();
+        login.setTitle("Login");
+        login.setSize(600, 400);
+        login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        login.setVisible(true);
+
+        while (login.validationStatus != 1) {
+            baseApp.setVisible(false);
+            login.setVisible(true);
+        }
+
+        baseApp.setVisible(true);
+        login.setVisible(false);
     }
 }

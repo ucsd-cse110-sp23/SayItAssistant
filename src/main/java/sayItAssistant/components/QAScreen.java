@@ -52,32 +52,32 @@ public class QAScreen extends JPanel {
     *-------------------------------------------------------------------*/
     public QAScreen(){
         this.setBackground(QABackColor);
-        /*
+
         QAText = new JTextArea();
         QAText.setPreferredSize(new Dimension(400, 600));
         QAText.setEditable(false);
 
         QAText.setBorder(BorderFactory.createEmptyBorder(40,0,40,0));
         QAText.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-        */
+
 
         JPanel QAPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         QAPanel.setPreferredSize(new Dimension(570, 600));
         QAPanel.setOpaque(true);
         QAPanel.setBackground(QABackColor);
         
-        Login login = new Login();
-        QAPanel.add(login);
+        //Login login = new Login();
+        // QAPanel.add(login);
 
         
 
-        //QAPanel.add(QAText);
-        /*
+        QAPanel.add(QAText);
+
         QAText.setBackground(QABackColor);
         QAText.setForeground(Color.WHITE);
         QAText.setLineWrap(true);
         QAText.setWrapStyleWord(true);
-        */
+
         
         this.add(QAPanel, BorderLayout.NORTH);
     }

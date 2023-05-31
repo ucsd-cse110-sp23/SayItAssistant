@@ -90,6 +90,7 @@ class ButtonPanel extends JPanel {
     public JButton getCreateButton() {
         return createButton;
     }
+
 }
  /*---------------------------------------------------------------------
     |  Constructor Login()
@@ -105,18 +106,22 @@ class ButtonPanel extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
 
-public class Login extends JPanel {
+public class Login extends JFrame {
     private JButton loginButton, createButton;
     private FieldPanel fieldPanel;
     private ButtonPanel buttonPanel;
     public static JPanel LoginPanel;
     public static JTextArea MessageText;
+
+    public int validationStatus;
   
-    public Login() { 
+    public Login() {
+        validationStatus = 0;
+        setLayout(new BorderLayout());
         LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
         LoginPanel.setLayout(new GridLayout(3, 2));
-
+        this.add(LoginPanel);
         fieldPanel = new FieldPanel();
         LoginPanel.add(fieldPanel);
 
@@ -135,11 +140,22 @@ public class Login extends JPanel {
         LoginPanel.add(MessagePanel);
 
         this.add(LoginPanel);
+        addListeners();
     }  
+
+    public void addListeners() {
+
+        loginButton.addActionListener(
+        (ActionEvent e) -> {
+            validationStatus = 1;
+            AccountCreationSuccess();
+        }  
+    );
+    }
 
     public void AccountCreationSuccess() {
         MessageText.setForeground(Color.GREEN);
-        MessageText.setText("New account created!"); 
+        MessageText.setText("New account created!");
     }
 
     public void AccountCreationFail() {
