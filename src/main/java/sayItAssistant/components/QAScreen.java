@@ -68,6 +68,7 @@ public class QAScreen extends JPanel {
         
         Login login = new Login();
         QAPanel.add(login);
+
         login.AccountCreationFail();
         
 

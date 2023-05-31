@@ -99,6 +99,7 @@ class AppFrame extends JFrame {
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
+    
     public static void main(String[] args) throws IOException{
     	
         AppFrame baseApp = new AppFrame();

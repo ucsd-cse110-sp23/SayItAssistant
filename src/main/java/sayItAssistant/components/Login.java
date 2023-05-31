@@ -110,12 +110,11 @@ public class Login extends JPanel {
     private FieldPanel fieldPanel;
     private ButtonPanel buttonPanel;
     public static JPanel LoginPanel;
-    public static JTextArea successText;
+    public static JTextArea MessageText;
   
     public Login() { 
         LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
-        LoginPanel.setLayout(new BorderLayout());
         LoginPanel.setLayout(new GridLayout(3, 2));
 
         fieldPanel = new FieldPanel();
@@ -128,24 +127,24 @@ public class Login extends JPanel {
         createButton = buttonPanel.getCreateButton();
 
         JPanel MessagePanel = new JPanel();
-        successText = new JTextArea();
-        successText.setPreferredSize(new Dimension(200, 20));
-        successText.setEditable(false);
-        successText.setFont(new Font("Serief", Font.BOLD, 13));
-        MessagePanel.add(successText);
+        MessageText = new JTextArea();
+        MessageText.setPreferredSize(new Dimension(200, 20));
+        MessageText.setEditable(false);
+        MessageText.setFont(new Font("Serief", Font.BOLD, 13));
+        MessagePanel.add(MessageText);
         LoginPanel.add(MessagePanel);
 
         this.add(LoginPanel);
     }  
 
     public void AccountCreationSuccess() {
-        successText.setForeground(Color.GREEN);
-        successText.setText("New account created!"); 
+        MessageText.setForeground(Color.GREEN);
+        MessageText.setText("New account created!"); 
     }
 
     public void AccountCreationFail() {
-        successText.setForeground(Color.RED);
-        successText.setText("Account creation failed"); 
+        MessageText.setForeground(Color.RED);
+        MessageText.setText("Account creation failed"); 
     }
     
 }
