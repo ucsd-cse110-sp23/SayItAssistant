@@ -89,22 +89,30 @@ public class Footer extends JPanel { // This class contains recording buttons
                         speakNewQuestion.setBackground(Color.WHITE);
                         Question question = audio.stopRecording();
                         URL url;
-                        try {
-                            url = new URL(URL);
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            conn.setRequestMethod("POST");
-                            conn.setDoOutput(true);
-                            OutputStreamWriter out = new OutputStreamWriter(
-                                    conn.getOutputStream()
-                            );
-                            out.write(question.getQuestionString() + "," + question.getAnswerObject().getAnswerString());
-                            out.flush();
-                            out.close();
-                            conn.getInputStream();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
+                        if(question.getQuestionString().toLowerCase().startsWith("question")) {
+                            try {
+                                url = new URL(URL);
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                conn.setRequestMethod("POST");
+                                conn.setDoOutput(true);
+                                OutputStreamWriter out = new OutputStreamWriter(
+                                        conn.getOutputStream()
+                                );
+                                // Check for comma in question and replace with a colon.
+                                // This ensures that intonation while saying the command doesn't produce a comma
+                                String softQuestionCopy = question.getQuestionString();
+                                if(softQuestionCopy.contains(",")) {
+                                    softQuestionCopy = softQuestionCopy.replace(",",":");
+                                }
+                                out.write(softQuestionCopy + "," + question.getAnswerObject().getAnswerString());
+                                out.flush();
+                                out.close();
+                                conn.getInputStream();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                            Sidebar.updateAddHistory();
                         }
-                        Sidebar.updateAddHistory();
                     }
                 }
         );
