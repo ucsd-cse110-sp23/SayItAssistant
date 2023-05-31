@@ -18,6 +18,8 @@ dependencies {
     //compile group: 'org.json', name: 'json', version: '20230227'
     implementation 'org.json:json:20230227'
 
+    implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+
     // This provides the JUnit API.
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     // This provides the TestEngine to actually run the tests.
