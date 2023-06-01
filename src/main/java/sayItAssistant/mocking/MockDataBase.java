@@ -1,52 +1,24 @@
-package sayItAssistant.data;
-/*+----------------------------------------------------------------------
-||
-||  Class History
-||
-||         Author:  Chanho Jeon
-||
-||        Purpose:  Connect to MongoDB, get collections
-||					Verify login, add data when account created,
-||					Update question when new question is asked
-||
-|+-----------------------------------------------------------------------
-||
-||          Field:
-||					uri: uri for connecting mongodb
-||					collection: array of documents containing 
-||							information of collection
-||					user_id: id which will be set when user log in
-||					history: arrayList containing Question object
-||
-|+-----------------------------------------------------------------------
-||
-||   Constructors:
-||					DataBase() - default constructor/ initialize arraylist
-||					DataBase(str, arrList) - constructor using user informations
-||					 
-||
-||  Class Methods:				
-||					logIn() - check if id and pw matches database
-||					signUp() - check if id exist, create new data in database
-||					addQuestion() - add question in database
-||
-++-----------------------------------------------------------------------*/
-import com.mongodb.client.*;
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
+package sayItAssistant.mocking;
+
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
-import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Updates.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
+import sayItAssistant.data.Answer;
+import sayItAssistant.data.DataBase;
+import sayItAssistant.data.Question;
 
-public class DataBase {
+public class MockDataBase extends DataBase{
 
     private final String uri = "mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority";
     private MongoCollection<Document> collection;
@@ -66,7 +38,7 @@ public class DataBase {
     |
     |         Returns: DataBase object
     *-------------------------------------------------------------------*/
-    public DataBase() {
+    public MockDataBase() {
         history = new ArrayList<>();
     }
     
@@ -84,7 +56,7 @@ public class DataBase {
     |
     |         Returns: DataBase object
     *-------------------------------------------------------------------*/
-    public DataBase(String user_id, ArrayList<Question> history) {
+    public MockDataBase(String user_id, ArrayList<Question> history) {
     	this.user_id=user_id;
     	this.history=history;
     }
@@ -106,10 +78,11 @@ public class DataBase {
     |					0 | login success
     |					1 | the pw does not match in database
     *-------------------------------------------------------------------*/
+    @Override
     public int logIn(String id, String pw) {
         try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
-            collection = db.getCollection("historyList");
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            collection = db.getCollection("test");
             Document document = collection.find(eq("user_id", id)).first();
             if (document == null) {
                 System.out.println("ID does not exist");
@@ -155,10 +128,11 @@ public class DataBase {
     |         Returns: True | the id already exist on database
     |					False | account created/logged in
     *-------------------------------------------------------------------*/
+    @Override
     public boolean signUp(String id, String pw) {
         try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
-            collection = db.getCollection("historyList");
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            collection = db.getCollection("test");
             Document document = collection.find(eq("user_id", id)).first();
             if(document != null) {
                 //ID exist
@@ -191,6 +165,7 @@ public class DataBase {
     |         Returns: True | successfully added
     |					False | failed-fatal error
     *-------------------------------------------------------------------*/
+    @Override
     public boolean addQuestion(Question question) {
     	if(user_id == null) {
     		return false;
@@ -203,8 +178,8 @@ public class DataBase {
 		history = addedHistory;
 
     	try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
-            collection = db.getCollection("historyList");
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            collection = db.getCollection("test");
            	collection.updateOne(eq("user_id",user_id), set("question_list",historyToString()));
            	
            	return true;
@@ -238,34 +213,4 @@ public class DataBase {
     public ArrayList<Question> getHistory() {
         return history;
     }
-    
-//    public static void main(String[] args) {
-//    	DataBase db = new DataBase();
-//    	Question q= new Question("q8", new Answer("a8"));
-//		System.out.println(db.addQuestion(q));
-//		db.logIn("admin", "admin1234");
-//		System.out.println(db.addQuestion(q));
-//		System.out.println("Size: " + db.getHistory().size());
-//		System.out.println("ID: " + db.user_id);
-//		for (Question s: db.getHistory()) {
-//			System.out.println(s.getQuestionString());
-//			System.out.println(s.getAnswerObject().getAnswerString());
-//		}
-//		db.logIn("test@gmail.com", "1234");
-//		System.out.println("ID: " + db.user_id);
-//		System.out.println("Size: " + db.getHistory().size());
-//		for (Question s: db.getHistory()) {
-//			System.out.println(s.getQuestionString());
-//			System.out.println(s.getAnswerObject().getAnswerString());
-//		}
-//		db.logIn("admin", "admin1234");
-//		System.out.println("ID: " + db.user_id);
-//		System.out.println("Size: " + db.getHistory().size());
-//		for (Question s: db.getHistory()) {
-//			System.out.println(s.getQuestionString());
-//			System.out.println(s.getAnswerObject().getAnswerString());
-//		}
-//	}
-    
-    
 }
