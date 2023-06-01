@@ -151,6 +151,12 @@ public class Login extends JFrame {
             AccountCreationSuccess();
         }  
     );
+        createButton.addActionListener(
+            (ActionEvent e) -> {
+                
+            }  
+                
+        );
     }
 
     public void AccountCreationSuccess() {
