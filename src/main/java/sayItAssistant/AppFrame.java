@@ -18,6 +18,7 @@ import sayItAssistant.components.Footer;
 import sayItAssistant.components.Login;
 import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
+import sayItAssistant.data.DataBase;
 import sayItAssistant.data.History;
 import sayItAssistant.handler.RequestHandler;
 /*+----------------------------------------------------------------------
@@ -120,7 +121,9 @@ class AppFrame extends JFrame {
             baseApp.setVisible(false);
             login.setVisible(true);
         }
+        
 
+        //Footer.questionDatabase.logIn("admin","admin1234");
         baseApp.setVisible(true);
         login.setVisible(false);
     }

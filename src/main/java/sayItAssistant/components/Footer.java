@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import sayItAssistant.data.Answer;
+import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
 /*+----------------------------------------------------------------------
@@ -60,6 +61,7 @@ public class Footer extends JPanel { // This class contains recording buttons
     //JButton deleteAll;
     boolean recordingStatus = false;
     Audio audio = new Audio();
+    public static DataBase questionDatabase = new DataBase();
     public final String URL = "http://localhost:8100/";
 
     /*---------------------------------------------------------------------
@@ -88,6 +90,8 @@ public class Footer extends JPanel { // This class contains recording buttons
                     if (audio.getIsMicOn()) {
                         speakNewQuestion.setBackground(Color.WHITE);
                         Question question = audio.stopRecording();
+                        questionDatabase = new DataBase();
+            
                         URL url;
                         if(question.getQuestionString().toLowerCase().startsWith("question")) {
                             try {
@@ -108,6 +112,7 @@ public class Footer extends JPanel { // This class contains recording buttons
                                 out.flush();
                                 out.close();
                                 conn.getInputStream();
+                                questionDatabase.addQuestion(question);
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
