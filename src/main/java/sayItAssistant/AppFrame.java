@@ -117,7 +117,7 @@ class AppFrame extends JFrame {
         login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         login.setVisible(true);
 
-        while (login.validationStatus != 1) {
+        while (login.validationStatus != 0) {
             baseApp.setVisible(false);
             login.setVisible(true);
         }
