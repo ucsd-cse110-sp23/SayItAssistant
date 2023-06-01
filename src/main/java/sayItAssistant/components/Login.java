@@ -168,10 +168,13 @@ public class Login extends JFrame {
                             AccountCreationSuccess();
                             validationStatus = 1;  
                         }
+                        else{
+                            AccountCreationFail();
+                        }
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }   
             }     
         );
