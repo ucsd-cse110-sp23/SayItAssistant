@@ -170,6 +170,9 @@ public class MockDataBase extends DataBase{
     *-------------------------------------------------------------------*/
     @Override
     public boolean addQuestion(Question question) {
+    	if(question.getQuestionString().equals("")) {
+    		return false;
+    	}
     	if(user_id == null) {
     		return false;
     	}
