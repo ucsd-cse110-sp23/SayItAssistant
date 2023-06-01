@@ -18,11 +18,6 @@ import sayItAssistant.mocking.MockDataBase;
 
 class DatabaseTest {
 
-//	@BeforeEach
-//	void setUp() throws Exception {
-//		DataBase db = new MockDataBase();
-//	}
-
 	@AfterEach
 	void tearDown() throws Exception {
         try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
