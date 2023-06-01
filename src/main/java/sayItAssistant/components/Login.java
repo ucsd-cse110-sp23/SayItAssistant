@@ -56,6 +56,12 @@ class FieldPanel extends JPanel {
     public String getEmail() {
         return emailField.getText();
     }
+    public String getPassword() {
+        return passwordField.getText();
+    }
+    public String getVerify() {
+        return verifyField.getText();
+    }
 }
 
  /*---------------------------------------------------------------------
@@ -153,10 +159,39 @@ public class Login extends JFrame {
     );
         createButton.addActionListener(
             (ActionEvent e) -> {
+                DataBase db = new DataBase();
+                try{
+                    String email = fieldPanel.getEmail();
+                    String password = fieldPanel.getPassword();
+                    if(passwordVerified(pwd, verified)){
+                        if(signUp(email, password)){
+                            
+                        }
+
+                    }
+                }
+                catch(Exception ex){
+
+                }
+    
+                
                 
             }  
                 
         );
+    }
+
+    public boolean passwordVerified(String pwd, String verified){
+        if(pwd.equals(verified)){
+            return True;
+        }
+        MismatchPasswords();
+        return False; 
+    }
+
+    public void MismatchPasswords() {
+        MessageText.setForeground(Color.GREEN);
+        MessageText.setText("Verification Failed");
     }
 
     public void AccountCreationSuccess() {
