@@ -5,10 +5,12 @@ import java.io.*;
 import java.net.*;
 import javax.swing.*;
 
+import sayItAssistant.data.DataBase;
+
 /*+----------------------------------------------------------------------
 ||
 ||  Class Login
-||||
+||
 ||        Purpose: Serves as the component for the Login on the UI
 ||
 |+-----------------------------------------------------------------------
@@ -48,6 +50,7 @@ class FieldPanel extends JPanel {
         passwordField = new JTextField();
         add(passwordLabel);
         add(passwordField);
+
         JLabel verifyLabel = new JLabel("Verify Password:");
         verifyField = new JTextField();
         add(verifyLabel);
@@ -56,9 +59,17 @@ class FieldPanel extends JPanel {
     public String getEmail() {
         return emailField.getText();
     }
+
+    public String getPassword() {
+        return passwordField.getText();
+    }
+
+    public String getVerify() {
+        return verifyField.getText();
+    }
 }
 
- /*---------------------------------------------------------------------
+    /*---------------------------------------------------------------------
     |  Constructor ButtonPanel()
     |
     |         Purpose: Creates the ButtonPanel
@@ -91,8 +102,12 @@ class ButtonPanel extends JPanel {
         return createButton;
     }
 
+    public void addCreateListener(ActionListener listener) {
+        createButton.addActionListener(listener);
+    }
+
 }
- /*---------------------------------------------------------------------
+     /*---------------------------------------------------------------------
     |  Constructor Login()
     |
     |         Purpose: Creates the Login
@@ -114,9 +129,12 @@ public class Login extends JFrame {
     public static JTextArea MessageText;
 
     public int validationStatus;
-  
+    private DataBase database;
+    
+
     public Login() {
-        validationStatus = 0;
+        validationStatus = 5; //Arbitrary non-relevant value
+        database = new DataBase();
         setLayout(new BorderLayout());
         LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
@@ -142,15 +160,55 @@ public class Login extends JFrame {
         this.add(LoginPanel);
         addListeners();
     }  
-
+     /*---------------------------------------------------------------------
+    |  Method addListeners()
+    |
+    |         Purpose: Adds listeners to the buttons
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Adds listeners to the buttons
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public void addListeners() {
+        loginButton.addActionListener((ActionEvent e) -> {
+            String email = fieldPanel.getEmail();
+            String password = fieldPanel.getPassword();
 
-        loginButton.addActionListener(
-        (ActionEvent e) -> {
-            validationStatus = 1;
-            AccountCreationSuccess();
-        }  
-    );
+            int loginStatus = database.logIn(email, password);
+            if (loginStatus == 0) {
+                validationStatus = 0;
+                MessageText.setForeground(Color.GREEN);
+                MessageText.setText("Login successful!");
+            } else if (loginStatus == 1) {
+                validationStatus = 1;
+                MessageText.setForeground(Color.RED);
+                MessageText.setText("Incorrect Password");
+            } else if (loginStatus == -1) {
+                validationStatus = -1;
+                MessageText.setForeground(Color.RED);
+                MessageText.setText("Account not Found");
+            }
+        });
+
+        createButton.addActionListener((ActionEvent e) -> {
+            String email = fieldPanel.getEmail();
+            String password = fieldPanel.getPassword();
+            
+            boolean createBStatus = database.signUp(email, password);
+            if (createBStatus) {
+                validationStatus = 0;
+                MessageText.setForeground(Color.GREEN);
+                MessageText.setText("New account created!");
+            } else {
+                validationStatus = -1;
+                MessageText.setForeground(Color.RED);
+                MessageText.setText("Account creation failed");
+            }     
+        });
     }
 
     public void AccountCreationSuccess() {
@@ -161,6 +219,16 @@ public class Login extends JFrame {
     public void AccountCreationFail() {
         MessageText.setForeground(Color.RED);
         MessageText.setText("Account creation failed"); 
+    }
+
+    public void AccessLoginSuccess() {
+        MessageText.setForeground(Color.GREEN);
+        MessageText.setText("Login successful!");
+    }
+
+    public void AccessLoginFail() {
+        MessageText.setForeground(Color.RED);
+        MessageText.setText("Login failed");
     }
     
 }
