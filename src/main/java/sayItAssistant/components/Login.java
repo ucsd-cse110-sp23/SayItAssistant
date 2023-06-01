@@ -165,19 +165,15 @@ public class Login extends JFrame {
                     String password = fieldPanel.getPassword();
                     if(passwordVerified(pwd, verified)){
                         if(signUp(email, password)){
-                            
+                            AccountCreationSuccess();
+                            validationStatus = 1;  
                         }
-
                     }
                 }
                 catch(Exception ex){
 
-                }
-    
-                
-                
-            }  
-                
+                }   
+            }     
         );
     }
 
