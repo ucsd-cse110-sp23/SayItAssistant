@@ -3,9 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 import sayItAssistant.data.DataBase;
+import sayItAssistant.functions.ValidationListener;
 
 /*+----------------------------------------------------------------------
 ||
@@ -130,7 +132,9 @@ public class Login extends JFrame {
 
     public int validationStatus;
     private DataBase database;
-    
+
+    private ArrayList<ValidationListener> validationListeners = new ArrayList<>();
+
 
     public Login() {
         validationStatus = 5; //Arbitrary non-relevant value
@@ -181,16 +185,15 @@ public class Login extends JFrame {
             int loginStatus = database.logIn(email, password);
             if (loginStatus == 0) {
                 validationStatus = 0;
-                MessageText.setForeground(Color.GREEN);
-                MessageText.setText("Login successful!");
+                AccessLoginSuccess();
             } else if (loginStatus == 1) {
                 validationStatus = 1;
-                MessageText.setForeground(Color.RED);
-                MessageText.setText("Incorrect Password");
+                AccessLoginFail();
             } else if (loginStatus == -1) {
                 validationStatus = -1;
                 MessageText.setForeground(Color.RED);
                 MessageText.setText("Account not Found");
+                notifyValidationComplete(validationStatus);
             }
         });
 
@@ -201,12 +204,10 @@ public class Login extends JFrame {
             boolean createBStatus = database.signUp(email, password);
             if (createBStatus) {
                 validationStatus = 0;
-                MessageText.setForeground(Color.GREEN);
-                MessageText.setText("New account created!");
+                AccountCreationSuccess();
             } else {
                 validationStatus = -1;
-                MessageText.setForeground(Color.RED);
-                MessageText.setText("Account creation failed");
+                AccountCreationFail();
             }     
         });
     }
@@ -214,21 +215,36 @@ public class Login extends JFrame {
     public void AccountCreationSuccess() {
         MessageText.setForeground(Color.GREEN);
         MessageText.setText("New account created!");
+        notifyValidationComplete(validationStatus);
     }
 
     public void AccountCreationFail() {
         MessageText.setForeground(Color.RED);
-        MessageText.setText("Account creation failed"); 
+        MessageText.setText("Account creation failed");
+        notifyValidationComplete(validationStatus);
     }
+
 
     public void AccessLoginSuccess() {
         MessageText.setForeground(Color.GREEN);
         MessageText.setText("Login successful!");
+        notifyValidationComplete(validationStatus);
     }
 
     public void AccessLoginFail() {
         MessageText.setForeground(Color.RED);
         MessageText.setText("Login failed");
+        notifyValidationComplete(validationStatus);
     }
+
+    public void addValidationListener(ValidationListener listener) {validationListeners.add(listener);}
+
+    private void notifyValidationComplete(int status) {
+        for (ValidationListener listener: validationListeners) {
+            listener.onValidationCompletion(status);
+        }
+    }
+
+
     
 }
