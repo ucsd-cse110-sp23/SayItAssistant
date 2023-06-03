@@ -8,9 +8,7 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -20,6 +18,7 @@ import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.History;
+import sayItAssistant.functions.ValidationListener;
 import sayItAssistant.handler.RequestHandler;
 /*+----------------------------------------------------------------------
 ||
@@ -45,7 +44,7 @@ import sayItAssistant.handler.RequestHandler;
 ||
 ++-----------------------------------------------------------------------*/
 class AppFrame extends JFrame {
-	
+
     private QAScreen mainScreen;
     private Sidebar historyList;
     private Footer buttons;
@@ -74,7 +73,7 @@ class AppFrame extends JFrame {
         mainScreen = new QAScreen();
 
         JSplitPane splitScreen = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, historyList, mainScreen);
-    
+
         // Set width of sidebar
         splitScreen.setDividerLocation(230);
         // Set divider to non-adjustable
@@ -87,6 +86,8 @@ class AppFrame extends JFrame {
         this.add(buttons, BorderLayout.SOUTH);
 
     }
+
+
 
     /*---------------------------------------------------------------------
     |  Method main()
@@ -101,30 +102,34 @@ class AppFrame extends JFrame {
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
-    
-    public static void main(String[] args) throws IOException{
-    	
-        AppFrame baseApp = new AppFrame();
 
-        baseApp.setTitle("SayIt Assistant");
-        baseApp.setSize(800, 600);
-        baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseApp.setVisible(false);
+    public static void main(String[] args) throws IOException {
+        SwingUtilities.invokeLater(() -> {
+            AppFrame baseApp = new AppFrame();
 
-        Login login = new Login();
-        login.setTitle("Login");
-        login.setSize(600, 400);
-        login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        login.setVisible(true);
-
-        while (login.validationStatus != 0) {
+            baseApp.setTitle("SayIt Assistant");
+            baseApp.setSize(800, 600);
+            baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             baseApp.setVisible(false);
-            login.setVisible(true);
-        }
-        
 
-        //Footer.questionDatabase.logIn("admin","admin1234");
-        baseApp.setVisible(true);
-        login.setVisible(false);
+            Login login = new Login();
+            login.setTitle("Login");
+            login.setSize(600, 400);
+            login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            login.setVisible(true);
+
+            login.addValidationListener(new ValidationListener() {
+                @Override
+                public void onValidationCompletion(int status) {
+                    if (status == 0) {
+                        login.setVisible(false);
+                        baseApp.setVisible(true);
+                    }
+                }
+            });
+
+            //Footer.questionDatabase.logIn("admin","admin1234");
+            baseApp.setVisible(false);
+        });
     }
 }
