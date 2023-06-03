@@ -200,15 +200,21 @@ public class Login extends JFrame {
         createButton.addActionListener((ActionEvent e) -> {
             String email = fieldPanel.getEmail();
             String password = fieldPanel.getPassword();
+            String verifyPassword = fieldPanel.getVerify();
             
-            boolean createBStatus = database.signUp(email, password);
-            if (createBStatus) {
-                validationStatus = 0;
-                AccountCreationSuccess();
+            if( verifyPassword.compareTo(password) == 0) {
+                boolean createBStatus = database.signUp(email, password);
+                if (createBStatus) {
+                    validationStatus = 0;
+                    AccountCreationSuccess();
+                } else {
+                    validationStatus = -1;
+                    AccountCreationFail();
+                }   
             } else {
                 validationStatus = -1;
-                AccountCreationFail();
-            }     
+                PasswordVerificationFail();
+            }  
         });
     }
 
@@ -236,6 +242,13 @@ public class Login extends JFrame {
         MessageText.setText("Login failed");
         notifyValidationComplete(validationStatus);
     }
+
+    public void PasswordVerificationFail() {
+        MessageText.setForeground(Color.RED);
+        MessageText.setText("Password Verification Failed");
+        notifyValidationComplete(validationStatus);
+    }
+
 
     public void addValidationListener(ValidationListener listener) {validationListeners.add(listener);}
 
