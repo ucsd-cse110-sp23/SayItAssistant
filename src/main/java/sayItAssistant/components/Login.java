@@ -109,6 +109,33 @@ class ButtonPanel extends JPanel {
     }
 
 }
+
+/*---------------------------------------------------------------------
+    |  Constructor SelectPanel()
+    |
+    |         Purpose: Creates the SelectPanel for the Auto Login Selector
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Initialize SelectPanel component and add JCheckBox
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+
+class SelectPanel extends JPanel {
+    private JCheckBox selectBox;
+
+    public SelectPanel() {
+        selectBox = new JCheckBox("Remember Me");
+        this.add(selectBox);
+    }
+
+    public JCheckBox getSelectBox() {
+        return selectBox;
+    }
+}
      /*---------------------------------------------------------------------
     |  Constructor Login()
     |
@@ -142,8 +169,10 @@ public class Login extends JFrame {
         setLayout(new BorderLayout());
         LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
-        LoginPanel.setLayout(new GridLayout(3, 2));
+        LoginPanel.setLayout(new GridLayout(4, 2));
         this.add(LoginPanel);
+
+
         fieldPanel = new FieldPanel();
         LoginPanel.add(fieldPanel);
 
@@ -152,6 +181,10 @@ public class Login extends JFrame {
 
         loginButton = buttonPanel.getLoginButton();
         createButton = buttonPanel.getCreateButton();
+
+        JPanel SelectPanel = new SelectPanel();
+        SelectPanel.setPreferredSize(new Dimension(100, 20));
+        LoginPanel.add(SelectPanel);
 
         JPanel MessagePanel = new JPanel();
         MessageText = new JTextArea();
@@ -201,7 +234,7 @@ public class Login extends JFrame {
             String email = fieldPanel.getEmail();
             String password = fieldPanel.getPassword();
             String verifyPassword = fieldPanel.getVerify();
-            
+
             if( verifyPassword.compareTo(password) == 0) {
                 boolean createBStatus = database.signUp(email, password);
                 if (createBStatus) {
