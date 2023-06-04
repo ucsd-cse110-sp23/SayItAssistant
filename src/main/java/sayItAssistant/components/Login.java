@@ -125,7 +125,7 @@ class ButtonPanel extends JPanel {
     *-------------------------------------------------------------------*/
 
 class SelectPanel extends JPanel {
-    private JCheckBox selectBox;
+    public static JCheckBox selectBox;
 
     public SelectPanel() {
         selectBox = new JCheckBox("Remember Me");
@@ -160,13 +160,17 @@ public class Login extends JFrame {
     public int validationStatus;
     private DataBase database;
 
+
     private ArrayList<ValidationListener> validationListeners = new ArrayList<>();
+    public LoginConfig loginConfig;
 
 
     public Login() {
         validationStatus = 5; //Arbitrary non-relevant value
+        loginConfig = new LoginConfig();
         database = new DataBase();
-        setLayout(new BorderLayout());
+
+        this.setLayout(new BorderLayout());
         LoginPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         LoginPanel.setPreferredSize(new Dimension(500, 200));
         LoginPanel.setLayout(new GridLayout(4, 2));
@@ -218,6 +222,12 @@ public class Login extends JFrame {
             int loginStatus = database.logIn(email, password);
             if (loginStatus == 0) {
                 validationStatus = 0;
+                loginConfig.setProperty("username", email);
+                loginConfig.setProperty("password", password);
+                if(SelectPanel.selectBox.isSelected()) {
+                    loginConfig.setProperty("autoLoginEnabled", "true");
+                }
+                loginConfig.store();
                 AccessLoginSuccess();
             } else if (loginStatus == 1) {
                 validationStatus = 1;
@@ -239,6 +249,12 @@ public class Login extends JFrame {
                 boolean createBStatus = database.signUp(email, password);
                 if (createBStatus) {
                     validationStatus = 0;
+                    loginConfig.setProperty("username", email);
+                    loginConfig.setProperty("password", password);
+                    if(SelectPanel.selectBox.isSelected()) {
+                        loginConfig.setProperty("autoLoginEnabled", "true");
+                    }
+                    loginConfig.store();
                     AccountCreationSuccess();
                 } else {
                     validationStatus = -1;
@@ -249,6 +265,8 @@ public class Login extends JFrame {
                 PasswordVerificationFail();
             }  
         });
+
+
     }
 
     public void AccountCreationSuccess() {
@@ -289,6 +307,18 @@ public class Login extends JFrame {
         for (ValidationListener listener: validationListeners) {
             listener.onValidationCompletion(status);
         }
+    }
+
+    public boolean checkAutoLogin() {
+        return loginConfig.getProperty("autoLoginEnabled").compareTo("true") == 0;
+    }
+
+    public void autoLogin() {
+        String email = loginConfig.getProperty("username");
+        String password = loginConfig.getProperty("password");
+        database.logIn(email, password);
+        validationStatus = 0;
+        notifyValidationComplete(validationStatus);
     }
 
 

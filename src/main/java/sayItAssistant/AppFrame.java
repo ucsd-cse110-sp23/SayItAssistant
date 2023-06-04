@@ -118,6 +118,12 @@ class AppFrame extends JFrame {
             login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             login.setVisible(true);
 
+            if(login.checkAutoLogin()) {
+                login.autoLogin();
+                login.setVisible(false);
+                baseApp.setVisible(true);
+            }
+
             login.addValidationListener(new ValidationListener() {
                 @Override
                 public void onValidationCompletion(int status) {
@@ -128,8 +134,6 @@ class AppFrame extends JFrame {
                 }
             });
 
-            //Footer.questionDatabase.logIn("admin","admin1234");
-            baseApp.setVisible(false);
         });
     }
 }
