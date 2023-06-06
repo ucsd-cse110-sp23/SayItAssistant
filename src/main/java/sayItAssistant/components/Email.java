@@ -38,10 +38,11 @@ class emailFieldPanel extends JPanel {
     private JTextField firstNameField, lastNameField, displayNameField,emailAddressField, SMTPField, TLSPortField, emailPasswordField;
     
     public emailFieldPanel() {
-        setLayout(new GridLayout(4,4));
+        setLayout(new GridLayout(7,2));
+        
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameField = new JTextField();
-        add(firstNameLabel );
+        add(firstNameLabel);
         add(firstNameField);
 
         JLabel lastNameLabel = new JLabel("Last Name:");
@@ -54,16 +55,10 @@ class emailFieldPanel extends JPanel {
         add(displayNameLabel);
         add(displayNameField);
 
-
         JLabel emailAddressLabel = new JLabel("Email Address:");
         emailAddressField = new JTextField();
         add(emailAddressLabel);
         add(emailAddressField);
-
-        JLabel SMTPLabel = new JLabel("SMTP:");
-        SMTPField = new JTextField();
-        add(SMTPLabel);
-        add(SMTPField);
 
         JLabel TLSPortLabel = new JLabel("TLS Port:");
         TLSPortField = new JTextField();
@@ -74,6 +69,12 @@ class emailFieldPanel extends JPanel {
         emailPasswordField = new JTextField();
         add(emailpasswordLabel);
         add(emailPasswordField);
+
+        JLabel SMTPLabel = new JLabel("SMTP:");
+        SMTPField = new JTextField();
+        add(SMTPLabel);
+        add(SMTPField);
+
     }
     
     public String getLastName() {
@@ -119,10 +120,10 @@ class emailFieldPanel extends JPanel {
     |
     |         Returns: None
     *-------------------------------------------------------------------*/
-class ButtonPanel extends JPanel {
+class emailButtonPanel extends JPanel {
     private JButton saveButton, cancelButton;
   
-    public ButtonPanel() {
+    public emailButtonPanel() {
       saveButton = new JButton("Save");
       add(saveButton);
   
@@ -154,7 +155,7 @@ class ButtonPanel extends JPanel {
 *-------------------------------------------------------------------*/
 public class Email  extends JFrame {
     public static JPanel emailPanel;
-    private ButtonPanel buttonPanel;
+    private emailButtonPanel buttonPanel;
     private emailFieldPanel emailFieldPanel;
     public Email(){
         this.setSize(1200, 1000); // 1200 width and 1000 height
@@ -163,13 +164,13 @@ public class Email  extends JFrame {
          
         emailPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         emailPanel.setPreferredSize(new Dimension(500, 200));
-        emailPanel.setLayout(new GridLayout(4, 2));  
+        emailPanel.setLayout(new GridLayout(2, 4));  
 
         
         emailFieldPanel = new emailFieldPanel();
         emailPanel.add(emailFieldPanel);
 
-        buttonPanel = new ButtonPanel();
+        buttonPanel = new emailButtonPanel();
         emailPanel.add(buttonPanel);
 
         this.add(emailPanel);
