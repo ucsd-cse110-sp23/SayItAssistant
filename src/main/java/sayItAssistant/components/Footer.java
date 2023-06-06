@@ -121,8 +121,13 @@ public class Footer extends JPanel { // This class contains recording buttons
                         
                         if(question.getQuestionString().toLowerCase().startsWith("setup email")){
                             Email email = new Email();
-                            this.add(email); 
+                         
                         }
+                        if(question.getQuestionString().toLowerCase().startsWith("set up email")){
+                            Email email = new Email();
+                         
+                        }
+
                         
                     }
                 }

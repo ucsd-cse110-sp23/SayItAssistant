@@ -81,8 +81,7 @@ class emailFieldPanel extends JPanel {
     }
 }
 
-public class Email  extends JPanel {
-    
+public class Email  extends JFrame {
     public static JPanel emailPanel;
     private emailFieldPanel emailFieldPanel;
     public Email(){
@@ -90,11 +89,11 @@ public class Email  extends JPanel {
         emailPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         emailPanel.setPreferredSize(new Dimension(500, 200));
         emailPanel.setLayout(new GridLayout(4, 2));  
-        
-        this.add(emailPanel);
+
         
         emailFieldPanel = new emailFieldPanel();
         emailPanel.add(emailFieldPanel);
+        this.add(emailPanel);
     }   
     
     
