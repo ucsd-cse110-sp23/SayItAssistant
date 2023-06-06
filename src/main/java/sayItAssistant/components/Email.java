@@ -1,3 +1,4 @@
+
 package sayItAssistant.components;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,11 +9,11 @@ import javax.swing.*;
 
 
 
-class FieldPanel extends JPanel {
+class emailFieldPanel extends JPanel {
     
     private JTextField firstNameField, lastNameField, displayNameField,emailAddressField, SMTPField, TLSPortField, emailPasswordField;
     
-    public FieldPanel() {
+    public emailFieldPanel() {
         setLayout(new GridLayout(3, 2));
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameField = new JTextField();
@@ -42,8 +43,8 @@ class FieldPanel extends JPanel {
 
         JLabel TLSPortLabel = new JLabel("TLS Port:");
         TLSPortField = new JTextField();
-        add(emailAddressLabel);
-        add(emailAddressField);
+        add(TLSPortLabel);
+        add(TLSPortField);
 
         JLabel emailpasswordLabel = new JLabel("Email Password:");
         emailPasswordField = new JTextField();
@@ -80,11 +81,22 @@ class FieldPanel extends JPanel {
     }
 }
 
-public class Email  extends JFrame {
-   
-    private FieldPanel fieldPanel;
-   // public  Email 
-
-
+public class Email  extends JPanel {
+    
+    public static JPanel emailPanel;
+    private emailFieldPanel emailFieldPanel;
+    public Email(){
+         
+        emailPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        emailPanel.setPreferredSize(new Dimension(500, 200));
+        emailPanel.setLayout(new GridLayout(4, 2));  
+        
+        this.add(emailPanel);
+        
+        emailFieldPanel = new emailFieldPanel();
+        emailPanel.add(emailFieldPanel);
+    }   
+    
     
 }
+
