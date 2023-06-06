@@ -94,6 +94,7 @@ public class Email  extends JFrame {
         emailFieldPanel = new emailFieldPanel();
         emailPanel.add(emailFieldPanel);
         this.add(emailPanel);
+        revalidate();
     }   
     
     
