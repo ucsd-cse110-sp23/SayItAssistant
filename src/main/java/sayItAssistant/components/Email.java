@@ -14,7 +14,7 @@ class emailFieldPanel extends JPanel {
     private JTextField firstNameField, lastNameField, displayNameField,emailAddressField, SMTPField, TLSPortField, emailPasswordField;
     
     public emailFieldPanel() {
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(1, 1));
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameField = new JTextField();
         add(firstNameLabel );
@@ -85,6 +85,9 @@ public class Email  extends JFrame {
     public static JPanel emailPanel;
     private emailFieldPanel emailFieldPanel;
     public Email(){
+        this.setSize(1200, 1000); // 1200 width and 1000 height
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
+        this.setVisible(true); // Make visible
          
         emailPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         emailPanel.setPreferredSize(new Dimension(500, 200));
