@@ -40,39 +40,51 @@ class FieldPanel extends JPanel {
         add(SMTPLabel);
         add(SMTPField);
 
-        ////emailPasswordField;
         JLabel TLSPortLabel = new JLabel("TLS Port:");
         TLSPortField = new JTextField();
         add(emailAddressLabel);
         add(emailAddressField);
 
-        JLabel emailpasswordLabel = new JLabel("Password:");
+        JLabel emailpasswordLabel = new JLabel("Email Password:");
         emailPasswordField = new JTextField();
         add(emailpasswordLabel);
         add(emailPasswordField);
-
-        JLabel verifyLabel = new JLabel("Verify Password:");
-        verifyField = new JTextField();
-        add(verifyLabel);
-        add(verifyField);
     }
-    public String getEmail() {
-        return emailField.getText();
+    
+    public String getLastName() {
+        return lastNameField.getText();
     }
 
-    public String getPassword() {
-        return passwordField.getText();
+    public String getFirstName() {
+        return firstNameField.getText();
     }
 
-    public String getVerify() {
-        return verifyField.getText();
+    public String getdisplayName() {
+        return displayNameField.getText();
+    }
+
+    public String getEmailAddress() {
+        return emailAddressField.getText();
+    }
+
+    public String getSMTP() {
+        return SMTPField.getText();
+    }
+
+    public String getTLSPort() {
+        return TLSPortField.getText();
+    }
+
+    public String getEmailPassword() {
+        return emailPasswordField.getText();
     }
 }
 
 public class Email  extends JFrame {
    
     private FieldPanel fieldPanel;
-    public 
+   // public  Email 
+
 
     
 }
