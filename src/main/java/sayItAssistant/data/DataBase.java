@@ -36,6 +36,9 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,6 +55,7 @@ public class DataBase {
     private MongoCollection<Document> collection;
     private String user_id;
     private ArrayList<Question> history;
+    private final String dbPath = "./DB/Questions.txt";
 
     /*---------------------------------------------------------------------
     |  Constructor DataBase()
@@ -237,6 +241,23 @@ public class DataBase {
 
     public ArrayList<Question> getHistory() {
         return history;
+    }
+
+    public void setUserID(String userID) {
+        this.user_id = userID;
+    }
+
+    public void writeToFile() {
+        File dbFile=  new File(dbPath);
+
+        try (FileWriter fw = new FileWriter(dbFile)) {
+            fw.write("");
+            fw.write(this.historyToString());
+            fw.flush();
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
 //    public static void main(String[] args) {
