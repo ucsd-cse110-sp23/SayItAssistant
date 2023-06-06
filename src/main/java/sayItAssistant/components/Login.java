@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.Question;
 import sayItAssistant.functions.ValidationListener;
 
 /*+----------------------------------------------------------------------
@@ -158,7 +159,7 @@ public class Login extends JFrame {
     public static JTextArea MessageText;
 
     public int validationStatus;
-    private DataBase database;
+    public static DataBase database;
 
 
     private ArrayList<ValidationListener> validationListeners = new ArrayList<>();
@@ -319,6 +320,14 @@ public class Login extends JFrame {
         database.logIn(email, password);
         validationStatus = 0;
         notifyValidationComplete(validationStatus);
+    }
+
+    public ArrayList<Question> getLoginArrayList() {
+        return database.getHistory();
+    }
+
+    public static DataBase returnDatabase() {
+        return database;
     }
 
 

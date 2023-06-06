@@ -6,20 +6,31 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.Scanner;
 
+import javax.xml.crypto.Data;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import sayItAssistant.components.LoginConfig;
 import sayItAssistant.data.Answer;
+import sayItAssistant.data.DataBase;
 import sayItAssistant.data.History;
 import sayItAssistant.data.Question;
 
 public class RequestHandler implements HttpHandler{
 
 	private final History data;
+	private final DataBase database;
+	private LoginConfig properties;
+	private String userID;
 
 
-	public RequestHandler(History data) {
+	public RequestHandler(History data, DataBase database) {
 		this.data = data;
+		this.database = database;
+		this.properties = new LoginConfig();
+		userID = properties.getProperty("username");
+		database.setUserID(userID);
 	}
 	
 	@Override
@@ -60,6 +71,7 @@ public class RequestHandler implements HttpHandler{
 
 		Question question = new Question(questionString, new Answer(answerString));
 		data.addQuestion(question);
+		database.addQuestion(question);
 		scanner.close();
 	}
 	
@@ -73,6 +85,11 @@ public class RequestHandler implements HttpHandler{
 	
 	private void handleDeleteAll(HttpExchange httpExchange) throws IOException {
 		data.clearHistory();
+	}
+
+	public void setUser() {
+		userID = properties.getProperty("username");
+		database.setUserID(userID);
 	}
 
 }

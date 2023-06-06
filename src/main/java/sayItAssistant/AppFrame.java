@@ -104,13 +104,8 @@ class AppFrame extends JFrame {
     *-------------------------------------------------------------------*/
 
     public static void main(String[] args) throws IOException {
+        Server.startServer();
         SwingUtilities.invokeLater(() -> {
-            AppFrame baseApp = new AppFrame();
-
-            baseApp.setTitle("SayIt Assistant");
-            baseApp.setSize(800, 600);
-            baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            baseApp.setVisible(false);
 
             Login login = new Login();
             login.setTitle("Login");
@@ -121,6 +116,14 @@ class AppFrame extends JFrame {
             if(login.checkAutoLogin()) {
                 login.autoLogin();
                 login.setVisible(false);
+                //Server.requestHandler.setUser();
+                Server.database = Login.returnDatabase();
+                Server.contextBuilder();
+                Server.database.writeToFile();
+                AppFrame baseApp = new AppFrame();
+                baseApp.setTitle("SayIt Assistant");
+                baseApp.setSize(800, 600);
+                baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 baseApp.setVisible(true);
             }
 
@@ -129,6 +132,14 @@ class AppFrame extends JFrame {
                 public void onValidationCompletion(int status) {
                     if (status == 0) {
                         login.setVisible(false);
+                        //Server.requestHandler.setUser();
+                        Server.database = Login.returnDatabase();
+                        Server.contextBuilder();
+                        Server.database.writeToFile();
+                        AppFrame baseApp = new AppFrame();
+                        baseApp.setTitle("SayIt Assistant");
+                        baseApp.setSize(800, 600);
+                        baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                         baseApp.setVisible(true);
                     }
                 }
