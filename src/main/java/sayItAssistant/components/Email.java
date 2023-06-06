@@ -14,7 +14,7 @@ class emailFieldPanel extends JPanel {
     private JTextField firstNameField, lastNameField, displayNameField,emailAddressField, SMTPField, TLSPortField, emailPasswordField;
     
     public emailFieldPanel() {
-        setLayout(new GridLayout(1, 1));
+        setLayout(new GridLayout(4,4));
         JLabel firstNameLabel = new JLabel("First Name:");
         firstNameField = new JTextField();
         add(firstNameLabel );
