@@ -182,7 +182,7 @@ public class DataBase {
     }
 
     /*---------------------------------------------------------------------
-    |  Method addQuestion(Question question)
+    |  Method removeQuestion(Question question)
     |
     |         Purpose: delete question in database
     |
