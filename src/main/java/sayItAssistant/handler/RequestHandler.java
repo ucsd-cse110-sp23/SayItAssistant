@@ -81,6 +81,7 @@ public class RequestHandler implements HttpHandler{
 		String stringIndex = query.substring(query.indexOf("=") + 1);
 		int intIndex = Integer.parseInt(stringIndex);
 		data.removeQuestion(intIndex);
+		database.removeQuestion(intIndex);
 	}
 	
 	private void handleDeleteAll(HttpExchange httpExchange) throws IOException {

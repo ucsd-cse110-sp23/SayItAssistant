@@ -195,10 +195,13 @@ public class DataBase {
     |         Returns: True | successfully deleted
     |					False | failed-fatal error
     *-------------------------------------------------------------------*/
-    public boolean removeQuestion(String question){   
+    public boolean removeQuestion(int index){   
         if(user_id == null) {
     		return false;
     	}
+
+        String question = history.get(index).getQuestionString();
+        System.out.println(question);
 
     	ArrayList<Question> removedHistory = new ArrayList<>();
     
@@ -208,9 +211,8 @@ public class DataBase {
                 continue;
             }
             removedHistory.add(q);
-            //System.out.println(q.getQuestionString());
         }
-        history = addedHistory;
+        history = removedHistory;
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
             collection = db.getCollection("historyList");

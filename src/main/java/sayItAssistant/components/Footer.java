@@ -103,7 +103,8 @@ public class Footer extends JPanel { // This class contains recording buttons
                                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                     conn.setRequestMethod("DELETE");
                                     conn.getInputStream();
-                                    questionDatabase.removeQuestion(Sidebar.historyJList.getSelectedValue());
+                                    System.out.print("HERE");
+                                    questionDatabase.removeQuestion(Sidebar.historyJList.getSelectedIndex());
                                     
                                 }
                             }catch (Exception ex) {

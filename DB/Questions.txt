@@ -1,6 +1,2 @@
 Question. Where is France located?
 France is located in Western Europe.
-Question. What is 10 plus 10?
-Answer: 20
-Question: what is 5 plus 5?
-Answer: 10
