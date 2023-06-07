@@ -208,8 +208,9 @@ public class DataBase {
                 continue;
             }
             removedHistory.add(q);
+            //System.out.println(q.getQuestionString());
         }
-
+        history = addedHistory;
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
             collection = db.getCollection("historyList");
