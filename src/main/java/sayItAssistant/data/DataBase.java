@@ -182,7 +182,7 @@ public class DataBase {
     }
 
     /*---------------------------------------------------------------------
-    |  Method removeQuestion(Question question)
+    |  Method removeQuestion(int index)
     |
     |         Purpose: delete question in database
     |
@@ -214,6 +214,35 @@ public class DataBase {
             MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
             collection = db.getCollection("historyList");
            	collection.updateOne(eq("user_id",user_id), set("question_list",historyToString()));
+
+           	return true;
+    	}
+    }
+    
+    /*---------------------------------------------------------------------
+    |  Method clearAll()
+    |
+    |         Purpose: delete All questions in database
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: New empty array list for question history,
+    |					and the data base updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: True | successfully deleted
+    |					False | failed-fatal error
+    *-------------------------------------------------------------------*/
+    public boolean clearAll() {
+    	if(user_id == null) {
+    		return false;
+    	}
+    	history = new ArrayList<>();
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+           	collection.updateOne(eq("user_id",user_id), set("question_list",""));
 
            	return true;
     	}
@@ -285,6 +314,20 @@ public class DataBase {
         this.user_id = userID;
     }
 
+    /*---------------------------------------------------------------------
+    |  Method writeToFile()
+    |
+    |         Purpose: Write current data into txt file
+    |				** this method is not required in MS2
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: txt file updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public void writeToFile() {
         File dbFile=  new File(dbPath);
 

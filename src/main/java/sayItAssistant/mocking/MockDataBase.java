@@ -193,6 +193,75 @@ public class MockDataBase extends DataBase{
     }
     
     /*---------------------------------------------------------------------
+    |  Method removeQuestion(int index)
+    |
+    |         Purpose: delete question in database
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: selected question deleted
+    |
+    |      Parameters: Question
+    |
+    |         Returns: True | successfully deleted
+    |					False | failed-fatal error
+    *-------------------------------------------------------------------*/
+    @Override
+    public boolean removeQuestion(int index){   
+        if(user_id == null) {
+    		return false;
+    	}
+        String question = history.get(index).getQuestionString();
+
+    	ArrayList<Question> removedHistory = new ArrayList<>();
+    
+		for (Question q : history) {
+            if(q.getQuestionString().equals(question)){
+                continue;
+            }
+            removedHistory.add(q);
+        }
+        history = removedHistory;
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            collection = db.getCollection("test");
+           	collection.updateOne(eq("user_id",user_id), set("question_list",historyToString()));
+
+           	return true;
+    	}
+    }
+    
+    /*---------------------------------------------------------------------
+    |  Method clearAll()
+    |
+    |         Purpose: delete All questions in database
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: New empty array list for question history,
+    |					and the data base updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: True | successfully deleted
+    |					False | failed-fatal error
+    *-------------------------------------------------------------------*/
+    @Override
+    public boolean clearAll() {
+    	if(user_id == null) {
+    		return false;
+    	}
+    	history = new ArrayList<>();
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            collection = db.getCollection("test");
+           	collection.updateOne(eq("user_id",user_id), set("question_list",""));
+
+           	return true;
+    	}
+    }
+    
+    /*---------------------------------------------------------------------
     |  Method historyToString()
     |
     |         Purpose: private method to change current history field
