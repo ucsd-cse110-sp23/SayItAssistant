@@ -199,15 +199,12 @@ public class DataBase {
         if(user_id == null) {
     		return false;
     	}
-
         String question = history.get(index).getQuestionString();
-        System.out.println(question);
 
     	ArrayList<Question> removedHistory = new ArrayList<>();
     
 		for (Question q : history) {
-            if(q.getQuestionString().equals(question/*question.getQuestionString()*/)){
-                System.out.println(q.getQuestionString());
+            if(q.getQuestionString().equals(question)){
                 continue;
             }
             removedHistory.add(q);
