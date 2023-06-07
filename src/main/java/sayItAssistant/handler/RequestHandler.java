@@ -86,6 +86,7 @@ public class RequestHandler implements HttpHandler{
 	
 	private void handleDeleteAll(HttpExchange httpExchange) throws IOException {
 		data.clearHistory();
+		database.clearAll();
 	}
 
 	public void setUser() {
