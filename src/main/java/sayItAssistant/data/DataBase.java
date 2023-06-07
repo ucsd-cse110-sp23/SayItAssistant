@@ -32,6 +32,9 @@ package sayItAssistant.data;
 ||
 ++-----------------------------------------------------------------------*/
 import com.mongodb.client.*;
+
+import sayItAssistant.components.EmailConfig;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -218,6 +221,36 @@ public class DataBase {
     	}
     }
 
+    /*---------------------------------------------------------------------
+    |  Method getEmailSettings(...)
+    |
+    |         Purpose: update email settings on local file
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: email settings changed on local file
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    
+    public void getEmailSettings() {
+        try(MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+            EmailConfig emailDetails = new EmailConfig();
+            Document document = collection.find(eq("user_id", user_id)).first();
+            emailDetails.setProperty("DisplayName", document.get("DisplayName").toString());
+            emailDetails.setProperty("EmailAddress", document.get("EmailAddress").toString());
+            emailDetails.setProperty("FirstName", document.get("FirstName").toString());
+            emailDetails.setProperty("LastName", document.get("LastName").toString());
+            emailDetails.setProperty("Password", document.get("Password").toString());
+            emailDetails.setProperty("SMTP", document.get("SMTP").toString());
+            emailDetails.setProperty("TLSPort", document.get("TLSPort").toString());
+            emailDetails.store();
+        }
+    }
     /*---------------------------------------------------------------------
     |  Method removeQuestion(Question question)
     |
