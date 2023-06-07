@@ -1,4 +1,2 @@
-Question: where is Spain?
-Spain is located in southwestern Europe, bordered by Portugal to the west and France to the north. The country is situated between the Mediterranean Sea to the south and east, and the Atlantic Ocean to the west.
-Question: where is England?
-England is located in the northern part of Europe, in the British Isles. It is bordered by Wales to the west and Scotland to the north.
+Question. Where is France located?
+France is located in Western Europe.
