@@ -2,28 +2,18 @@ package sayItAssistant;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
-import com.sun.net.httpserver.HttpServer;
-
-import sayItAssistant.components.Email;
 import sayItAssistant.components.EmailConfig;
 import sayItAssistant.components.Footer;
 import sayItAssistant.components.Login;
 import sayItAssistant.components.QAScreen;
 import sayItAssistant.components.Sidebar;
-import sayItAssistant.data.DataBase;
-import sayItAssistant.data.History;
 import sayItAssistant.functions.ValidationListener;
-import sayItAssistant.handler.RequestHandler;
+
 /*+----------------------------------------------------------------------
 ||
 ||  Class AppFrame
@@ -159,10 +149,10 @@ class AppFrame extends JFrame {
         Server.database.writeToFile();
         Server.database.getEmailSettings();
         AppFrame baseApp = new AppFrame();
-        baseApp.setTitle("SayIt Assistant");
+        baseApp.setTitle("SayIt Assistant 2");
         baseApp.setSize(815, 600);
         baseApp.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        baseApp.setResizable(false);
+        //baseApp.setResizable(false);
 
         baseApp.addWindowListener(new WindowAdapter() {
             @Override
