@@ -195,7 +195,7 @@ public class DataBase {
     |         Returns: True | successfully deleted
     |					False | failed-fatal error
     *-------------------------------------------------------------------*/
-    public boolean removeQuestion(Question question){   
+    public boolean removeQuestion(String question){   
         if(user_id == null) {
     		return false;
     	}
@@ -203,7 +203,7 @@ public class DataBase {
     	ArrayList<Question> removedHistory = new ArrayList<>();
     
 		for (Question q : history) {
-            if(q.getQuestionString().equals(question.getQuestionString())){
+            if(q.getQuestionString().equals(question/*question.getQuestionString()*/)){
                 System.out.println(q.getQuestionString());
                 continue;
             }

@@ -96,11 +96,15 @@ public class Footer extends JPanel { // This class contains recording buttons
                         if(question.getQuestionString().toLowerCase().startsWith("delete")){
                             try {
                                 if(!Sidebar.historyJList.isSelectionEmpty())  {
-                                    url = new URL(URL);
+                                    String query = String.valueOf(Sidebar.getIndex());
+                                    System.out.print("THIS" + Sidebar.historyJList.getSelectedValue());
+                                    //url = new URL(URL);
+                                    url = new URL(URL + "?=" + query);
                                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                     conn.setRequestMethod("DELETE");
                                     conn.getInputStream();
-                                    questionDatabase.removeQuestion(question);
+                                    questionDatabase.removeQuestion(Sidebar.historyJList.getSelectedValue());
+                                    
                                 }
                             }catch (Exception ex) {
                                 ex.printStackTrace();
