@@ -182,7 +182,7 @@ public class DataBase {
     }
 
     /*---------------------------------------------------------------------
-    |  Method addQuestion(Question question)
+    |  Method removeQuestion(int index)
     |
     |         Purpose: delete question in database
     |
@@ -214,6 +214,35 @@ public class DataBase {
             MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
             collection = db.getCollection("historyList");
            	collection.updateOne(eq("user_id",user_id), set("question_list",historyToString()));
+
+           	return true;
+    	}
+    }
+    
+    /*---------------------------------------------------------------------
+    |  Method clearAll()
+    |
+    |         Purpose: delete All questions in database
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: New empty array list for question history,
+    |					and the data base updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: True | successfully deleted
+    |					False | failed-fatal error
+    *-------------------------------------------------------------------*/
+    public boolean clearAll() {
+    	if(user_id == null) {
+    		return false;
+    	}
+    	history = new ArrayList<>();
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+           	collection.updateOne(eq("user_id",user_id), set("question_list",""));
 
            	return true;
     	}
