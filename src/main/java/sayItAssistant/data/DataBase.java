@@ -314,6 +314,20 @@ public class DataBase {
         this.user_id = userID;
     }
 
+    /*---------------------------------------------------------------------
+    |  Method writeToFile()
+    |
+    |         Purpose: Write current data into txt file
+    |				** this method is not required in MS2
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: txt file updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public void writeToFile() {
         File dbFile=  new File(dbPath);
 
