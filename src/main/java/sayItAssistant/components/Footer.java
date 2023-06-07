@@ -108,6 +108,19 @@ public class Footer extends JPanel { // This class contains recording buttons
                             }
                             Sidebar.updateRemoveHistory();
                         }
+                        
+                        if(question.getQuestionString().toLowerCase().startsWith("clear all")){
+                            try {
+                                url = new URL(URL);
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                conn.setRequestMethod("PUT");
+                                conn.getInputStream();
+                                questionDatabase.clearAll();
+                            }catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                            Sidebar.resetHistory();
+                        }
 
                         if(question.getQuestionString().toLowerCase().startsWith("question")) {
                             try {
