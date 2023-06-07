@@ -52,7 +52,7 @@ public class ChatGpt {
 	private static final String API_ENDPOINT = "https://api.openai.com/v1/completions";
 	private static final String API_KEY = "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";
 	private static final String MODEL = "text-davinci-003";
-	private static final int MAX_TOKENS = 100;
+	private static final int MAX_TOKENS = 1024;
 	private static final double TEMPERATURE = 1.0;
 	
 	Question question;
@@ -153,6 +153,7 @@ public class ChatGpt {
 		String responseBody = response.body();
 		responseJson = new JSONObject(responseBody);
 		JSONArray choices = responseJson.getJSONArray("choices");
+        System.out.println(choices.getJSONObject(0).getString("text"));
 		question.getAnswerObject().setAnswerString(choices.getJSONObject(0).getString("text").replace("\n", "").replace("\r", ""));
 	}
 }

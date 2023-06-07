@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
 import com.sun.net.httpserver.HttpServer;
 
 import sayItAssistant.components.Email;
+import sayItAssistant.components.EmailConfig;
 import sayItAssistant.components.Footer;
 import sayItAssistant.components.Login;
 import sayItAssistant.components.QAScreen;
@@ -112,41 +115,74 @@ class AppFrame extends JFrame {
             Login login = new Login();
             login.setTitle("Login");
             login.setSize(600, 400);
-            login.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            login.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             login.setVisible(true);
 
             if(login.checkAutoLogin()) {
                 login.autoLogin();
                 login.setVisible(false);
-                //Server.requestHandler.setUser();
-                Server.database = Login.returnDatabase();
-                Server.contextBuilder();
-                Server.database.writeToFile();
-                AppFrame baseApp = new AppFrame();
-                baseApp.setTitle("SayIt Assistant");
-                baseApp.setSize(800, 600);
-                baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                baseApp.setVisible(true);
+                openBaseApp();
             }
+
 
             login.addValidationListener(new ValidationListener() {
                 @Override
                 public void onValidationCompletion(int status) {
                     if (status == 0) {
                         login.setVisible(false);
-                        //Server.requestHandler.setUser();
-                        Server.database = Login.returnDatabase();
-                        Server.contextBuilder();
-                        Server.database.writeToFile();
-                        AppFrame baseApp = new AppFrame();
-                        baseApp.setTitle("SayIt Assistant");
-                        baseApp.setSize(800, 600);
-                        baseApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                        baseApp.setVisible(true);
+                        openBaseApp();
                     }
                 }
             });
 
+            login.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    login.dispose();
+                    try {
+                        Server.stopServer();
+                        System.out.println("Server closed");
+                    } catch (IOException e1) {
+                        System.out.println("Server failed to shut down");
+                    }
+                    System.exit(0);
+                }
+            });
+
+
         });
+    }
+
+    private static void openBaseApp() {
+        Server.database = Login.returnDatabase();
+        Server.contextBuilder();
+        Server.database.writeToFile();
+        Server.database.getEmailSettings();
+        AppFrame baseApp = new AppFrame();
+        baseApp.setTitle("SayIt Assistant");
+        baseApp.setSize(815, 600);
+        baseApp.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        baseApp.setResizable(false);
+
+        baseApp.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                EmailConfig emailDetails = new EmailConfig();
+                Server.database.emailSettings(emailDetails.getProperty("DisplayName"), emailDetails.getProperty("EmailAddress"), 
+                                              emailDetails.getProperty("FirstName") , emailDetails.getProperty("LastName"), 
+                                              emailDetails.getProperty("Password"), emailDetails.getProperty("SMTP"), 
+                                              emailDetails.getProperty("TLSPort"));
+                baseApp.dispose();
+                try {
+                    Server.stopServer();
+                    System.out.println("Server closed");
+                } catch (IOException e1) {
+                    System.out.println("Server failed to shut down");
+                }
+                System.exit(0);
+            }
+        });
+
+        baseApp.setVisible(true);
     }
 }

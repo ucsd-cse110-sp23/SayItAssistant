@@ -32,6 +32,9 @@ package sayItAssistant.data;
 ||
 ++-----------------------------------------------------------------------*/
 import com.mongodb.client.*;
+
+import sayItAssistant.components.EmailConfig;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -173,15 +176,83 @@ public class DataBase {
                 Document user = new Document("_id", new ObjectId());
                 user.append("user_id", id)
                    .append("user_pw", pw)
-                   .append("question_list", "");
+                   .append("question_list", "")
+                   .append("DisplayName","")
+                   .append("EmailAddress","")
+                   .append("FirstName","")
+                   .append("LastName","")
+                   .append("Password","")
+                   .append("SMTP","")
+                   .append("TLSPort","");
                 collection.insertOne(user);
                 user_id=id;
                 return true;
             }
         }
     }
+    
+    /*---------------------------------------------------------------------
+    |  Method emailSettings(...)
+    |
+    |         Purpose: update email settings
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: email settings changed
+    |
+    |      Parameters: displayName, emailAddress, firstName, lastName
+    |					password, smtp, tlsPort
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    public void emailSettings(String displayName, String emailAddress,
+    						String firstName, String lastName, String password,
+    						String smtp, String tlsPort) {
+    	try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+           	collection.updateOne(eq("user_id",user_id), set("DisplayName",displayName));
+           	collection.updateOne(eq("user_id",user_id), set("EmailAddress",emailAddress));
+           	collection.updateOne(eq("user_id",user_id), set("FirstName",firstName));
+           	collection.updateOne(eq("user_id",user_id), set("LastName",lastName));
+           	collection.updateOne(eq("user_id",user_id), set("Password",password));
+           	collection.updateOne(eq("user_id",user_id), set("SMTP",smtp));
+           	collection.updateOne(eq("user_id",user_id), set("TLSPort",tlsPort));
+    	}
+    }
 
     /*---------------------------------------------------------------------
+    |  Method getEmailSettings(...)
+    |
+    |         Purpose: update email settings on local file
+    |
+    |   Pre-condition: Initialized DataBase object needed
+    |
+    |  Post-condition: email settings changed on local file
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    
+    public void getEmailSettings() {
+        try(MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
+            collection = db.getCollection("historyList");
+            EmailConfig emailDetails = new EmailConfig();
+            Document document = collection.find(eq("user_id", user_id)).first();
+            emailDetails.setProperty("DisplayName", document.get("DisplayName").toString());
+            emailDetails.setProperty("EmailAddress", document.get("EmailAddress").toString());
+            emailDetails.setProperty("FirstName", document.get("FirstName").toString());
+            emailDetails.setProperty("LastName", document.get("LastName").toString());
+            emailDetails.setProperty("Password", document.get("Password").toString());
+            emailDetails.setProperty("SMTP", document.get("SMTP").toString());
+            emailDetails.setProperty("TLSPort", document.get("TLSPort").toString());
+            emailDetails.store();
+        }
+    }
+    /*---------------------------------------------------------------------
+    |  Method removeQuestion(Question question)
     |  Method removeQuestion(int index)
     |
     |         Purpose: delete question in database
