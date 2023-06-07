@@ -118,6 +118,17 @@ public class Footer extends JPanel { // This class contains recording buttons
                             }
                             Sidebar.updateAddHistory();
                         }
+                        
+                        if(question.getQuestionString().toLowerCase().startsWith("setup email")){
+                            Email email = new Email();
+                         
+                        }
+                        if(question.getQuestionString().toLowerCase().startsWith("set up email")){
+                            Email email = new Email();
+                         
+                        }
+
+                        
                     }
                 }
         );

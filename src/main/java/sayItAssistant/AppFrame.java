@@ -12,6 +12,7 @@ import javax.swing.*;
 
 import com.sun.net.httpserver.HttpServer;
 
+import sayItAssistant.components.Email;
 import sayItAssistant.components.Footer;
 import sayItAssistant.components.Login;
 import sayItAssistant.components.QAScreen;
@@ -106,6 +107,7 @@ class AppFrame extends JFrame {
     public static void main(String[] args) throws IOException {
         Server.startServer();
         SwingUtilities.invokeLater(() -> {
+
 
             Login login = new Login();
             login.setTitle("Login");
