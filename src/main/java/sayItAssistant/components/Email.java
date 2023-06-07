@@ -121,7 +121,9 @@ class emailFieldPanel extends JPanel {
     |         Returns: None
     *-------------------------------------------------------------------*/
 class emailButtonPanel extends JPanel {
-    private JButton saveButton, cancelButton;
+    JButton saveButton;
+    JButton cancelButton;
+    EmailConfig emailDetailConfig;
   
     public emailButtonPanel() {
       saveButton = new JButton("Save");
@@ -157,10 +159,13 @@ public class Email  extends JFrame {
     public static JPanel emailPanel;
     private emailButtonPanel buttonPanel;
     private emailFieldPanel emailFieldPanel;
+    private EmailConfig emailDetails;
     public Email(){
-        this.setSize(1200, 1000); // 1200 width and 1000 height
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
+        this.setSize(800, 600); // 800 width and 600 height
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); // Close only setup window on exit
         this.setVisible(true); // Make visible
+
+        emailDetails = new EmailConfig();
          
         emailPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         emailPanel.setPreferredSize(new Dimension(500, 200));
@@ -172,9 +177,20 @@ public class Email  extends JFrame {
 
         buttonPanel = new emailButtonPanel();
         emailPanel.add(buttonPanel);
+        addListeners();
 
         this.add(emailPanel);
         revalidate();
-    }     
+    }    
+    
+    private void addListeners() {
+        buttonPanel.saveButton.addActionListener(
+            (ActionEvent e) -> {
+                emailDetails.setEmailDetails(emailFieldPanel);
+                emailDetails.store();
+                this.setVisible(false);
+            }
+        );
+    }
 }
 
