@@ -160,8 +160,9 @@ class AppFrame extends JFrame {
         Server.database.getEmailSettings();
         AppFrame baseApp = new AppFrame();
         baseApp.setTitle("SayIt Assistant");
-        baseApp.setSize(800, 600);
+        baseApp.setSize(815, 600);
         baseApp.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        baseApp.setResizable(false);
 
         baseApp.addWindowListener(new WindowAdapter() {
             @Override
