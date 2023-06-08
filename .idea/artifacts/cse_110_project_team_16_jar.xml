@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cse-110-project-team-16:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cse_110_project_team_16_jar</output-path>
+    <root id="archive" name="cse-110-project-team-16.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

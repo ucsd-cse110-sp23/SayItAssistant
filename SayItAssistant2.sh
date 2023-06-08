@@ -1,0 +1,1 @@
+java -jar out/artifacts/cse_110_project_team_16_main_jar2/cse-110-project-team-16.main.jar
