@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Scanner;
+
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import sayItAssistant.components.LoginConfig;
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.History;
+import sayItAssistant.data.JavaMail;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.data.Question;
 
 public class RequestHandler implements HttpHandler{
@@ -44,6 +47,8 @@ public class RequestHandler implements HttpHandler{
 				handleDelete(httpExchange);
 			} else if (method.equals("PUT")) {
 				handleDeleteAll(httpExchange);
+			} else if (method.equals("TRACE")) {
+				handleSendEmail(httpExchange);
 			} else {
 				throw new Exception("Not Valid Request Method");
 			}
@@ -80,6 +85,17 @@ public class RequestHandler implements HttpHandler{
 		int intIndex = Integer.parseInt(stringIndex);
 		data.removeQuestion(intIndex);
 		database.removeQuestion(intIndex);
+	}
+
+	private void handleSendEmail(HttpExchange httpExchange) throws IOException {
+		URI uri = httpExchange.getRequestURI();
+		String query = uri.getRawQuery();
+		String stringIndex = query.substring(query.indexOf("=") + 1);
+		int intIndex = Integer.parseInt(stringIndex);
+		JavaMail mailHandler = new JavaMail();
+		ArrayList<Question> historyList = data.getHistory();
+		String emailSubject = historyList.get(intIndex).getAnswerObject().getAnswerString();
+		mailHandler.sendEmail(emailSubject);
 	}
 	
 	private void handleDeleteAll(HttpExchange httpExchange) throws IOException {

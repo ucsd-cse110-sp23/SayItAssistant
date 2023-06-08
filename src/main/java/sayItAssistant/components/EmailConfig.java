@@ -23,6 +23,8 @@ package sayItAssistant.components;
 ||
 ++-----------------------------------------------------------------------*/
 
+import sayItAssistant.components.Email;
+
 public class EmailConfig extends Config {
 
     public EmailConfig() {

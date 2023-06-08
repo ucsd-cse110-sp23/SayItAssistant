@@ -162,8 +162,8 @@ class AppFrame extends JFrame {
                                               emailDetails.getProperty("FirstName") , emailDetails.getProperty("LastName"), 
                                               emailDetails.getProperty("Password"), emailDetails.getProperty("SMTP"), 
                                               emailDetails.getProperty("TLSPort"));
-                emailDetails.setSendEmailEmpty();
-                emailDetails.store();
+                //emailDetails.setSendEmailEmpty();
+                //emailDetails.store();
                 baseApp.dispose();
                 try {
                     Server.stopServer();

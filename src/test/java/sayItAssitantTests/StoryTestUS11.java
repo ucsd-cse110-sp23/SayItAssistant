@@ -10,8 +10,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
-import sayItAssistant.components.LoginConfig;
+import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.LoginConfig;
+import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockDataBase;
 
 public class StoryTestUS11 {

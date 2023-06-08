@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.functions.ValidationListener;
 
 /*+----------------------------------------------------------------------
@@ -268,7 +271,7 @@ public class Login extends JFrame {
         createButton.addActionListener((ActionEvent e) -> {
             String email = fieldPanel.getEmail();
             String password = fieldPanel.getPassword();
-            String verifyPassword = fieldPanel.getVerify();
+            String verifyPassword = fieldPanel.getVerify();       
 
             if( verifyPassword.compareTo(password) == 0) {
                 boolean createBStatus = database.signUp(email, password);

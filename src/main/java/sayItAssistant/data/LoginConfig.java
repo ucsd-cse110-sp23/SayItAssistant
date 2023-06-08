@@ -1,9 +1,11 @@
-package sayItAssistant.components;
+package sayItAssistant.data;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import sayItAssistant.components.Config;
 
 /*+----------------------------------------------------------------------
 ||
@@ -31,35 +33,9 @@ import java.util.Properties;
 ||
 ++-----------------------------------------------------------------------*/
 
-public class LoginConfig {
-    private Properties properties;
-    String configPath = "./DB/login.properties";
-
+public class LoginConfig extends Config {
+    
     public LoginConfig() {
-        properties = new Properties();
-        try {
-            FileInputStream fileInputStream = new FileInputStream(configPath);
-            properties.load(fileInputStream);
-            fileInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super("./DB/login.properties");
     }
-
-    public String getProperty(String Key) {
-        return properties.getProperty(Key);
-    }
-
-    public void setProperty(String Key, String Value) {
-        properties.setProperty(Key, Value);
-    }
-
-    public void store() {
-        try {
-            properties.store(new FileOutputStream(configPath), null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

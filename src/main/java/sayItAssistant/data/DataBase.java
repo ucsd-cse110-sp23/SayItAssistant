@@ -162,6 +162,10 @@ public class DataBase {
     |					False | account created/logged in
     *-------------------------------------------------------------------*/
     public boolean signUp(String id, String pw) {
+    	if (id.equals("")||pw.equals("")) {
+    		return false;
+    	}
+    	
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase db = mongoClient.getDatabase("SayItAssistant2");
             collection = db.getCollection("historyList");
