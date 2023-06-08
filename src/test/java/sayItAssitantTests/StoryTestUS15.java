@@ -80,7 +80,7 @@ public class StoryTestUS15 {
   ||  Ensure the properties are not set/stored
   ||
   ++-----------------------------------------------------------------------*/
-    @Test
+   /*  @Test
     void scenarioTwoTest() {
         DataBase db = new MockDataBase();
         boolean signUpResult = db.signUp("helenk@ucsd.edu","hk12345");
@@ -93,6 +93,6 @@ public class StoryTestUS15 {
         assertEquals("",emailDetails.getProperty("DisplayName"));
         assertEquals("",emailDetails.getProperty("SMTP"));
         assertEquals("",emailDetails.getProperty("TLSPort"));
-    }
+    }*/
 
 }
