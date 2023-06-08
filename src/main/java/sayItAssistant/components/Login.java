@@ -1,13 +1,11 @@
 package sayItAssistant.components;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.net.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 import sayItAssistant.data.DataBase;
-import sayItAssistant.data.Question;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.functions.ValidationListener;
 
 /*+----------------------------------------------------------------------
