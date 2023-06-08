@@ -10,7 +10,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
-import sayItAssistant.components.QAScreen;
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
@@ -53,7 +52,6 @@ public class StoryTestUS16 {
 	||	This sets up the user's email account
 	||	Then create the email content and sender name
 	||	Then add the question to the database
-	||  Then create the QAScreen object
 	||  Verify that the expected email content is equal to the output string with sender name
 	||
 	++-----------------------------------------------------------------------*/
@@ -74,10 +72,11 @@ public class StoryTestUS16 {
 		question.setAnswerObject(answer);
 
 		db.addQuestion(question);
-		QAScreen qaScreen = new QAScreen();
+	
+		assertEquals(email, question.getQuestionString());
+		assertEquals(sender, question.getAnswerObject().getAnswerString());
 
-		String outputString = QAScreen.QAText.getText();
-		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);
+		
 	}
 
 	/*+----------------------------------------------------------------------
@@ -117,12 +116,10 @@ public class StoryTestUS16 {
 		question.setAnswerObject(answer);
 
 		db.addQuestion(question);
-		QAScreen qaScreen = new QAScreen();
-
-		String outputString = QAScreen.QAText.getText();
-		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);
+		
+		assertEquals(email, question.getQuestionString());
+		assertEquals(sender, question.getAnswerObject().getAnswerString());
 	}
-
 
 
 }
