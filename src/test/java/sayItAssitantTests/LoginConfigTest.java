@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sayItAssistant.components.LoginConfig;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.mocking.MockLoginConfig;
 
 class LoginConfigTest {

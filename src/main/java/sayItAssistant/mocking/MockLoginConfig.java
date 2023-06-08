@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import sayItAssistant.components.LoginConfig;
+import sayItAssistant.data.LoginConfig;
 
 public class MockLoginConfig extends LoginConfig{
 	

@@ -12,11 +12,11 @@ import javax.xml.crypto.Data;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import sayItAssistant.components.LoginConfig;
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.History;
 import sayItAssistant.data.JavaMail;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.data.Question;
 
 public class RequestHandler implements HttpHandler{

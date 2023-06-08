@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.LoginConfig;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.ValidationListener;
 
