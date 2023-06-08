@@ -15,7 +15,7 @@ import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockDataBase;
-class StoryTestUS12 {
+public class StoryTestUS13 {
 	@AfterEach
 	void tearDown() throws Exception {
 			try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
@@ -58,7 +58,7 @@ class StoryTestUS12 {
 
 	/*+----------------------------------------------------------------------
 	||
-	||	Scenario 1: Select single question and answer from my history side bar that has multple question
+	||	Scenario 2: Select single question and answer from my history side bar that has multple questions
 	||	Given: The prompt history is displayed on the launch screen
 	||	When: Helen clicks on a previously asked question “Question. What is a famous restaurant in La Jolla?” in the prompt history
 	||	Then: The previously asked question with command “Question. What is a famous restaurant in La Jolla?” and answer “Haidilao which is a hot pot place” to the previously asked shows up.
@@ -75,7 +75,7 @@ class StoryTestUS12 {
 	||  Ask question by calling addQuestion method
 	||  Ensure the size of history list is equal to 3 after adding the question
 	||  Delete question by calling removeQuestion method 
-    ||  Ensure the question list is now empty or not
+    ||  Ensure the question list size is now 2
 	++-----------------------------------------------------------------------*/
 	@Test
 	void scenarioTwoTest() {
@@ -101,7 +101,7 @@ class StoryTestUS12 {
 		assertEquals(true, success3);
 		assertEquals(3, db.getHistory().size());
 
-		db.removeQuestion(0);
-		assertEquals(1, db.getHistory().size());
+		db.removeQuestion(1);
+		assertEquals(2, db.getHistory().size());
 	}
 }
