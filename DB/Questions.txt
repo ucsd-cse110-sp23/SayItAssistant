@@ -1,8 +1,0 @@
-Send email to vardurun@gmail.com
-Email Sent!
-Send email to vardurun@gmail.com
-Email Sent!
-Create email to John.
-  Subject: Thanks for your Help!  Dear John,  I wanted to thank you for all of the help you provided this past week. Your assistance was invaluable and I really appreciate it. Your willingness to help out on such short notice was truly incredible.  I'm grateful to have someone like you on our team.  Again, thank you so much for your help.  Sincerely, Andrew
-Question: where is Denmark?
-  Denmark is located in Northern Europe, between the North Sea and the Baltic Sea, between Germany and Sweden.

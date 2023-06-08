@@ -156,7 +156,7 @@ public class Sidebar extends JPanel {
         historyJList.validate();
         historyJList.repaint();
         historyJList.setSelectedIndex(0);
-        QAScreen.updateQAScreen();
+        //QAScreen.updateQAScreen();
     }
     
     public static int getIndex() {

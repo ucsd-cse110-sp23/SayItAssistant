@@ -52,15 +52,15 @@ public class FooterCommander {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                    conn.getOutputStream()
-            );
             // Check for comma in question and replace with a colon.
             // This ensures that intonation while saying the command doesn't produce a comma
             String softQuestionCopy = question.getQuestionString();
             if(softQuestionCopy.contains(",")) {
                 softQuestionCopy = softQuestionCopy.replace(",",":");
             }
+            OutputStreamWriter out = new OutputStreamWriter(
+                    conn.getOutputStream()
+            );
             out.write(softQuestionCopy + "," + question.getAnswerObject().getAnswerString());
             out.flush();
             out.close();
@@ -82,6 +82,7 @@ public class FooterCommander {
     public void checkCreateEmail(String lowerQuestionString, DataBase questionDataBase) {
         if( lowerQuestionString.startsWith("create email") || lowerQuestionString.startsWith("create e-mail")) {
             emailProcess.generate(question, serverURL, questionDataBase);
+            //Sidebar.historyJList.setSelectedIndex(0);
         }
     }
 
@@ -90,6 +91,7 @@ public class FooterCommander {
             emailProcess.extract(lowerQuestionString);
             emailProcess.send(serverURL);
             emailProcess.sendUI(serverURL, question, questionDataBase );
+            //Sidebar.historyJList.setSelectedIndex(0);
         }
     }
 }

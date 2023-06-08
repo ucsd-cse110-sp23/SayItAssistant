@@ -71,11 +71,9 @@ public class EmailServerProcess implements EmailProcess {
             );
             String softQuestionCopy = question.getQuestionString();
             softQuestionCopy = softQuestionCopy.replace(" at ", "@").replace(" dot ", ".");
-            if(EmailUtil.emailStatus == 0) {
-                out.write(softQuestionCopy + "," + "Email Sent!");
-            } else {
-                out.write(softQuestionCopy + "," + "Error Sending Email" + " SMTP Host: " + emailDetails.getProperty("SMTP").toString());
-            }
+            String emailStatusMessage = (EmailUtil.emailStatus == 0) ? "Email Sent!" :
+                "Error Sending Email" + " SMTP Host: " + emailDetails.getProperty("SMTP").toString();
+            out.write(softQuestionCopy + "," + emailStatusMessage);
             out.flush();
             out.close();
             conn.getInputStream();
