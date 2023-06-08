@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.JavaMail;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
 /*+----------------------------------------------------------------------
@@ -174,11 +176,13 @@ public class Footer extends JPanel { // This class contains recording buttons
                         }
                         if(lowerQuestionString.startsWith("send email")) {
                             emailExtractor(lowerQuestionString, emailConfig );
-                            emailSendServerProcess(question);
+                            emailSendServerUIProcess(question);
+                            emailSendServerProcess();
                         }
                         if(lowerQuestionString.startsWith("send e-mail")) {
                             emailExtractor(lowerQuestionString, emailConfig);
-                            emailSendServerProcess(question);
+                            emailSendServerUIProcess(question);
+                            emailSendServerProcess();
                         }
 
                         
@@ -251,7 +255,7 @@ public class Footer extends JPanel { // This class contains recording buttons
         Sidebar.updateAddHistory();
     }
 
-    private void emailSendServerProcess(Question question) {
+    private void emailSendServerUIProcess(Question question) {
         try {
             URL url = new URL(URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -271,6 +275,21 @@ public class Footer extends JPanel { // This class contains recording buttons
             ex.printStackTrace();
         }
         Sidebar.updateAddHistory();
+    }
+
+    private void emailSendServerProcess() {
+        try {
+            URL url = new URL(URL);
+            if(!Sidebar.historyJList.isSelectionEmpty())  {
+                String query = String.valueOf(Sidebar.getIndex());
+                url = new URL(URL + "?=" + query);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("TRACE");
+                conn.getInputStream();
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void emailExtractor(String string, EmailConfig emailDetails) {
