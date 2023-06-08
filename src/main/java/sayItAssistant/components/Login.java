@@ -244,7 +244,7 @@ public class Login extends JFrame {
         createButton.addActionListener((ActionEvent e) -> {
             String email = fieldPanel.getEmail();
             String password = fieldPanel.getPassword();
-            String verifyPassword = fieldPanel.getVerify();
+            String verifyPassword = fieldPanel.getVerify();       
 
             if( verifyPassword.compareTo(password) == 0) {
                 boolean createBStatus = database.signUp(email, password);
