@@ -6,10 +6,11 @@ import java.net.URL;
 import java.util.regex.Pattern;
 
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.EmailProcess;
 import sayItAssistant.data.EmailUtil;
 import sayItAssistant.data.Question;
 
-public class EmailServerProcess {
+public class EmailServerProcess implements EmailProcess {
     public void generate(Question question, String serverURL, DataBase questionDatabase) {
         try {
             URL url = new URL(serverURL);
