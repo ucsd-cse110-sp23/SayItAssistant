@@ -1,0 +1,4 @@
+Question: where is Denmark?
+  Denmark is in Northern Europe, bordering the North Sea and the Baltic Sea. It is bordered by Germany to the south, Norway to the north, and Sweden to the east.
+Create email to John.
+  Dear John,  I hope this email finds you in good spirits. I wanted to reach out to touch base and see how you're doing. It has been a long time since we've connected, and I would love to catch up with you soon.  Let me know when might be the best time to chat, and I look forward to hearing from you.  All the best, [Your Name]
