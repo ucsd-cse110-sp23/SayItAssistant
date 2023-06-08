@@ -8,6 +8,7 @@ import java.util.Properties;
 import sayItAssistant.components.LoginConfig;
 
 public class MockLoginConfig extends LoginConfig{
+	
     private Properties properties;
     String configPath = "./mockingData/LoginConfigTest.properties";
 
