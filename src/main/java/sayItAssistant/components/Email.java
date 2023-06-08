@@ -36,42 +36,42 @@ import javax.swing.*;
 class emailFieldPanel extends JPanel {
     
     private JTextField firstNameField, lastNameField, displayNameField,emailAddressField, SMTPField, TLSPortField, emailPasswordField;
-    
+    private EmailConfig emailDetails = new EmailConfig();
     public emailFieldPanel() {
         setLayout(new GridLayout(7,2));
         
         JLabel firstNameLabel = new JLabel("First Name:");
-        firstNameField = new JTextField();
+        firstNameField = new JTextField(emailDetails.getProperty("FirstName"));
         add(firstNameLabel);
         add(firstNameField);
 
         JLabel lastNameLabel = new JLabel("Last Name:");
-        lastNameField = new JTextField();
+        lastNameField = new JTextField(emailDetails.getProperty("LastName"));
         add(lastNameLabel);
         add(lastNameField);
 
         JLabel displayNameLabel = new JLabel("Display Name:");
-        displayNameField = new JTextField();
+        displayNameField = new JTextField(emailDetails.getProperty("DisplayName"));
         add(displayNameLabel);
         add(displayNameField);
 
         JLabel emailAddressLabel = new JLabel("Email Address:");
-        emailAddressField = new JTextField();
+        emailAddressField = new JTextField(emailDetails.getProperty("EmailAddress"));
         add(emailAddressLabel);
         add(emailAddressField);
 
         JLabel TLSPortLabel = new JLabel("TLS Port:");
-        TLSPortField = new JTextField();
+        TLSPortField = new JTextField(emailDetails.getProperty("TLSPort"));
         add(TLSPortLabel);
         add(TLSPortField);
 
         JLabel emailpasswordLabel = new JLabel("Email Password:");
-        emailPasswordField = new JTextField();
+        emailPasswordField = new JTextField(emailDetails.getProperty("Password"));
         add(emailpasswordLabel);
         add(emailPasswordField);
 
         JLabel SMTPLabel = new JLabel("SMTP:");
-        SMTPField = new JTextField();
+        SMTPField = new JTextField(emailDetails.getProperty("SMTP"));
         add(SMTPLabel);
         add(SMTPField);
 
@@ -161,9 +161,9 @@ public class Email  extends JFrame {
     private emailFieldPanel emailFieldPanel;
     private EmailConfig emailDetails;
     public Email(){
-        this.setSize(800, 600); // 800 width and 600 height
+        this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE); // Close only setup window on exit
-        this.setVisible(true); // Make visible
+        this.setVisible(true);
 
         emailDetails = new EmailConfig();
          
@@ -188,6 +188,12 @@ public class Email  extends JFrame {
             (ActionEvent e) -> {
                 emailDetails.setEmailDetails(emailFieldPanel);
                 emailDetails.store();
+                this.setVisible(false);
+            }
+        );
+
+        buttonPanel.cancelButton.addActionListener(
+            (ActionEvent e) -> {
                 this.setVisible(false);
             }
         );
