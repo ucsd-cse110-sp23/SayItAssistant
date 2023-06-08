@@ -10,13 +10,25 @@ import org.junit.jupiter.api.Test;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+
+import sayItAssistant.components.Config;
 import sayItAssistant.components.EmailConfig;
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockDataBase;
+import sayItAssistant.mocking.MockEmailConfig;
 
 public class StoryTestUS15 {
+	
+    @BeforeEach
+    void setUp() throws Exception {
+        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            db.drop();
+        }
+    }
+	
     @AfterEach
     void tearDown() throws Exception {
             try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
@@ -47,7 +59,7 @@ public class StoryTestUS15 {
         DataBase db = new MockDataBase();
         boolean signUpResult = db.signUp("helenk@ucsd.edu","hk12345");
         assertEquals(true, signUpResult);
-        EmailConfig emailDetails= new EmailConfig();
+        Config emailDetails= new MockEmailConfig();
         emailDetails.setProperty("LastName", "Keller");
         emailDetails.setProperty("FirstName", "Helen");
         emailDetails.setProperty("DisplayName", "HelloHellen");
@@ -80,12 +92,12 @@ public class StoryTestUS15 {
   ||  Ensure the properties are not set/stored
   ||
   ++-----------------------------------------------------------------------*/
-   /*  @Test
+   @Test
     void scenarioTwoTest() {
         DataBase db = new MockDataBase();
         boolean signUpResult = db.signUp("helenk@ucsd.edu","hk12345");
         assertEquals(true, signUpResult);
-        EmailConfig emailDetails= new EmailConfig();
+        Config emailDetails= new MockEmailConfig();
         assertEquals("", emailDetails.getProperty("EmailAddress"));
         assertEquals("",emailDetails.getProperty("Password"));
         assertEquals("",emailDetails.getProperty("LastName"));
@@ -93,6 +105,6 @@ public class StoryTestUS15 {
         assertEquals("",emailDetails.getProperty("DisplayName"));
         assertEquals("",emailDetails.getProperty("SMTP"));
         assertEquals("",emailDetails.getProperty("TLSPort"));
-    }*/
+    }
 
 }
