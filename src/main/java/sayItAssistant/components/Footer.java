@@ -79,46 +79,80 @@ public class Footer extends JPanel { // This class contains recording buttons
     public void addListeners() {
         speakNewQuestion.addActionListener(
                 (ActionEvent e) -> {
-                    speakNewQuestion.setBackground(Color.GREEN);
-                    audio.startRecording();
+                	speakNewQuestionListener();
                 }
         );
 
         stopRecording.addActionListener(
                 (ActionEvent e) -> {
-                    if (audio.getIsMicOn()) {
-                        speakNewQuestion.setBackground(Color.WHITE);
-                        Question question = audio.stopRecording();
-                        questionDatabase = new DataBase();
-                        EmailConfig emailConfig = new EmailConfig();
-                        URL url;
-                        String lowerQuestionString = question.getQuestionString().toLowerCase();
-                        FooterCommander FooterCommander = new FooterCommander(question, URL);
-
-
-                        if(lowerQuestionString.startsWith("delete")){
-                            FooterCommander.notifyDelete(questionDatabase);
-                        }
-                        
-                        if(lowerQuestionString.startsWith("clear all")){
-                            FooterCommander.notifyClearAll(questionDatabase);
-                        }
-
-                        if(lowerQuestionString.startsWith("question")) {
-                            FooterCommander.notifyNewQuestion(questionDatabase);
-                        }
-                        
-                        FooterCommander.checkEmailSettings(lowerQuestionString);
-                        
-                        FooterCommander.checkCreateEmail(lowerQuestionString, questionDatabase);
-
-                        FooterCommander.checkSendEmail(lowerQuestionString, questionDatabase);
-
-                        
-                    }
+                	stopRecordingListener();
                 }
         );
 
+    }
+    
+    /*---------------------------------------------------------------------
+    |  Method speakNewQuestionListener()
+    |
+    |         Purpose: Adds action listeners to speakNewQuestion button
+    |
+    |   Pre-condition: Buttons are initialized
+    |
+    |  Post-condition: New question button has action listeners
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    private void speakNewQuestionListener() {
+        speakNewQuestion.setBackground(Color.GREEN);
+        audio.startRecording();
+    }
+    
+    /*---------------------------------------------------------------------
+    |  Method stopRecordingListener()
+    |
+    |         Purpose: Adds action listeners to stopRecording button
+    |
+    |   Pre-condition: Buttons are initialized
+    |
+    |  Post-condition: stop recording has action listeners
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    private void stopRecordingListener() {
+        if (audio.getIsMicOn()) {
+            speakNewQuestion.setBackground(Color.WHITE);
+            Question question = audio.stopRecording();
+            questionDatabase = new DataBase();
+            EmailConfig emailConfig = new EmailConfig();
+            URL url;
+            String lowerQuestionString = question.getQuestionString().toLowerCase();
+            FooterCommander FooterCommander = new FooterCommander(question, URL);
+
+
+            if(lowerQuestionString.startsWith("delete")){
+                FooterCommander.notifyDelete(questionDatabase);
+            }
+            
+            if(lowerQuestionString.startsWith("clear all")){
+                FooterCommander.notifyClearAll(questionDatabase);
+            }
+
+            if(lowerQuestionString.startsWith("question")) {
+                FooterCommander.notifyNewQuestion(questionDatabase);
+            }
+            
+            FooterCommander.checkEmailSettings(lowerQuestionString);
+            
+            FooterCommander.checkCreateEmail(lowerQuestionString, questionDatabase);
+
+            FooterCommander.checkSendEmail(lowerQuestionString, questionDatabase);
+
+            
+        }
     }
 
     
