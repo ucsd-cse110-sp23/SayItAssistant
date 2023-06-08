@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,10 +14,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
@@ -34,26 +30,22 @@ import sayItAssistant.functions.Audio;
 ||          Field:
 ||					speakNewQuestion - new question button
 ||					stopRecording - stop recording button
-||                  deleteCurrent - delete current question button
-||                  deleteAll - delete all questions button
-||					recordingStatus - true if recording is in progress. False otherwise
-||					targetDataLine - type of dataline from which audio can be read
-||					audioFormat - format for the audio
-||					audioFile - file where audio is saved
+||                  recordingStatus - recording status
+||                  audio - instance of the Audio class
+||                  questionDatabase - question database
+||                  URL - url
 ||
 |+-----------------------------------------------------------------------
 ||
 ||   Constructors:
-||					Footer()- default constructor
-||					Creates Footer which consists of start recording (new question) 
-||                  and stop recording buttons
+||					Footer() - default constructor
+||					Creates Footer which displays new question and stop recording buttons
 ||
 ||  Class Methods:
-||					startRecording() - method to begin recording
-||					stopRecording() - method to stop recording
-||					getAudioFormat() - method for getting the format of audio
-||                  addListeners() - method for handles clicking of buttons
-||                  removeAudio() - method for deleting audio file
+||				  addListeners() - methods to add listeners
+||                emailGenerateServerProcess(Question question) - methods to generate email server process
+||                emailSendServerProcess(Question question) - methods to send email server process
+||                emailExtractor(String string, EmailConfig emailDetails) - methods to extract email
 ||
 ++-----------------------------------------------------------------------*/
 public class Footer extends JPanel { // This class contains recording buttons
@@ -218,7 +210,19 @@ public class Footer extends JPanel { // This class contains recording buttons
         );*/
 
     }
-
+    /*---------------------------------------------------------------------
+    |  Method emailGenerateServerProcess(Question question)
+    |
+    |         Purpose: Generates email server process
+    |
+    |   Pre-condition: Question is initialized
+    |
+    |  Post-condition: Email server process is generated
+    |
+    |      Parameters: Question question
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     private void emailGenerateServerProcess(Question question) {
         try {
             URL url = new URL(URL);
@@ -250,6 +254,19 @@ public class Footer extends JPanel { // This class contains recording buttons
         }
         Sidebar.updateAddHistory();
     }
+    /*---------------------------------------------------------------------
+    |  Method  emailSendServerProcess(Question question)
+    |
+    |         Purpose: Sends email server process
+    |
+    |   Pre-condition: Question is initialized
+    |
+    |  Post-condition: Email server process is sent
+    |
+    |      Parameters: Question question
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 
     private void emailSendServerProcess(Question question) {
         try {
@@ -272,7 +289,20 @@ public class Footer extends JPanel { // This class contains recording buttons
         }
         Sidebar.updateAddHistory();
     }
-
+    /*---------------------------------------------------------------------
+    |  Method emailExtractor(String string, EmailConfig emailDetails)
+    |
+    |         Purpose: Extracts email
+    |
+    |   Pre-condition: String and emailDetails are initialized
+    |
+    |  Post-condition: Email is extracted
+    |
+    |      Parameters: String string, EmailConfig emailDetails
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    
     private void emailExtractor(String string, EmailConfig emailDetails) {
         String regex = "\\b[A-Za-z0-9._%+-]+\\s*(?:at|@)\\s*[A-Za-z0-9-]+\\s*(?:dot|\\.)\\s*(?:com|\\b[A-Za-z]{3}\\b)\\b";
         Pattern pattern = Pattern.compile(regex);

@@ -1,4 +1,16 @@
 package sayItAssistant.data;
+import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Updates.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
 /*+----------------------------------------------------------------------
 ||
 ||  Class History
@@ -31,25 +43,12 @@ package sayItAssistant.data;
 ||					addQuestion() - add question in database
 ||
 ++-----------------------------------------------------------------------*/
-import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import sayItAssistant.components.EmailConfig;
-
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.function.Consumer;
-
-
-import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Updates.*;
 
 
 public class DataBase {

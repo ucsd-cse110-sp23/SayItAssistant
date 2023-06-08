@@ -5,23 +5,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.*;
+import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.*;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import sayItAssistant.data.History;
 import sayItAssistant.data.Question;
-
-import java.util.ArrayList;
-import javax.swing.JTextArea;
 /*+----------------------------------------------------------------------
 ||
 ||  Class Sidebar
@@ -158,10 +156,35 @@ public class Sidebar extends JPanel {
         historyJList.setSelectedIndex(0);
         QAScreen.updateQAScreen();
     }
-    
+    /*---------------------------------------------------------------------
+    |  Method  getIndex 
+    |
+    |  Purpose:  Returns the current index of the historyJList
+    |
+    |  Pre-condition: None
+    |
+    |  Post-condition: None
+    |
+    |  Parameters: None
+    |
+    |  Returns:  int currentQuestionIndex
+    *-------------------------------------------------------------------*/
     public static int getIndex() {
     	return currentQuestionIndex;
     }
+    /*---------------------------------------------------------------------
+    |  Method updateRemoveHistory()
+    |
+    |         Purpose: Updates history and refreshes the historyJList to display elementes removed from history
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: History is updated with removed element
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
 
     public static void updateRemoveHistory() {
         if(!historyJList.isSelectionEmpty()) {
@@ -174,6 +197,20 @@ public class Sidebar extends JPanel {
         }
     }
 
+    /*---------------------------------------------------------------------
+    |  Method resetHistory()
+    |
+    |         Purpose: Resets history and refreshes the historyJList to display empty history
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: History is reset
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+
     public static void resetHistory() {
         historyListModel.clear();
         historyObj.clearHistory();
@@ -184,6 +221,19 @@ public class Sidebar extends JPanel {
         QAScreen.resetQAScreen();
     }
 
+    /*---------------------------------------------------------------------
+    |  Method valueChangedAnswer()
+    |
+    |         Purpose: Updates the QAScreen to display the selected question and answer
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: QAScreen is updated
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public void valueChangedAnswer(){
         Thread thr = new Thread(
             () -> {

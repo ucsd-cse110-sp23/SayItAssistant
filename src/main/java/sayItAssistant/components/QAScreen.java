@@ -3,14 +3,12 @@ package sayItAssistant.components;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.Border;
-import javax.swing.*;
 /*+----------------------------------------------------------------------
 ||
 ||  Class QAScreen
@@ -103,6 +101,19 @@ public class QAScreen extends JPanel {
         QAText.setText(outputString);
     }*/
 
+    /*---------------------------------------------------------------------
+    |  Method resetQAScreen()
+    |
+    |         Purpose: Resets QAScreen
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: QAText is empty
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
     public static void resetQAScreen() {
         QAText.setText("");
     }

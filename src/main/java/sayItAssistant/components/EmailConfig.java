@@ -1,4 +1,27 @@
 package sayItAssistant.components;
+/*+----------------------------------------------------------------------
+||
+||  Class 
+||    EmailConfig
+||
+||        Purpose: Serves as the component for the EmailConfig on the UI
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||					EmailConfig - email config
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					EmailConfig() - default constructor
+||					Creates EmailConfig which displays email config
+||
+||  Class Methods:
+||					setEmailDetails(emailFieldPanel details) - methods to set the email details
+||					setSendEmailEmpty() - methods to set the send email empty
+||
+++-----------------------------------------------------------------------*/
 
 public class EmailConfig extends Config {
 

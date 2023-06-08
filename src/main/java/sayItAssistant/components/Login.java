@@ -1,13 +1,23 @@
 package sayItAssistant.components;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import sayItAssistant.data.DataBase;
-import sayItAssistant.data.Question;
 import sayItAssistant.functions.ValidationListener;
 
 /*+----------------------------------------------------------------------
@@ -18,7 +28,7 @@ import sayItAssistant.functions.ValidationListener;
 ||
 |+-----------------------------------------------------------------------
 ||
-||          Field: 
+||          Field:
 ||					loginButton - button to login
 ||					createButton - button to create account
 ||					fieldPanel - panel for the fields
@@ -59,6 +69,7 @@ class FieldPanel extends JPanel {
         add(verifyLabel);
         add(verifyField);
     }
+
     public String getEmail() {
         return emailField.getText();
     }
@@ -96,6 +107,7 @@ class ButtonPanel extends JPanel {
       createButton = new JButton("Create Account");
       add(createButton);
     }
+
 
     public JButton getLoginButton() {
         return loginButton;
@@ -240,7 +252,19 @@ public class Login extends JFrame {
                 notifyValidationComplete(validationStatus);
             }
         });
-
+     /*---------------------------------------------------------------------
+    |  Method addActionListeners()
+    |
+    |         Purpose: Adds action listeners to the buttons 
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Adds action listeners to the buttons
+    |
+    |      Parameters: None
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
         createButton.addActionListener((ActionEvent e) -> {
             String email = fieldPanel.getEmail();
             String password = fieldPanel.getPassword();
@@ -301,7 +325,20 @@ public class Login extends JFrame {
         notifyValidationComplete(validationStatus);
     }
 
-
+     /*---------------------------------------------------------------------
+    |  Method addValidationListener()
+    |
+    |         Purpose: Adds validation listeners
+    |
+    |   Pre-condition: None
+    |
+    |  Post-condition: Adds validation listeners
+    |
+    |      Parameters: ValidationListener listener
+    |
+    |         Returns: None
+    *-------------------------------------------------------------------*/
+    
     public void addValidationListener(ValidationListener listener) {validationListeners.add(listener);}
 
     private void notifyValidationComplete(int status) {

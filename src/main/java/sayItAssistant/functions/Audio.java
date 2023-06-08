@@ -10,8 +10,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine;
 
-import sayItAssistant.components.QAScreen;
-import sayItAssistant.components.Sidebar;
 import sayItAssistant.data.Question;
 
 public class Audio {
