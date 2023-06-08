@@ -1,14 +1,38 @@
 package sayItAssistant.data;
 
 
-import sayItAssistant.components.EmailConfig;
-
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 
+import sayItAssistant.components.EmailConfig;
+/*+----------------------------------------------------------------------
+||
+||  Class JavaMail
+||
+||         Author:  Bella Jeong
+||
+||        Purpose: Represents a class for sending email
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||					fromEmail - email address of sender
+||					password - password of sender
+||					toEmail - email address of receiver
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					JavaMail() - default constructor
+||					Creates JavaMail which displays fromEmail, password, and toEmail
+||
+||  Class Methods:
+||					sendEmail() - methods to send email
+||
+++-----------------------------------------------------------------------*/
 public class JavaMail {
     String fromEmail;
     String password;

@@ -4,6 +4,32 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+/*+----------------------------------------------------------------------
+||
+||  Class
+||    Config
+||
+||        Purpose: Serves as the component for the Config on the UI
+||
+|+-----------------------------------------------------------------------
+||
+||          Field:
+||					properties - properties
+||					configPath - path to config
+||
+|+-----------------------------------------------------------------------
+||
+||   Constructors:
+||					Config(String configPath) - default constructor
+||					Creates Config which displays properties and configPath
+||
+||  Class Methods:
+||					getProperty(String key) - methods to get the property
+||					setProperty(String key, String value) - methods to set the property
+||					store() - methods to store the property
+||
+++-----------------------------------------------------------------------*/
+
 
 public abstract class Config {
     private Properties properties;

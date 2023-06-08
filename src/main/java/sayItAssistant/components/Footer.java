@@ -31,26 +31,22 @@ import sayItAssistant.functions.Audio;
 ||          Field:
 ||					speakNewQuestion - new question button
 ||					stopRecording - stop recording button
-||                  deleteCurrent - delete current question button
-||                  deleteAll - delete all questions button
-||					recordingStatus - true if recording is in progress. False otherwise
-||					targetDataLine - type of dataline from which audio can be read
-||					audioFormat - format for the audio
-||					audioFile - file where audio is saved
+||                  recordingStatus - recording status
+||                  audio - instance of the Audio class
+||                  questionDatabase - question database
+||                  URL - url
 ||
 |+-----------------------------------------------------------------------
 ||
 ||   Constructors:
-||					Footer()- default constructor
-||					Creates Footer which consists of start recording (new question) 
-||                  and stop recording buttons
+||					Footer() - default constructor
+||					Creates Footer which displays new question and stop recording buttons
 ||
 ||  Class Methods:
-||					startRecording() - method to begin recording
-||					stopRecording() - method to stop recording
-||					getAudioFormat() - method for getting the format of audio
-||                  addListeners() - method for handles clicking of buttons
-||                  removeAudio() - method for deleting audio file
+||				  addListeners() - methods to add listeners
+||                emailGenerateServerProcess(Question question) - methods to generate email server process
+||                emailSendServerProcess(Question question) - methods to send email server process
+||                emailExtractor(String string, EmailConfig emailDetails) - methods to extract email
 ||
 ++-----------------------------------------------------------------------*/
 public class Footer extends JPanel { // This class contains recording buttons
