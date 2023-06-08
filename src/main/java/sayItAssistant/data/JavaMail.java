@@ -1,6 +1,12 @@
 package sayItAssistant.data;
 
 
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
 import sayItAssistant.components.EmailConfig;
 /*+----------------------------------------------------------------------
 ||
