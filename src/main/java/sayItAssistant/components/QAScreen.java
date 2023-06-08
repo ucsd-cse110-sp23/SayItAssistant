@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.Border;
 import javax.swing.*;
 /*+----------------------------------------------------------------------
 ||
@@ -54,32 +55,22 @@ public class QAScreen extends JPanel {
         this.setBackground(QABackColor);
 
         QAText = new JTextArea();
-        QAText.setPreferredSize(new Dimension(400, 600));
+        //QAText.setPreferredSize(new Dimension(400, 600));
         QAText.setEditable(false);
-
-        QAText.setBorder(BorderFactory.createEmptyBorder(40,0,40,0));
+        QAText.setBorder(BorderFactory.createEmptyBorder(40, 10, 40, 10));
         QAText.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
-
-
-        JPanel QAPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        QAPanel.setPreferredSize(new Dimension(570, 600));
-        QAPanel.setOpaque(true);
-        QAPanel.setBackground(QABackColor);
-        
-        //Login login = new Login();
-        // QAPanel.add(login);
-
-        
-
-        QAPanel.add(QAText);
-
         QAText.setBackground(QABackColor);
         QAText.setForeground(Color.WHITE);
         QAText.setLineWrap(true);
         QAText.setWrapStyleWord(true);
 
-        
-        this.add(QAPanel, BorderLayout.NORTH);
+        JScrollPane scrollPane = new JScrollPane(QAText);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(570, 600));
+        scrollPane.setOpaque(true);
+        scrollPane.setBackground(QABackColor);
+
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     /*---------------------------------------------------------------------

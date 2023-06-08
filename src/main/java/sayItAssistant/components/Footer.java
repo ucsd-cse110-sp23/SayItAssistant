@@ -108,6 +108,19 @@ public class Footer extends JPanel { // This class contains recording buttons
                             }
                             Sidebar.updateRemoveHistory();
                         }
+                        
+                        if(question.getQuestionString().toLowerCase().startsWith("clear all")){
+                            try {
+                                url = new URL(URL);
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                conn.setRequestMethod("PUT");
+                                conn.getInputStream();
+                                questionDatabase.clearAll();
+                            }catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                            Sidebar.resetHistory();
+                        }
 
                         if(question.getQuestionString().toLowerCase().startsWith("question")) {
                             try {
@@ -142,6 +155,19 @@ public class Footer extends JPanel { // This class contains recording buttons
                         if(question.getQuestionString().toLowerCase().startsWith("set up email")){
                             Email email = new Email();
                          
+                        }
+                        if(question.getQuestionString().toLowerCase().startsWith("setup e-mail")){
+                            Email email = new Email();
+                        }
+                        if(question.getQuestionString().toLowerCase().startsWith("set up e-mail")){
+                            Email email = new Email();
+                        }
+                        // Create E-mail command
+                        if(question.getQuestionString().toLowerCase().startsWith("create email")) {
+                            emailServerProcess(question);
+                        }
+                        if(question.getQuestionString().toLowerCase().startsWith("create e-mail")) {
+                            emailServerProcess(question);
                         }
 
                         
@@ -180,6 +206,38 @@ public class Footer extends JPanel { // This class contains recording buttons
             }   
         );*/
 
+    }
+
+    private void emailServerProcess(Question question) {
+        try {
+            URL url = new URL(URL);
+            EmailConfig emailDetails = new EmailConfig();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            OutputStreamWriter out = new OutputStreamWriter(
+                    conn.getOutputStream()
+            );
+            // Check for comma in question and replace with a colon.
+            // This ensures that intonation while saying the command doesn't produce a comma
+            String softQuestionCopy = question.getQuestionString();
+            String softAnswerCopy = question.getAnswerObject().getAnswerString();
+            String yourName = emailDetails.getProperty("DisplayName");
+            if(softQuestionCopy.contains(",")) {
+                softQuestionCopy = softQuestionCopy.replace(",",":");
+            }
+            if(softAnswerCopy.contains("[Your Name]")) {
+                softAnswerCopy = softAnswerCopy.replace("[Your Name]", yourName );
+            }
+            out.write(softQuestionCopy + "," + softAnswerCopy);
+            out.flush();
+            out.close();
+            conn.getInputStream();
+            questionDatabase.addQuestion(question);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        Sidebar.updateAddHistory();
     }
     
 

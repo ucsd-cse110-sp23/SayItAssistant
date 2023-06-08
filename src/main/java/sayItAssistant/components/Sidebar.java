@@ -100,7 +100,7 @@ public class Sidebar extends JPanel {
         });
         
         JScrollPane scrollList = new JScrollPane(historyJList);
-        scrollList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scrollList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollList.setBorder(new CompoundBorder(
             new LineBorder(SideBackColor, 1),

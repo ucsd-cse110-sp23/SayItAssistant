@@ -132,5 +132,85 @@ class DatabaseTest {
 		assertEquals("test question3", db.getHistory().get(0).getQuestionString());
 		assertEquals("test answer3", db.getHistory().get(0).getAnswerObject().getAnswerString());
 	}
+	
+	// Test if local question list is updated when the question is deleted
+	@Test
+	void removeQuestionLocal() {
+		DataBase db = new MockDataBase();
+		boolean signUpResult = db.signUp("testId@ppp.com", "testpw");
+		assertEquals(true, signUpResult);
+		assertEquals(0,db.getHistory().size());
+		db.addQuestion(new Question("test question1", new Answer("test answer1")));
+		db.addQuestion(new Question("test question2", new Answer("test answer2")));
+		db.addQuestion(new Question("test question3", new Answer("test answer3")));
+		assertEquals(3, db.getHistory().size());
+		
+		db.removeQuestion(1);
+		assertEquals(2, db.getHistory().size());
+		assertEquals("test question1", db.getHistory().get(1).getQuestionString());
+		assertEquals("test answer1", db.getHistory().get(1).getAnswerObject().getAnswerString());
+		assertEquals("test question3", db.getHistory().get(0).getQuestionString());
+		assertEquals("test answer3", db.getHistory().get(0).getAnswerObject().getAnswerString());
+	}
+	
+	// Test if database question list is changed when the question is deleted
+	@Test
+	void removeQuestionRemote() {
+		DataBase db = new MockDataBase();
+		boolean signUpResult = db.signUp("testId@ppp.com", "testpw");
+		assertEquals(true, signUpResult);
+		assertEquals(0,db.getHistory().size());
+		db.addQuestion(new Question("test question1", new Answer("test answer1")));
+		db.addQuestion(new Question("test question2", new Answer("test answer2")));
+		db.addQuestion(new Question("test question3", new Answer("test answer3")));
+		
+		db = new MockDataBase();
+		int logInResult = db.logIn("testId@ppp.com", "testpw");
+		assertEquals(0, logInResult);
+		assertEquals(3, db.getHistory().size());
+		
+		db.removeQuestion(1);
+		assertEquals(2, db.getHistory().size());
+		assertEquals("test question1", db.getHistory().get(1).getQuestionString());
+		assertEquals("test answer1", db.getHistory().get(1).getAnswerObject().getAnswerString());
+		assertEquals("test question3", db.getHistory().get(0).getQuestionString());
+		assertEquals("test answer3", db.getHistory().get(0).getAnswerObject().getAnswerString());
+	}
+	
+	// Test if local question list is updated when the list is cleared
+	@Test
+	void clearAllLocal() {
+		DataBase db = new MockDataBase();
+		boolean signUpResult = db.signUp("testId@ppp.com", "testpw");
+		assertEquals(true, signUpResult);
+		assertEquals(0,db.getHistory().size());
+		db.addQuestion(new Question("test question1", new Answer("test answer1")));
+		db.addQuestion(new Question("test question2", new Answer("test answer2")));
+		db.addQuestion(new Question("test question3", new Answer("test answer3")));
+		assertEquals(3, db.getHistory().size());
+		
+		db.clearAll();
+		assertEquals(0, db.getHistory().size());
+	}
+	
+	// Test if database question list is changed when the list is cleared
+	@Test
+	void clearAllRemote() {
+		DataBase db = new MockDataBase();
+		boolean signUpResult = db.signUp("testId@ppp.com", "testpw");
+		assertEquals(true, signUpResult);
+		assertEquals(0,db.getHistory().size());
+		db.addQuestion(new Question("test question1", new Answer("test answer1")));
+		db.addQuestion(new Question("test question2", new Answer("test answer2")));
+		db.addQuestion(new Question("test question3", new Answer("test answer3")));
+		
+		db = new MockDataBase();
+		int logInResult = db.logIn("testId@ppp.com", "testpw");
+		assertEquals(0, logInResult);
+		assertEquals(3, db.getHistory().size());
+		
+		db.clearAll();
+		assertEquals(0, db.getHistory().size());
+	}
 
 }
