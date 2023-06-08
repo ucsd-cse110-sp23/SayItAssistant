@@ -1,7 +1,6 @@
 package sayItAssitantTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,12 +11,11 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 import sayItAssistant.components.LoginConfig;
-import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
-import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockDataBase;
 
 public class StoryTestUS11 {
+
   @BeforeEach
   void setUp() throws Exception {
     DataBase db = new MockDataBase();
