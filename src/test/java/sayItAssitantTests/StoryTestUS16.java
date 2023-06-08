@@ -3,6 +3,7 @@ package sayItAssitantTests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.mongodb.client.MongoClient;
@@ -17,6 +18,14 @@ import sayItAssistant.mocking.MockDataBase;
 
 public class StoryTestUS16 {
 
+	@BeforeEach
+    void setUp() throws Exception {
+        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            db.drop();
+        }
+    }
+
 	@AfterEach
 	void tearDown() throws Exception {
 				try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?"
@@ -25,6 +34,8 @@ public class StoryTestUS16 {
 						db.drop();
 				}
 	}
+
+	
 
 	/*+----------------------------------------------------------------------
 	||
@@ -66,7 +77,7 @@ public class StoryTestUS16 {
 		QAScreen qaScreen = new QAScreen();
 
 		String outputString = QAScreen.QAText.getText();
-		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);
+		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);//
 	}
 
 	/*+----------------------------------------------------------------------
@@ -109,7 +120,7 @@ public class StoryTestUS16 {
 		QAScreen qaScreen = new QAScreen();
 
 		String outputString = QAScreen.QAText.getText();
-		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);
+		assertEquals("Create email to Jill let’s meet at Geisel for our 7 pm study session", outputString);//
 	}
 
 

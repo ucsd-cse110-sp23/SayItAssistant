@@ -1,7 +1,6 @@
 package sayItAssitantTests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +15,15 @@ import sayItAssistant.data.DataBase;
 import sayItAssistant.data.Question;
 import sayItAssistant.mocking.MockDataBase;
 public class StoryTestUS13 {
+
+	@BeforeEach
+    void setUp() throws Exception {
+        try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
+            MongoDatabase db = mongoClient.getDatabase("JunitTest");
+            db.drop();
+        }
+    }
+		
 	@AfterEach
 	void tearDown() throws Exception {
 			try (MongoClient mongoClient = MongoClients.create("mongodb+srv://cjadmin:cksghS9(@cluster0.1b0dvhj.mongodb.net/?retryWrites=true&w=majority")) {
