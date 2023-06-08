@@ -5,7 +5,7 @@
 
 **Mac/Linux Instructions**: <br><br>
 1. Navigate to the location of the project directory through the terminal (/cse-110-project-team-16) <br>
-2. Run the command `chmod +x SayItAssistant.sh` <br>
+2. Run the command `chmod +x SayItAssistant2.sh` <br>
 3. Run the application with the command `./SayItAssistant2.sh` <br>
 
 **Windows Instructions**: <br>
