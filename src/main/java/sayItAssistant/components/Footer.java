@@ -221,10 +221,15 @@ public class Footer extends JPanel { // This class contains recording buttons
             // Check for comma in question and replace with a colon.
             // This ensures that intonation while saying the command doesn't produce a comma
             String softQuestionCopy = question.getQuestionString();
+            String softAnswerCopy = question.getAnswerObject().getAnswerString();
+            String yourName = emailDetails.getProperty("DisplayName");
             if(softQuestionCopy.contains(",")) {
                 softQuestionCopy = softQuestionCopy.replace(",",":");
             }
-            out.write(softQuestionCopy + "," + question.getAnswerObject().getAnswerString());
+            if(softAnswerCopy.contains("[Your Name]")) {
+                softAnswerCopy = softAnswerCopy.replace("[Your Name]", yourName );
+            }
+            out.write(softQuestionCopy + "," + softAnswerCopy);
             out.flush();
             out.close();
             conn.getInputStream();
