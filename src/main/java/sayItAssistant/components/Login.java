@@ -322,10 +322,6 @@ public class Login extends JFrame {
         notifyValidationComplete(validationStatus);
     }
 
-    public ArrayList<Question> getLoginArrayList() {
-        return database.getHistory();
-    }
-
     public static DataBase returnDatabase() {
         return database;
     }

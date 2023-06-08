@@ -19,6 +19,8 @@ dependencies {
     implementation 'org.json:json:20230227'
 
     implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+    implementation files('lib/javax.mail.jar')
 
     // This provides the JUnit API.
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
