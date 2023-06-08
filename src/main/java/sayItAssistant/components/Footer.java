@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
+import sayItAssistant.data.EmailUtil;
 import sayItAssistant.data.JavaMail;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
@@ -176,13 +177,13 @@ public class Footer extends JPanel { // This class contains recording buttons
                         }
                         if(lowerQuestionString.startsWith("send email")) {
                             emailExtractor(lowerQuestionString, emailConfig );
-                            emailSendServerUIProcess(question);
                             emailSendServerProcess();
+                            emailSendServerUIProcess(question);
                         }
                         if(lowerQuestionString.startsWith("send e-mail")) {
                             emailExtractor(lowerQuestionString, emailConfig);
-                            emailSendServerUIProcess(question);
                             emailSendServerProcess();
+                            emailSendServerUIProcess(question);
                         }
 
                         
@@ -258,6 +259,7 @@ public class Footer extends JPanel { // This class contains recording buttons
     private void emailSendServerUIProcess(Question question) {
         try {
             URL url = new URL(URL);
+            EmailConfig emailDetails = new EmailConfig();
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
@@ -266,7 +268,11 @@ public class Footer extends JPanel { // This class contains recording buttons
             );
             String softQuestionCopy = question.getQuestionString();
             softQuestionCopy = softQuestionCopy.replace(" at ", "@").replace(" dot ", ".");
-            out.write(softQuestionCopy + "," + "");
+            if(EmailUtil.emailStatus == 0) {
+                out.write(softQuestionCopy + "," + "Email Sent!");
+            } else {
+                out.write(softQuestionCopy + "," + "Error Sending Email" + " SMTP Host: " + emailDetails.getProperty("SMTP").toString());
+            }
             out.flush();
             out.close();
             conn.getInputStream();

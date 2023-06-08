@@ -20,6 +20,8 @@ import javax.mail.internet.MimeMultipart;
 
 public class EmailUtil {
 
+	public static int emailStatus = 0;
+
 	/**
 	 * Utility method to send simple HTML email
 	 * @param session
@@ -48,11 +50,13 @@ public class EmailUtil {
 
 	      msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
 	      System.out.println("Message is ready");
-    	  Transport.send(msg);  
+    	  Transport.send(msg); 
+		  emailStatus = 0; 
 
 	      System.out.println("Email Sent Successfully!!");
 	    }
 	    catch (Exception e) {
+		  emailStatus = 1;
 	      e.printStackTrace();
 	    }
 	}

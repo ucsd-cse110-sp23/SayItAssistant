@@ -28,7 +28,7 @@ public class JavaMail {
     public void sendEmail(String subject) {
         Properties props = new Properties();
         props.put("mail.smtp.host", this.SMTPHost);
-        props.put("mail.smtp.host", this.TLSPort );
+        props.put("mail.smtp.port", this.TLSPort );
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 
