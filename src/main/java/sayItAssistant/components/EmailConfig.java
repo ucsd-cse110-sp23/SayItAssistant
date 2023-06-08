@@ -15,5 +15,9 @@ public class EmailConfig extends Config {
         this.setProperty("TLSPort", details.getTLSPort());
         this.setProperty("Password", details.getEmailPassword());
     }
+
+    public void setSendEmailEmpty() {
+        this.setProperty("SendEmail", "");
+    }
     
 }
