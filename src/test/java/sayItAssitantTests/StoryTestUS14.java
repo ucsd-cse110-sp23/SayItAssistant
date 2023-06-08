@@ -91,7 +91,7 @@ public class StoryTestUS14 {
     assertEquals(0, db.getHistory().size());
 
     boolean success = db.clearAll();
-    assertEquals(false, success);
+    assertEquals(true, success); 
     assertEquals(0, db.getHistory().size());
   }
 }
