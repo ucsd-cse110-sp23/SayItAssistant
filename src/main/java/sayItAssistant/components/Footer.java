@@ -6,24 +6,18 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import sayItAssistant.data.Answer;
 import sayItAssistant.data.DataBase;
 import sayItAssistant.data.EmailUtil;
-import sayItAssistant.data.JavaMail;
 import sayItAssistant.data.Question;
 import sayItAssistant.functions.Audio;
 /*+----------------------------------------------------------------------
@@ -99,92 +93,26 @@ public class Footer extends JPanel { // This class contains recording buttons
                         EmailConfig emailConfig = new EmailConfig();
                         URL url;
                         String lowerQuestionString = question.getQuestionString().toLowerCase();
+                        FooterCommander FooterCommander = new FooterCommander(question, URL);
+
+
                         if(lowerQuestionString.startsWith("delete")){
-                            try {
-                                if(!Sidebar.historyJList.isSelectionEmpty())  {
-                                    String query = String.valueOf(Sidebar.getIndex());
-                                    url = new URL(URL + "?=" + query);
-                                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                    conn.setRequestMethod("DELETE");
-                                    conn.getInputStream();
-                                    questionDatabase.removeQuestion(Sidebar.historyJList.getSelectedIndex());
-                                }
-                            }catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                            Sidebar.updateRemoveHistory();
+                            FooterCommander.notifyDelete(questionDatabase);
                         }
                         
-                        if(question.getQuestionString().toLowerCase().startsWith("clear all")){
-                            try {
-                                url = new URL(URL);
-                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                conn.setRequestMethod("PUT");
-                                conn.getInputStream();
-                                questionDatabase.clearAll();
-                            }catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                            Sidebar.resetHistory();
+                        if(lowerQuestionString.startsWith("clear all")){
+                            FooterCommander.notifyClearAll(questionDatabase);
                         }
 
                         if(lowerQuestionString.startsWith("question")) {
-                            try {
-                                url = new URL(URL);
-                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                conn.setRequestMethod("POST");
-                                conn.setDoOutput(true);
-                                OutputStreamWriter out = new OutputStreamWriter(
-                                        conn.getOutputStream()
-                                );
-                                // Check for comma in question and replace with a colon.
-                                // This ensures that intonation while saying the command doesn't produce a comma
-                                String softQuestionCopy = question.getQuestionString();
-                                if(softQuestionCopy.contains(",")) {
-                                    softQuestionCopy = softQuestionCopy.replace(",",":");
-                                }
-                                out.write(softQuestionCopy + "," + question.getAnswerObject().getAnswerString());
-                                out.flush();
-                                out.close();
-                                conn.getInputStream();
-                                questionDatabase.addQuestion(question);
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                            Sidebar.updateAddHistory();
+                            FooterCommander.notifyNewQuestion(questionDatabase);
                         }
                         
-                        if(lowerQuestionString.startsWith("setup email")){
-                            Email email = new Email();
-                         
-                        }
-                        if(lowerQuestionString.startsWith("set up email")){
-                            Email email = new Email();
-                         
-                        }
-                        if(lowerQuestionString.startsWith("setup e-mail")){
-                            Email email = new Email();
-                        }
-                        if(lowerQuestionString.startsWith("set up e-mail")){
-                            Email email = new Email();
-                        }
-                        // Create E-mail command
-                        if(lowerQuestionString.startsWith("create email")) {
-                            emailGenerateServerProcess(question);
-                        }
-                        if(lowerQuestionString.startsWith("create e-mail")) {
-                            emailGenerateServerProcess(question);
-                        }
-                        if(lowerQuestionString.startsWith("send email")) {
-                            emailExtractor(lowerQuestionString, emailConfig );
-                            emailSendServerProcess();
-                            emailSendServerUIProcess(question);
-                        }
-                        if(lowerQuestionString.startsWith("send e-mail")) {
-                            emailExtractor(lowerQuestionString, emailConfig);
-                            emailSendServerProcess();
-                            emailSendServerUIProcess(question);
-                        }
+                        FooterCommander.checkEmailSettings(lowerQuestionString);
+                        
+                        FooterCommander.checkCreateEmail(lowerQuestionString, questionDatabase);
+
+                        FooterCommander.checkSendEmail(lowerQuestionString, questionDatabase);
 
                         
                     }
@@ -193,95 +121,6 @@ public class Footer extends JPanel { // This class contains recording buttons
 
     }
 
-    private void emailGenerateServerProcess(Question question) {
-        try {
-            URL url = new URL(URL);
-            EmailConfig emailDetails = new EmailConfig();
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                    conn.getOutputStream()
-            );
-            // Check for comma in question and replace with a colon.
-            // This ensures that intonation while saying the command doesn't produce a comma
-            String softQuestionCopy = question.getQuestionString();
-            String softAnswerCopy = question.getAnswerObject().getAnswerString();
-            String yourName = emailDetails.getProperty("DisplayName");
-            if(softQuestionCopy.contains(",")) {
-                softQuestionCopy = softQuestionCopy.replace(",", ":");
-            }
-            if(softAnswerCopy.contains("[Your Name]")) {
-                softAnswerCopy = softAnswerCopy.replace("[Your Name]", yourName );
-            }
-            out.write(softQuestionCopy + "," + softAnswerCopy);
-            out.flush();
-            out.close();
-            conn.getInputStream();
-            questionDatabase.addQuestion(question);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        Sidebar.updateAddHistory();
-    }
-
-    private void emailSendServerUIProcess(Question question) {
-        try {
-            URL url = new URL(URL);
-            EmailConfig emailDetails = new EmailConfig();
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                    conn.getOutputStream()
-            );
-            String softQuestionCopy = question.getQuestionString();
-            softQuestionCopy = softQuestionCopy.replace(" at ", "@").replace(" dot ", ".");
-            if(EmailUtil.emailStatus == 0) {
-                out.write(softQuestionCopy + "," + "Email Sent!");
-            } else {
-                out.write(softQuestionCopy + "," + "Error Sending Email" + " SMTP Host: " + emailDetails.getProperty("SMTP").toString());
-            }
-            out.flush();
-            out.close();
-            conn.getInputStream();
-            questionDatabase.addQuestion(question);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        Sidebar.updateAddHistory();
-    }
-
-    private void emailSendServerProcess() {
-        try {
-            URL url = new URL(URL);
-            if(!Sidebar.historyJList.isSelectionEmpty())  {
-                String query = String.valueOf(Sidebar.getIndex());
-                url = new URL(URL + "?=" + query);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("TRACE");
-                conn.getInputStream();
-            }
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private void emailExtractor(String string, EmailConfig emailDetails) {
-        String regex = "\\b[A-Za-z0-9._%+-]+\\s*(?:at|@)\\s*[A-Za-z0-9-]+\\s*(?:dot|\\.)\\s*(?:com|\\b[A-Za-z]{3}\\b)\\b";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(string);
-
-        while(matcher.find()) {
-            String emailAddress = matcher.group();
-            emailAddress = emailAddress.replaceAll("\\s", "")
-                                       .replaceAll("dot",".")
-                                       .replaceAll("at","@");
-            System.out.println(emailAddress);
-            emailDetails.setProperty("SendEmail", emailAddress);
-            emailDetails.store();
-        }
-    }
     
 
     /*---------------------------------------------------------------------
@@ -323,26 +162,6 @@ public class Footer extends JPanel { // This class contains recording buttons
         leftHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
         setLayout(new BorderLayout());
         this.add(leftHalf, BorderLayout.WEST);
-
-        // Set Delete buttons to the right of the footer
-        //JPanel rightHalf = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
-        // Create delete current question button
-        //deleteCurrent = new JButton("Delete");
-        // Set features
-        //deleteCurrent.setFont(new Font("Sans-serif", Font.BOLD, 10));
-        //deleteCurrent.setBackground(Color.WHITE);
-        //rightHalf.add(deleteCurrent);
-
-        // Create clear all questions button
-        //deleteAll = new JButton("Clear All");
-        // Set features
-        //deleteAll.setFont(new Font("Sans-serif", Font.BOLD, 10));
-        //deleteAll.setBackground(Color.RED);
-        //rightHalf.add(deleteAll);
-
-        //Adjust position
-        //rightHalf.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
-        //this.add(rightHalf, BorderLayout.EAST);
         
         addListeners();
         revalidate();
