@@ -36,5 +36,9 @@ public class Server {
 		requestHandler = new RequestHandler(data, database);
 		server.createContext("/", requestHandler);
 	}
+
+	public static void stopServer() throws IOException {
+		server.stop(3);
+	}
    	
 }
